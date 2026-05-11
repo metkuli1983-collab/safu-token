@@ -2,42 +2,44 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SAFU | MANIFESTO</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>$SAFU | THE_MANIFESTO</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
-        body { background: #000; color: #fff; font-family: 'VT323', monospace; margin: 0; overflow-x: hidden; }
-        #rain-layer { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
-        .drop { position: absolute; color: #ff007f; font-size: 24px; animation: fall linear infinite; opacity: 0.4; }
-        @keyframes fall { from { transform: translateY(-10vh); } to { transform: translateY(110vh); } }
-        .neon-glow { text-shadow: 0 0 10px #ff007f; }
+        body { background-color: #000; color: #fff; font-family: 'VT323', monospace; margin: 0; overflow-x: hidden; }
+        .safu-neon { text-shadow: 0 0 10px #ff007f, 0 0 20px #ff007f; color: white; font-size: 6rem; line-height: 1; }
+        .broken-box { background: rgba(15, 15, 15, 0.9); border: 3px solid #ff007f; box-shadow: 8px 8px 0px #444; }
+        .shard { position: fixed; pointer-events: none; z-index: 1; color: #ff007f; font-weight: bold; }
+        #chaos-timer { text-shadow: 0 0 15px #ff007f; }
     </style>
 </head>
-<body class="p-6">
-    <div id="rain-layer"></div>
-    <div class="relative z-10 max-w-xl mx-auto">
-        <nav class="flex justify-between mb-12 border-b border-[#ff007f]/30 pb-2">
-            <a href="index.html" class="text-[#ff007f] font-bold underline italic"><- BACK</a>
-            <span class="opacity-50 uppercase text-xs tracking-tighter">MANIFESTO_V1</span>
-        </nav>
-        <h1 class="text-6xl font-black neon-glow italic uppercase mb-8 underline">The Vision</h1>
-        <div class="space-y-6 text-2xl uppercase italic opacity-90 leading-tight">
-            <p class="border-l-4 border-[#ff007f] pl-4">The devs are asleep.</p>
-            <p>The liquidity is a myth.</p>
-            <p>Your portfolio is screaming.</p>
-            <p>Welcome to the end of the line.</p>
+<body>
+    <nav class="flex justify-between p-4 border-b border-[#ff007f] bg-black sticky top-0 z-[100] text-[9px]">
+        <div class="font-black text-[#ff007f] animate-pulse">$SAFU_NODE_01</div>
+        <div class="flex gap-2 uppercase font-bold">
+            <a href="index.html" class="text-[#ff007f] underline italic"><- BACK</a>
+            <a href="memes.html" class="text-white underline">Wall</a>
+            <a href="regret.html" class="text-white underline">Regret</a>
         </div>
-    </div>
-    <script>
-        const rain = document.getElementById('rain-layer');
-        const items = ['👽', '💀', '📉', '💕'];
-        setInterval(() => {
-            const d = document.createElement('div');
-            d.className = 'drop'; d.innerText = items[Math.floor(Math.random()*items.length)];
-            d.style.left = Math.random() * 100 + 'vw'; d.style.animationDuration = (Math.random() * 2 + 2) + 's';
-            rain.appendChild(d); setTimeout(() => d.remove(), 4000);
-        }, 400);
-    </script>
+    </nav>
+
+    <main class="flex flex-col items-center py-12 px-6 relative z-10">
+        <h1 class="font-black mb-8 safu-neon italic text-center underline uppercase">Manifesto</h1>
+
+        <section class="w-full max-w-md broken-box p-6 mb-12">
+            <div class="space-y-6 text-xl uppercase italic leading-tight">
+                <p class="border-l-4 border-[#ff007f] pl-4 text-white">1. The devs are asleep. We are the nightmare.</p>
+                <p class="pl-4">2. Liquidity is a social construct. Chaos is the only currency.</p>
+                <p class="pl-4">3. We don't buy the dip. We embrace the abyss.</p>
+                <p class="pl-4">4. $SAFU isn't a token. It's a diagnosis.</p>
+            </div>
+        </section>
+
+        <div class="text-center opacity-50 text-xs uppercase tracking-tighter">
+            [END_OF_TRANSMISSION]
+        </div>
+    </main>
+  
 </body>
 </html>
