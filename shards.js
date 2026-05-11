@@ -1,29 +1,28 @@
-// shards.js
+// SAFU GLOBAL LOGIC
 function createShard() {
-    const symbols = ['✦', '☄️', 'SAFU', 'LUNC', '💖', '?', '!', '👽', '🛸'];
+    const symbols = ['SAFU', 'LUNC', '👽', '🛸', '📉', '🔥'];
     const shard = document.createElement('div');
-    shard.className = 'shard';
+    shard.className = 'shard'; // Make sure your CSS has .shard defined
     shard.innerHTML = symbols[Math.floor(Math.random() * symbols.length)];
-    
     shard.style.left = Math.random() * 100 + 'vw';
-    shard.style.top = '-5vh';
-    shard.style.fontSize = Math.random() * 20 + 12 + 'px';
-    shard.style.opacity = Math.random() * 0.7;
-    
+    shard.style.top = '-10vh';
+    shard.style.fontSize = Math.random() * 20 + 10 + 'px';
+    shard.style.position = 'fixed';
+    shard.style.pointerEvents = 'none';
+    shard.style.zIndex = '1';
+    shard.style.color = '#ff007f';
+    shard.style.fontWeight = 'bold';
+
     document.body.appendChild(shard);
 
-    const duration = 5000 + Math.random() * 3000;
-    
+    const duration = 4000 + Math.random() * 4000;
     shard.animate([
-        { top: '-5vh', transform: 'rotate(0deg)' },
-        { top: '105vh', transform: `rotate(${Math.random() * 720}deg) translateX(${Math.random() * 100 - 50}px)` }
-    ], {
-        duration: duration,
-        easing: 'linear'
-    });
+        { transform: `translateY(0) rotate(0deg)` }, 
+        { transform: `translateY(110vh) rotate(360deg)` }
+    ], { duration: duration });
 
     setTimeout(() => shard.remove(), duration);
 }
 
-// Start the madness
-setInterval(createShard, 500);
+// Start the rain
+setInterval(createShard, 400)
