@@ -46,7 +46,26 @@ button, a {
     text-shadow: 0 0 10px #ff007f, 0 0 20px #ff007f; 
     color: white; 
 }
+/* Page-Specific Intel/Wall Styles */
+.intel-card { 
+    border: 1px solid #ff007f; 
+    background: rgba(255, 0, 127, 0.05); 
+    transition: all 0.3s; 
+}
 
+.intel-card:hover {
+    background: rgba(255, 0, 127, 0.1);
+    box-shadow: 0 0 15px rgba(255, 0, 127, 0.2);
+}
+
+input { 
+    background: transparent; 
+    border: none;
+    border-bottom: 1px solid #ff007f; 
+    color: #ff007f; 
+    outline: none; 
+    font-family: 'VT323', monospace;
+}
 .shake-effect { animation: crt-shake 0.15s infinite; }
 @keyframes crt-shake { 0% { transform: translate(1px, 1px); } 50% { transform: translate(-1px, -1px); } 100% { transform: translate(1px, 1px); } }
 
