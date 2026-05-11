@@ -173,24 +173,30 @@ input {
     margin-top: 50px;
 }
 body:active { filter: invert(1); }
+/* 1. THE GLITCH (Keep this as is) */
+.glitch { animation: glitch-anim 1s linear infinite; }
 
-/* 1. THE GLOBAL PINK FORCE (For Wall/Index) */
-/* This forces pink on the green tailwind classes by default */
-[class*="[#00ff00]"] {
+/* 2. THE SMART SWITCH */
+/* ONLY force pink if we are NOT on the dev page */
+body:not(.dev-body) [class*="[#00ff00]"] {
     border-color: #ff007f !important;
     color: #ff007f !important;
-    box-shadow: 0 0 15px rgba(255, 0, 127, 0.4) !important;
+    box-shadow: 0 0 10px #ff007f !important;
 }
 
-/* 2. THE GREEN OVERRIDE (For Dev Room ONLY) */
-/* This MUST be below the pink rule to override it */
-.dev-body [class*="[#00ff00]"], 
-.dev-body .border-\[\#00ff00\] {
-    border-color: #00ff00 !important;
+/* 3. THE DEV ROOM RESTORATION */
+/* This forces the Dev Room back to green, overriding EVERYTHING above */
+.dev-body, 
+.dev-body * {
     color: #00ff00 !important;
-    box-shadow: 0 0 20px rgba(0, 255, 0, 0.6) !important;
+    border-color: #00ff00 !important;
 }
 
-/* 3. THE RAIN CHECK */
+/* The Glow for the Dev Room box */
+.dev-body div.border-2 {
+    box-shadow: 0 0 20px #00ff00 !important;
+}
+
+/* 4. THE RAIN */
 .shard { color: #ff007f !important; }
 .dev-body .shard { color: #00ff00 !important; }
