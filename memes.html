@@ -9,39 +9,90 @@
     <style>
         /* Mobile-first: Images are B&W until you tap them */
         .meme-card {
-            border: 2px solid #ff007f;
-            filter: grayscale(100%);
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>SAFU | INTEL_WALL</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="madness.css">
+    <style>
+        .meme-card {
+            border: 1px solid #333;
+            filter: grayscale(100%) contrast(150%);
             transition: all 0.2s ease;
-            background: #111;
+            background: #000;
         }
-        .meme-card:active, .meme-card:hover {
-            filter: grayscale(0%);
-            transform: scale(1.02);
-            border-color: #fff;
-            z-index: 20;
+        .meme-card:active {
+            filter: grayscale(0%) contrast(100%);
+            border-color: #ff007f;
         }
-        .glitch-text {
-            text-shadow: 2px 0 #00ffff, -2px 0 #ff007f;
+        .terminal-input {
+            caret-color: #ff007f;
+            background: transparent;
+            border: none;
+            outline: none;
+            color: #ff007f;
+            width: 100%;
         }
     </style>
 </head>
-<body class="bg-black text-white p-6 font-mono">
+<body class="bg-[#050505] text-zinc-400 p-6 font-mono">
 
-    <nav class="mb-10 flex justify-between items-center text-[10px] uppercase">
-        <a href="index.html" class="text-[#ff007f] underline font-bold">[ <- BACK TO CHAOS ]</a>
-        <span class="opacity-30">Status: Hurting</span>
+    <nav class="mb-10 flex justify-between items-center text-[9px] uppercase tracking-widest">
+        <a href="index.html" class="text-[#ff007f] font-black">[ <- DISCONNECT ]</a>
+        <span class="animate-pulse">● SECURE_CONNECTION_ESTABLISHED</span>
     </nav>
 
-    <header class="text-center mb-10">
-        <h1 class="text-5xl font-black uppercase italic glitch-text">Wall of Pain</h1>
-        <p class="text-[10px] opacity-50 mt-2 uppercase tracking-widest">A Shrine to Bad Decisions</p>
+    <header class="text-center mb-12">
+        <h1 class="text-4xl font-black uppercase italic text-white tracking-tighter">Wall of Pain</h1>
+        <p class="text-[9px] opacity-30 mt-2 uppercase">Unauthorized Archive // Classified Intel</p>
     </header>
 
-    <div class="grid grid-cols-2 gap-3 mb-20">
+    <div class="grid grid-cols-2 gap-4 mb-16">
         
         <div class="meme-card aspect-square relative overflow-hidden">
-            <span class="absolute top-1 left-1 text-[8px] bg-[#ff007f] text-black px-1 font-bold italic">#01</span>
-            <img src="https://placehold.co/400x400/000000/ff007f?text=MEME+1" class="w-full h-full object-cover">
+            <img src="https://placehold.co/400x400/000000/333333?text=NO+SIGNAL" class="w-full h-full object-cover opacity-50">
+        </div>
+
+        <div class="border-2 border-dashed border-[#ff007f]/30 aspect-square flex flex-col items-center justify-center text-center p-4">
+            <div class="text-[#ff007f] text-xl mb-2">📁</div>
+            <a href="https://wormhole.app/" target="_blank" class="text-[9px] bg-[#ff007f] text-black px-2 py-1 font-bold uppercase mb-2">Dead Drop</a>
+            <p class="text-[7px] uppercase leading-tight opacity-40">Drop file. Copy Link. <br>Submit via Terminal below.</p>
+        </div>
+    </div>
+
+    <section class="max-w-md mx-auto">
+        <div class="bg-black border border-zinc-800 p-4 text-[10px] shadow-2xl">
+            <div class="flex gap-1.5 mb-3">
+                <div class="w-2 h-2 rounded-full bg-zinc-800"></div>
+                <div class="w-2 h-2 rounded-full bg-zinc-800"></div>
+                <div class="w-2 h-2 rounded-full bg-zinc-800"></div>
+            </div>
+            <div id="terminal-content">
+                <p class="text-green-500">> SYSTEM READY.</p>
+                <p class="mb-2">> TO SUBMIT: PASTE WORMHOLE LINK BELOW.</p>
+            </div>
+            <div class="flex">
+                <span class="text-[#ff007f] mr-2">SAFU@NODE:~$</span>
+                <input type="text" class="terminal-input" id="termInput" placeholder="..." spellcheck="false">
+            </div>
+        </div>
+    </section>
+
+    <script>
+        const input = document.getElementById('termInput');
+        const content = document.getElementById('terminal-content');
+        
+        input.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                const val = this.value.toLowerCase();
+                const p = document.createElement('p');
+                p.className = "text-zinc-500";
+                
+                if (val.includes('http'))
+000/ff007f?text=MEME+1" class="w-full h-full object-cover">
         </div>
 
         <div class="meme-card aspect-square relative overflow-hidden">
