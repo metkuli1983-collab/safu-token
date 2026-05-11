@@ -174,21 +174,23 @@ input {
 }
 body:active { filter: invert(1); }
 
-/* --- THE GLOBAL COLOR SAFETY LOCK --- */
-
-/* This targets the specific Tailwind class causing the leak 
-   and forces it to be Pink UNLESS it's on a .dev-body page */
-body:not(.dev-body) .border-\[\#00ff00\] {
+/* 1. THE GLOBAL PINK FORCE (For Wall/Index) */
+/* This forces pink on the green tailwind classes by default */
+[class*="[#00ff00]"] {
     border-color: #ff007f !important;
+    color: #ff007f !important;
     box-shadow: 0 0 15px rgba(255, 0, 127, 0.4) !important;
 }
 
-body:not(.dev-body) .text-\[\#00ff00\] {
-    color: #ff007f !important;
+/* 2. THE GREEN OVERRIDE (For Dev Room ONLY) */
+/* This MUST be below the pink rule to override it */
+.dev-body [class*="[#00ff00]"], 
+.dev-body .border-\[\#00ff00\] {
+    border-color: #00ff00 !important;
+    color: #00ff00 !important;
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.6) !important;
 }
 
-/* Ensure the rain is ONLY green in the dev room */
-/* (Your existing .dev-body .shard already handles the green side) */
-.shard {
-    color: #ff007f !important;
-}
+/* 3. THE RAIN CHECK */
+.shard { color: #ff007f !important; }
+.dev-body .shard { color: #00ff00 !important; }
