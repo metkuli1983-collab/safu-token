@@ -48,31 +48,34 @@ body {
     100% { transform: translate(1px, 1px); }
 }
 
-/* 3. FIX THE Z-INDEX (Rain should be visible but behind text) */
+/* --- THE SMART RAIN SYSTEM --- */
+
+/* 1. Base Shard Style (Used everywhere) */
 .shard {
     position: fixed;
     pointer-events: none;
-    z-index: 1 !important; /* Changed from -1 to 1 so it's above background */
-    color: #ff007f;
+    z-index: -1 !important; /* Always stays in the background */
+    font-weight: bold;
+    color: #ff007f; /* Default Pink */
 }
 
-main, .content-wrapper {
-    position: relative;
-    z-index: 10; /* Keeps text above the rain */
-}
-/* --- THE RAIN (BACKGROUND LAYER) --- */
-.shard { 
-    position: fixed; 
-    pointer-events: none; 
-    z-index: -1 !important; /* Always stays behind */
-    color: #ff007f; 
-    font-weight: bold; 
+/* 2. Dev Room Override (Turns it Green) */
+.dev-body .shard {
+    color: #00ff00 !important;
+    text-shadow: 0 0 8px #00ff00 !important;
 }
 
-/* --- CONTENT CONTAINERS (FRONT LAYER) --- */
-main, section, .broken-box, .intel-card, .container {
+/* --- THE STACKING MASTER RULE --- */
+main, 
+section, 
+.content-wrapper, 
+.broken-box, 
+.intel-card, 
+.terminal-box, 
+.container {
     position: relative;
-    z-index: 10; /* Always stays in front of rain */
+    z-index: 10 !important; /* Force content to the front */
+    /* background: rgba(0, 0, 0, 0.8); */ /* Optional: Uncomment if rain makes text hard to read */
 }
 
 /* --- UI COMPONENTS --- */
