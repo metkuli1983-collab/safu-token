@@ -1,3 +1,4 @@
+/* --- GLOBAL CONFIG --- */
 @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
 
 body { 
@@ -6,56 +7,41 @@ body {
     font-family: 'VT323', monospace; 
     margin: 0; 
     overflow-x: hidden; 
-    transition: filter 0.5s; 
+    transition: filter 0.5s;
 }
 
-/* THE RAIN - Pushed to the back */
+/* --- THE RAIN (BACKGROUND LAYER) --- */
 .shard { 
     position: fixed; 
     pointer-events: none; 
-    z-index: -1 !important; /* FIXED THIS */
+    z-index: -1 !important; /* Always stays behind */
     color: #ff007f; 
     font-weight: bold; 
 }
 
-/* THE CONTENT - Pulled to the front */
-main, .broken-box, section {
+/* --- CONTENT CONTAINERS (FRONT LAYER) --- */
+main, section, .broken-box, .intel-card, .container {
     position: relative;
-    z-index: 10;
+    z-index: 10; /* Always stays in front of rain */
 }
 
-.safu-neon { text-shadow: 0 0 10px #ff007f, 0 0 20px #ff007f; color: white; font-size: 6rem; line-height: 1; }
-
+/* --- UI COMPONENTS --- */
 .broken-box { 
     background: rgba(15, 15, 15, 0.9); 
     border: 3px solid #ff007f; 
     box-shadow: 8px 8px 0px #444; 
-    transform: rotate(-1deg); 
-
-    
+    transform: rotate(-1deg);
 }
 
-/* This prevents that ugly blue/grey box when you tap buttons on a phone */
-button, a { 
-    -webkit-tap-highlight-color: transparent; 
-    cursor: pointer; 
-}
-
-/* A smaller glow utility class */
-.safu-glow { 
-    text-shadow: 0 0 10px #ff007f, 0 0 20px #ff007f; 
-    color: white; 
-}
-/* Page-Specific Intel/Wall Styles */
 .intel-card { 
     border: 1px solid #ff007f; 
     background: rgba(255, 0, 127, 0.05); 
     transition: all 0.3s; 
 }
 
-.intel-card:hover {
-    background: rgba(255, 0, 127, 0.1);
-    box-shadow: 0 0 15px rgba(255, 0, 127, 0.2);
+button, a { 
+    -webkit-tap-highlight-color: transparent; 
+    cursor: pointer; 
 }
 
 input { 
@@ -64,14 +50,34 @@ input {
     border-bottom: 1px solid #ff007f; 
     color: #ff007f; 
     outline: none; 
-    font-family: 'VT323', monospace;
 }
-.shake-effect { animation: crt-shake 0.15s infinite; }
-@keyframes crt-shake { 0% { transform: translate(1px, 1px); } 50% { transform: translate(-1px, -1px); } 100% { transform: translate(1px, 1px); } }
 
-.reality-glitch { animation: glitch-flash 0.2s infinite; filter: invert(1) hue-rotate(180deg) !important; }
-@keyframes glitch-flash { 0% { transform: translate(2px, 2px); } 50% { transform: translate(-5px, -5px); } 100% { transform: translate(2px, 2px); } }
+/* --- VISUAL EFFECTS --- */
+.safu-neon { 
+    text-shadow: 0 0 10px #ff007f, 0 0 20px #ff007f; 
+    color: white; 
+    font-size: 6rem; 
+    line-height: 1; 
+}
 
-#chaos-timer { text-shadow: 0 0 15px #ff007f; font-variant-numeric: tabular-nums; }
+.safu-glow { 
+    text-shadow: 0 0 10px #ff007f, 0 0 20px #ff007f; 
+    color: white; 
+}
+
+#chaos-timer { 
+    text-shadow: 0 0 15px #ff007f; 
+}
+
+.reality-glitch { 
+    animation: glitch-flash 0.1s infinite; 
+    filter: invert(1) hue-rotate(180deg) !important; 
+}
+
+@keyframes glitch-flash { 
+    0% { transform: translate(2px, 2px); } 
+    50% { transform: translate(-5px, -5px); } 
+    100% { transform: translate(2px, 2px); } 
+}
 
 body:active { filter: invert(1); }
