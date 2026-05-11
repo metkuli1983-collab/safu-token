@@ -74,10 +74,26 @@ input {
     filter: invert(1) hue-rotate(180deg) !important; 
 }
 
+
 @keyframes glitch-flash { 
     0% { transform: translate(2px, 2px); } 
     50% { transform: translate(-5px, -5px); } 
     100% { transform: translate(2px, 2px); } 
 }
+/* Add this to bring the Manifesto back to life */
+.manifesto-page {
+    background-color: #000;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px;
+}
 
+.manifesto-content {
+    max-width: 600px;
+    border-left: 4px solid #ff007f;
+    padding-left: 20px;
+    margin-top: 50px;
+}
 body:active { filter: invert(1); }
