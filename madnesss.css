@@ -131,11 +131,12 @@ input {
     text-shadow: 0 0 15px #ff007f; 
 }
 
-.reality-glitch { 
-    animation: glitch-flash 0.1s infinite; 
-    filter: invert(1) hue-rotate(180deg) !important; 
+/* This class now does nothing until the Script adds it to the body */
+.reality-glitch-active {
+    animation: glitch-flash 0.1s infinite !important;
+    filter: invert(1) hue-rotate(180deg) !important;
+    pointer-events: none; /* Stops you from clicking while glitching */
 }
-
 
 @keyframes glitch-flash { 
     0% { transform: translate(2px, 2px); } 
