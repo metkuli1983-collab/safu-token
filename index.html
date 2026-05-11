@@ -8,45 +8,38 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
         body { background: #000; color: #fff; font-family: 'VT323', monospace; margin: 0; padding: 0; overflow-x: hidden; }
-        
         #rain-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
         .rain-drop { position: absolute; color: #ff007f; font-size: 20px; animation: fall linear infinite; opacity: 0.5; }
         @keyframes fall { to { transform: translateY(100vh); } }
-
         .logo-img { width: 100%; max-width: 380px; height: auto; filter: drop-shadow(0 0 25px rgba(255, 0, 127, 0.4)); border-radius: 12px; z-index: 10; }
         .reality-glitch { filter: invert(1) hue-rotate(180deg) !important; animation: shake 0.2s infinite; }
         @keyframes shake { 0% { transform: translate(2px, 2px); } 50% { transform: translate(-3px, -3px); } 100% { transform: translate(2px, 2px); } }
-        
-        input { background: rgba(255, 0, 127, 0.1) !important; border: 1px solid #ff007f !important; color: #ff007f !important; text-align: center; }
+        input { background: rgba(255, 0, 127, 0.1) !important; border: 1px solid #ff007f !important; color: #ff007f !important; text-align: center; border-radius: 0; }
     </style>
 </head>
 <body class="flex flex-col min-h-screen relative">
-
     <div id="rain-container"></div>
 
     <nav class="flex justify-between items-center px-6 py-5 border-b border-[#ff007f]/30 bg-black/80 backdrop-blur-md sticky top-0 z-[100]">
-        <div class="text-[#ff007f] animate-pulse text-xl font-black">SAFU_NODE_01</div>
+        <div class="text-[#ff007f] animate-pulse text-xl font-black tracking-tighter">SAFU_NODE_01</div>
         <div class="flex gap-6 uppercase text-sm font-bold">
             <a href="index.html" class="text-white border-b-2 border-[#ff007f]">Home</a>
-            <a href="memes.html" class="text-[#ff007f] hover:text-white transition-all">The_Wall</a>
+            <a href="memes.html" class="text-[#ff007f]">The_Wall</a>
         </div>
     </nav>
 
     <main class="flex-grow flex flex-col items-center py-10 px-4 text-center z-10">
-        
-        <div class="mb-10">
-            <img src="logo.png" alt="SAFU" class="logo-img mx-auto">
-        </div>
+        <div class="mb-10"><img src="logo.png" alt="SAFU" class="logo-img mx-auto"></div>
 
-        <div class="w-full max-w-[300px] bg-zinc-900/80 border border-[#ff007f]/50 p-4 mb-10 shadow-[0_0_15px_rgba(255,0,127,0.1)]">
-            <h2 class="text-[#ff007f] text-xs uppercase mb-2 font-bold underline">Regret_Calculator.exe</h2>
-            <input type="number" id="buy-amount" placeholder="Tokens I didn't buy..." class="w-full py-1 mb-2 outline-none">
-            <p id="regret-output" class="text-[10px] uppercase opacity-70">Calculate potential emotional damage.</p>
-            <button onclick="calculateRegret()" class="mt-2 text-[10px] border border-[#ff007f] px-2 py-1 hover:bg-[#ff007f] hover:text-black transition-all">RUN_CALC</button>
+        <div class="w-full max-w-[300px] bg-zinc-900/90 border border-[#ff007f]/50 p-4 mb-10 shadow-lg">
+            <h2 class="text-[#ff007f] text-xs uppercase mb-2 font-bold underline italic">Regret_Calculator.exe</h2>
+            <input type="number" id="buy-amount" placeholder="Tokens I didn't buy..." class="w-full py-2 mb-2 outline-none text-lg">
+            <p id="regret-output" class="text-[10px] uppercase opacity-70 leading-tight">Calculate potential emotional damage.</p>
+            <button onclick="calculateRegret()" class="mt-3 w-full bg-[#ff007f]/20 border border-[#ff007f] py-1 text-[10px] hover:bg-[#ff007f] hover:text-black transition-all font-bold">RUN_DIAGNOSTICS</button>
         </div>
 
         <div class="w-full max-w-[300px] space-y-4 mb-12">
-            <button onclick="window.location.href='memes.html'" class="w-full bg-[#ff007f] text-white font-black py-5 text-2xl border-2 border-white shadow-[6px_6px_0px_#ff007f] active:translate-y-1 active:shadow-none transition-all uppercase">
+            <button onclick="window.location.href='memes.html'" class="w-full bg-[#ff007f] text-white font-black py-5 text-2xl border-2 border-white shadow-[6px_6px_0px_#ff007f] active:translate-y-1 active:shadow-none transition-all uppercase italic">
                 Access The Wall
             </button>
             <button id="wallet-btn" class="w-full border-2 border-[#ff007f] text-[#ff007f] py-3 text-sm uppercase font-bold tracking-[0.2em] bg-black/50 active:bg-[#ff007f] active:text-black transition-all">
@@ -60,69 +53,21 @@
         </div>
     </main>
 
-    <footer class="mt-auto border-t border-[#ff007f]/30 p-8 bg-black/90 z-10 text-center">
-        <div class="mb-4">
-            <p class="text-[10px] text-zinc-400 uppercase italic mb-2">Financial Ruin Protocol:</p>
-            <p class="text-xs break-all font-mono text-[#ff007f] bg-[#ff007f]/10 p-2 border border-[#ff007f]/20 rounded">CA: 0x0000000000000000000000000000000000000000</p>
+    <footer class="mt-auto border-t border-[#ff007f]/30 p-8 bg-black/95 z-10 text-center">
+        <div class="mb-4 text-center">
+            <p class="text-[10px] text-zinc-400 uppercase italic mb-2 tracking-widest">Financial Ruin Protocol:</p>
+            <p class="text-[11px] font-mono text-[#ff007f] bg-[#ff007f]/10 p-3 border border-[#ff007f]/20 rounded break-all max-w-sm mx-auto">CA: 0x0000000000000000000000000000000000000000</p>
         </div>
-        <p class="text-[9px] opacity-40 uppercase max-w-xs mx-auto">
-            Not a investment. <a href="secret.html" class="hover:text-[#ff007f] cursor-default">Not a coin.</a> Just a ticking clock in a dark room. 👽
+        <p class="text-[9px] opacity-40 uppercase max-w-xs mx-auto leading-relaxed">
+            Not a investment. <a href="#" class="hover:text-[#ff007f] cursor-default">Not a coin.</a> Just a ticking clock in a dark room. 👽
         </p>
     </footer>
 
     <div id="alien-popup" class="fixed -bottom-60 -left-60 text-9xl transition-all duration-500 opacity-0 pointer-events-none z-[200]">👽</div>
 
     <script>
-        // Raining Items
         const items = ['👽', '💕', '💀', '📉'];
         setInterval(() => {
             const drop = document.createElement('div');
             drop.classList.add('rain-drop');
-            drop.innerText = items[Math.floor(Math.random() * items.length)];
-            drop.style.left = Math.random() * 100 + "vw";
-            drop.style.animationDuration = Math.random() * 2 + 3 + "s";
-            document.getElementById('rain-container').appendChild(drop);
-            setTimeout(() => drop.remove(), 5000);
-        }, 300);
-
-        // Regret Calc
-        function calculateRegret() {
-            const val = document.getElementById('buy-amount').value;
-            const output = document.getElementById('regret-output');
-            if(val > 0) {
-                output.innerText = `IF $SAFU GOES TO $1, YOU LOST $${(val * 1).toLocaleString()}. YOU ARE ALREADY POOR.`;
-                output.classList.add('text-white');
-            } else {
-                output.innerText = "INPUT QUANTITY OF REGRET.";
-            }
-        }
-
-        // Timer
-        const target = new Date("2026-10-31T00:00:00").getTime();
-        setInterval(() => {
-            const now = new Date().getTime();
-            const diff = target - now;
-            const d = Math.floor(diff / 86400000).toString().padStart(3, '0');
-            const h = Math.floor((diff % 86400000) / 3600000).toString().padStart(2, '0');
-            const m = Math.floor((diff % 3600000) / 60000).toString().padStart(2, '0');
-            const s = Math.floor((diff % 60000) / 1000).toString().padStart(2, '0');
-            document.getElementById('chaos-timer').innerText = `${d}:${h}:${m}:${s}`;
-        }, 1000);
-
-        // Neural Link
-        document.getElementById('wallet-btn').addEventListener('click', function() {
-            const alien = document.getElementById('alien-popup');
-            this.innerText = "> SCANNING_SOUL...";
-            document.body.classList.add('reality-glitch');
-            alien.style.opacity = "1";
-            alien.style.transform = "scale(5) rotate(20deg) translate(25%, -25%)";
-            setTimeout(() => {
-                alert("👽: 'INSUFFICIENT KARMA DETECTED.'");
-                document.body.classList.remove('reality-glitch');
-                alien.style.opacity = "0";
-                this.innerText = "[ ACCESS_DENIED ]";
-            }, 2000);
-        });
-    </script>
-</body>
-</html>
+            drop.innerText = items[Math.floor(
