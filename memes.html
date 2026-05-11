@@ -1,1 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>SAFU | Wall of Pain</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="madness.css">
+    <style>
+        /* Mobile-first: Images are B&W until you tap them */
+        .meme-card {
+            border: 2px solid #ff007f;
+            filter: grayscale(100%);
+            transition: all 0.2s ease;
+            background: #111;
+        }
+        .meme-card:active, .meme-card:hover {
+            filter: grayscale(0%);
+            transform: scale(1.02);
+            border-color: #fff;
+            z-index: 20;
+        }
+        .glitch-text {
+            text-shadow: 2px 0 #00ffff, -2px 0 #ff007f;
+        }
+    </style>
+</head>
+<body class="bg-black text-white p-6 font-mono">
 
+    <nav class="mb-10 flex justify-between items-center text-[10px] uppercase">
+        <a href="index.html" class="text-[#ff007f] underline font-bold">[ <- BACK TO CHAOS ]</a>
+        <span class="opacity-30">Status: Hurting</span>
+    </nav>
+
+    <header class="text-center mb-10">
+        <h1 class="text-5xl font-black uppercase italic glitch-text">Wall of Pain</h1>
+        <p class="text-[10px] opacity-50 mt-2 uppercase tracking-widest">A Shrine to Bad Decisions</p>
+    </header>
+
+    <div class="grid grid-cols-2 gap-3 mb-20">
+        
+        <div class="meme-card aspect-square relative overflow-hidden">
+            <span class="absolute top-1 left-1 text-[8px] bg-[#ff007f] text-black px-1 font-bold italic">#01</span>
+            <img src="https://placehold.co/400x400/000000/ff007f?text=MEME+1" class="w-full h-full object-cover">
+        </div>
+
+        <div class="meme-card aspect-square relative overflow-hidden">
+            <span class="absolute top-1 left-1 text-[8px] bg-[#ff007f] text-black px-1 font-bold italic">#02</span>
+            <img src="https://placehold.co/400x400/000000/ff007f?text=MEME+2" class="w-full h-full object-cover">
+        </div>
+
+        <div class="meme-card aspect-square relative overflow-hidden">
+            <span class="absolute top-1 left-1 text-[8px] bg-[#ff007f] text-black px-1 font-bold italic">#03</span>
+            <img src="https://placehold.co/400x400/000000/ff007f?text=MEME+3" class="w-full h-full object-cover">
+        </div>
+
+        <div class="border-2 border-dashed border-zinc-800 aspect-square flex flex-col items-center justify-center text-center p-4">
+            <span class="text-3xl mb-2">💀</span>
+            <p class="text-[9px] uppercase opacity-40">Your Meme Here?<br>Post on Telegram</p>
+        </div>
+
+    </div>
+
+    <div class="w-full border-t border-b border-[#ff007f] py-4 text-center">
+        <p class="text-xs italic opacity-80 italic italic">"I bought the top and all I got was this stupid website."</p>
+    </div>
+
+    <script src="shards.js"></script>
+
+</body>
+</html>
