@@ -48,22 +48,30 @@ window.submitIntel = submitIntel;
 // 3. GLOBAL VISUALS (Rain & Flicker)
 // ==========================================
 function createShard() {
-    const symbols = ['SAFU', 'LUNC', '👽', '🛸', '📉', '🔥'];
+    // 1. Move the check INSIDE the function so it checks every 400ms
+    const isDevRoom = document.body.classList.contains('dev-body');
+
+    const symbols = ['SAFU', 'LUNC', '👽', '🛸', '🔥'];
     const shard = document.createElement('div');
     shard.className = 'shard';
     shard.innerHTML = symbols[Math.floor(Math.random() * symbols.length)];
+
     Object.assign(shard.style, {
         position: 'fixed',
         left: Math.random() * 100 + 'vw',
         top: '-10vh',
         zIndex: '1',
         pointerEvents: 'none',
-        fontSize: (Math.random() * 20 + 10) + 'px'
+        fontSize: (Math.random() * 20 + 10) + 'px',
+        // 2. This is the logic that kills the Pinkster
+        color: isDevRoom ? '#00ff00' : '#ff007f',
+        textShadow: isDevRoom ? `0 0 5px ${isDevRoom ? '#00ff00' : '#ff007f'}` : 'none'
     });
+
     document.body.appendChild(shard);
 
     const anim = shard.animate([
-        { transform: 'translateY(0) rotate(0deg)' }, 
+        { transform: 'translateY(0) rotate(0deg)' },
         { transform: 'translateY(110vh) rotate(360deg)' }
     ], { duration: 4000 + Math.random() * 4000 });
 
