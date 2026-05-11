@@ -5,144 +5,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>$SAFU | PURE CHAOS</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        /* Keep original font style (retro pixel/mono) */
-        @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
-        
-        body {
-            background-color: #050505;
-            color: #d1d1d1;
-            font-family: 'VT323', monospace; /* Restoring the classic pixel font */
-            overflow-x: hidden;
-            margin: 0;
-            cursor: crosshair;
-        }
-
-        /* 1. Restoring the Original Pink Neon and Flicker */
-        .safu-neon {
-            text-shadow: 0 0 10px #ff007f, 0 0 20px #ff007f, 0 0 30px #ff007f;
-            color: white;
-            font-size: 8rem;
-            line-height: 1;
-            animation: flicker 1.5s infinite;
-        }
-
-        @keyframes flicker {
-            0%, 18%, 22%, 25%, 53%, 57%, 100% { opacity: 1; }
-            20%, 24%, 55% { opacity: 0.3; }
-        }
-
-        /* 2. ADDING THE CRT SHAKE (Small random shakes for chaos) */
-        @keyframes crt-shake {
-            0% { transform: translate(1px, 1px); }
-            25% { transform: translate(-1px, -1px); }
-            50% { transform: translate(1px, -1px); }
-            75% { transform: translate(-1px, 1px); }
-            100% { transform: translate(1px, 1px); }
-        }
-        .shake-effect {
-            animation: crt-shake 0.1s infinite;
-        }
-
-        /* 3. The Broken Boxes from your Screenshot */
-        .broken-box-1 {
-            background: rgba(20, 20, 20, 0.9);
-            border: 3px solid #ff007f;
-            box-shadow: 10px 10px 0px #444;
-            transform: rotate(-1deg);
-        }
-
-        /* 4. Falling Debris styling */
-        .shard {
-            position: fixed;
-            pointer-events: none;
-            z-index: 1;
-            color: #ff007f;
-        }
-
-    </style>
+    <link rel="stylesheet" href="madness.css">
 </head>
 <body>
-
     <nav class="flex justify-between p-4 border-b border-[#ff007f] bg-black sticky top-0 z-[100] text-xs">
         <div class="font-black text-[#ff007f]">$SAFU</div>
         <div class="flex gap-4">
+            <a href="regret.html" class="animate-bounce text-white underline">REGRET CALC</a>
             <span class="line-through opacity-50">UTILITY</span>
-            <span class="line-through opacity-50">WHITEPAPER</span>
-            <span class="animate-bounce">PAIN</span>
         </div>
     </nav>
 
-    <div class="fixed inset-0 z-50 pointer-events-none opacity-20" style="background: repeating-linear-gradient(0deg, transparent, transparent 2px, black 2px, black 4px);"></div>
-
     <main class="flex flex-col items-center py-20 px-6 relative z-10">
-        
-        <h1 class="font-black mb-0 safu-neon italic shake-effect">SAFU</h1>
+        <h1 class="text-8xl font-black mb-0 safu-neon italic shake-effect">SAFU</h1>
         <div class="bg-[#ff007f] text-black font-black text-xl px-4 py-1 -mt-4 mb-12 rotate-2 uppercase">
             So Absolutely F#ked Up
         </div>
 
-        <p class="text-center max-w-sm mb-12 text-lg leading-tight tracking-tighter uppercase font-mono">
+        <p class="text-center max-w-sm mb-12 text-lg leading-tight tracking-tighter uppercase">
             THE DEVS ARE ASLEEP. <br>
             THE LIQUIDITY IS A MYTH. <br>
             YOUR PORTFOLIO IS SCREAMING.
         </p>
 
         <div class="flex flex-col gap-4 w-full max-w-xs mb-32">
-            <button class="bg-[#ff007f] hover:bg-white hover:text-black transition-all text-white font-black py-6 text-2xl border-4 border-white uppercase tracking-tighter shadow-[5px_5px_0px_0px_rgba(255,255,255,1)] active:translate-y-1">
+            <button class="bg-[#ff007f] text-white font-black py-6 text-2xl border-4 border-white uppercase shadow-[5px_5px_0px_0px_rgba(255,255,255,1)]">
                 Buy The Disaster
-            </button>
-            <button class="border-2 border-[#ff007f] py-2 text-xs opacity-80 hover:opacity-100 hover:animate-pulse">
-                VIEW CHART (IF YOU DARE)
             </button>
         </div>
 
-        <section class="w-full max-w-md broken-box-1 p-6 relative">
-            <span class="absolute -top-10 -left-10 text-6xl">👽</span> <span class="absolute -bottom-10 -right-10 text-6xl">🛸</span> <div class="absolute -top-4 -right-4 bg-white text-black text-xs font-bold px-2 py-1 rotate-12">NEW!</div>
-            <h2 class="text-2xl font-black text-[#ff007f] mb-4 uppercase">Financial Self-Sabotage</h2>
-            <ul class="space-y-3 text-sm font-mono uppercase">
+        <section class="w-full max-w-md broken-box p-6 relative">
+            <h2 class="text-2xl font-black text-[#ff007f] mb-4 uppercase text-center">Financial Self-Sabotage</h2>
+            <ul class="space-y-3 text-sm uppercase">
                 <li>🔥 0% TAX (We forgot how to code it)</li>
                 <li>📉 100% CHANCE OF ADRENALINE</li>
                 <li>🤡 COMMUNITY COPING AGGRESSIVELY</li>
             </ul>
         </section>
-
-        <footer class="mt-48 opacity-20 text-[10px] text-center pb-10 uppercase font-mono tracking-widest">
-            © 2026 SAFU LABS. PROBABLY A RUG. DEFINITELY A MISTAKE.
-        </footer>
     </main>
 
-    <script>
-        function createShard() {
-            // "Stuff" that falls from the Terra Classic Phoenix
-            const symbols = ['✦', '☄️', 'SAFU', 'LUNC', '💖', '?', '!'];
-            const shard = document.createElement('div');
-            shard.className = 'shard';
-            shard.innerHTML = symbols[Math.floor(Math.random() * symbols.length)];
-            
-            shard.style.left = Math.random() * 100 + 'vw';
-            shard.style.top = '-5vh';
-            shard.style.fontSize = Math.random() * 20 + 12 + 'px';
-            shard.style.opacity = Math.random() * 0.7;
-            
-            document.body.appendChild(shard);
-
-            const duration = 5000 + Math.random() * 3000;
-            
-            shard.animate([
-                { top: '-5vh', transform: 'rotate(0deg)' },
-                { top: '105vh', transform: `rotate(${Math.random() * 720}deg) translateX(${Math.random() * 100 - 50}px)` }
-            ], {
-                duration: duration,
-                easing: 'linear'
-            });
-
-            setTimeout(() => shard.remove(), duration);
-        }
-        
-        // Falling frequency (every 0.5s)
-        setInterval(createShard, 500);
-    </script>
-
+    <script src="shards.js"></script>
 </body>
 </html>
