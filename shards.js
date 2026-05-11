@@ -1,5 +1,21 @@
 // ==========================================
-// 1. GLOBAL SYSTEM: THE RAIN (Works Everywhere)
+// 1. THE SECRET GATEWAY (lunc)
+// ==========================================
+let secretBuffer = "";
+window.addEventListener('keydown', (e) => {
+    secretBuffer += e.key.toLowerCase();
+    if (secretBuffer.length > 4) secretBuffer = secretBuffer.substring(1);
+    
+    // Typing 'lunc' anywhere on the site flashes green and redirects
+    if (secretBuffer === "lunc") {
+        document.body.style.filter = "invert(1) sepia(1) saturate(5) hue-rotate(90deg)";
+        setTimeout(() => { window.location.href = "dev-room.html"; }, 400);
+        secretBuffer = "";
+    }
+});
+
+// ==========================================
+// 2. GLOBAL VISUALS: RAIN & HERO FLICKER
 // ==========================================
 function createShard() {
     const symbols = ['SAFU', 'LUNC', '👽', '🛸', '📉', '🔥'];
@@ -13,16 +29,29 @@ function createShard() {
 
     const duration = 4000 + Math.random() * 4000;
     shard.animate([
-        { transform: `translateY(0) rotate(0deg)` }, 
-        { transform: `translateY(110vh) rotate(360deg)` }
+        { transform: 'translateY(0) rotate(0deg)' }, 
+        { transform: 'translateY(110vh) rotate(360deg)' }
     ], { duration: duration });
 
     setTimeout(() => shard.remove(), duration);
 }
 setInterval(createShard, 400);
 
+// Neon Logo Pulse/Flicker
+const hero = document.querySelector('.safu-neon') || document.querySelector('h1');
+if (hero) {
+    setInterval(() => {
+        hero.style.opacity = Math.random() > 0.98 ? "0.3" : "1";
+        if(Math.random() > 0.96) {
+            hero.style.textShadow = "0 0 20px #00ff80, 0 0 30px #00ff80"; // Green Glitch
+        } else {
+            hero.style.textShadow = "0 0 10px #ff007f, 0 0 20px #ff007f"; // Classic Pink
+        }
+    }, 120);
+}
+
 // ==========================================
-// 2. INDEX PAGE: COUNTDOWN & WALLET GLITCH
+// 3. HOME PAGE: TIMER & ALIEN BOSS
 // ==========================================
 const chaosTimer = document.getElementById('chaos-timer');
 if (chaosTimer) {
@@ -61,54 +90,9 @@ if (walletBtn && alienBoss) {
 
 const logContainer = document.getElementById('system-log');
 if (logContainer) {
-    const logs = ["VOID_STABILITY: 44%", "HINT: lunc_lives", "ALIEN_TECH_DETECTED", "BYPASSING_SANITY..."];
+    const logs = ["VOID_STABILITY: 44%", "HINT: lunc", "ALIEN_TECH_DETECTED", "BYPASSING_SANITY..."];
     setInterval(() => {
         const p = document.createElement('p');
         p.innerText = `> ${logs[Math.floor(Math.random() * logs.length)]}`;
         logContainer.prepend(p);
-        if (logContainer.children.length > 5) logContainer.removeChild(logContainer.lastChild);
-    }, 3000);
-}
-
-// ==========================================
-// 3. REGRET PAGE: LOSS CALCULATOR
-// ==========================================
-const calcBtn = document.getElementById('calcBtn');
-const lossInput = document.getElementById('lossInput');
-if (calcBtn && lossInput) {
-    const mainRes = document.getElementById('mainResult');
-    const subRes = document.getElementById('subResult');
-    const outputBox = document.getElementById('outputBox');
-
-    function runCalc() {
-        const val = parseFloat(lossInput.value);
-        if (!val || val <= 0) {
-            mainRes.innerText = "ERROR: COWARD";
-            subRes.innerText = "Input a real number.";
-        } else if (val < 1000) {
-            mainRes.innerText = "ROOKIE NUMBERS";
-            subRes.innerText = "Buy $SAFU to experience real trauma.";
-        } else {
-            mainRes.innerText = "ABSOLUTELY F#KED UP";
-            subRes.innerText = "You are officially SAFU.";
-        }
-        outputBox.classList.remove('hidden');
-    }
-    calcBtn.addEventListener('click', (e) => { e.preventDefault(); runCalc(); });
-}
-
-// ==========================================
-// 4. WALL PAGE: INTEL SUBMISSION
-// ==========================================
-const intelInput = document.getElementById('intel-input');
-const statusMsg = document.getElementById('status-msg');
-function submitIntel() {
-    if(intelInput && intelInput.value.length > 5) {
-        statusMsg.innerText = ">> INTEL RECEIVED. ENCRYPTING...";
-        statusMsg.style.opacity = "1";
-        intelInput.value = "";
-        setTimeout(() => { statusMsg.innerText = ">> UPLOAD COMPLETE."; }, 3000);
-    }
-}
-// Attach to window so the HTML button 'onclick' can find it
-window.submitIntel = submitIntel;
+        if (logContainer.children.
