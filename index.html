@@ -3,82 +3,155 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>$SAFU | PURE CHAOS</title>
+    <title>$SAFU | Terra Classic Madness</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @keyframes pulse-glow {
-            0%, 100% { text-shadow: 0 0 10px #ff007f, 0 0 20px #ff007f; }
-            50% { text-shadow: 0 0 30px #ff007f, 0 0 50px #ff007f, 0 0 70px #ff007f; }
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700&family=VT323&display=swap');
+
+        body {
+            background-color: #050505;
+            color: #fff;
+            font-family: 'Space Grotesk', sans-serif;
+            overflow-x: hidden;
+            margin: 0;
         }
-        .safu-glow { animation: pulse-glow 1.5s infinite; color: white; }
-        
-        /* CRT Scanline Effect */
-        body::before {
+
+        /* The Neon Glow */
+        .safu-glow {
+            text-shadow: 0 0 10px #ff007f, 0 0 20px #ff007f, 0 0 40px #ff007f;
+            animation: flicker 2s infinite;
+        }
+
+        @keyframes flicker {
+            0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { opacity: 1; }
+            20%, 24%, 55% { opacity: 0.4; }
+        }
+
+        /* CRT Overlay */
+        .crt::before {
             content: " ";
             display: block;
             position: fixed;
             top: 0; left: 0; bottom: 0; right: 0;
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
-            z-index: 2;
-            background-size: 100% 2px, 3px 100%;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), 
+                        linear-gradient(90deg, rgba(255, 0, 0, 0.05), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.05));
+            z-index: 50;
+            background-size: 100% 3px, 3px 100%;
             pointer-events: none;
         }
 
-        .broken-card {
-            background: rgba(20, 20, 20, 0.9);
-            border: 3px solid #ff007f;
-            box-shadow: 10px 10px 0px #444;
-            transform: rotate(-1deg);
+        /* Floating Shard Styling */
+        .shard {
+            position: fixed;
+            pointer-events: none;
+            z-index: 1;
+            font-family: 'VT323', monospace;
         }
+
+        .broken-box {
+            border: 4px solid #ff007f;
+            box-shadow: 8px 8px 0px #333;
+            transform: rotate(-1.5deg);
+        }
+
+        .pixel-font { font-family: 'VT323', monospace; }
     </style>
 </head>
-<body class="bg-[#0a0a0a] text-zinc-300 font-mono overflow-x-hidden">
+<body class="crt">
 
-    <nav class="flex justify-between p-4 border-b border-[#ff007f] bg-black sticky top-0 z-10">
-        <div class="font-black text-[#ff007f]">$SAFU</div>
-        <div class="flex gap-4 text-xs pt-1">
-            <span class="line-through opacity-50">UTILITY</span>
-            <span class="line-through opacity-50">WHITEPAPER</span>
-            <span class="animate-bounce">PAIN</span>
+    <nav class="w-full p-6 flex justify-between items-center border-b border-zinc-800 bg-black/80 backdrop-blur-sm sticky top-0 z-[100]">
+        <div class="text-[#ff007f] font-bold text-2xl tracking-tighter">$SAFU</div>
+        <div class="flex gap-4 text-[10px] pixel-font uppercase">
+            <a href="#" class="hover:text-[#ff007f]">[ LUNC_CLASSIC ]</a>
+            <a href="#" class="hover:text-[#ff007f]">[ DEGEN_ONLY ]</a>
         </div>
     </nav>
 
-    <main class="flex flex-col items-center py-20 px-6">
+    <main class="relative z-10 flex flex-col items-center px-6 pt-16 pb-32">
         
-        <h1 class="text-8xl md:text-9xl font-black mb-0 safu-glow italic">SAFU</h1>
-        <div class="bg-[#ff007f] text-black font-black text-xl px-4 py-1 -mt-4 mb-12 rotate-2 uppercase">
+        <div class="mb-2 relative">
+            <span class="absolute -top-6 -left-6 text-4xl">☄️</span>
+            <h1 class="text-8xl font-black italic tracking-tighter safu-glow">SAFU</h1>
+            <span class="absolute -bottom-4 -right-6 text-4xl">👽</span>
+        </div>
+        
+        <div class="bg-white text-black font-black px-4 py-1 rotate-2 mb-10 text-sm uppercase">
             So Absolutely F#ked Up
         </div>
 
-        <p class="text-center max-w-sm mb-12 text-lg leading-tight tracking-tighter">
-            THE DEVS ARE ASLEEP. <br>
-            THE LIQUIDITY IS A MYTH. <br>
-            YOUR PORTFOLIO IS SCREAMING.
+        <p class="text-center max-w-xs text-zinc-400 pixel-font text-xl mb-12">
+            The Phoenix of Terra Classic. <br>
+            Cute enough to trust, <br>
+            mad enough to hold.
         </p>
 
-        <div class="flex flex-col gap-4 w-full max-w-xs">
-            <button class="bg-[#ff007f] hover:bg-white hover:text-black transition-all text-white font-black py-6 text-2xl border-4 border-white uppercase tracking-tighter shadow-[5px_5px_0px_0px_rgba(255,255,255,1)] active:translate-y-1">
-                Buy The Disaster
+        <div class="w-full max-w-xs space-y-4 mb-20">
+            <button class="w-full bg-[#ff007f] py-5 font-black text-2xl border-b-8 border-r-8 border-pink-900 active:border-0 active:translate-y-2 active:translate-x-2 transition-all">
+                EMBRACE MADNESS
             </button>
-            <button class="border-2 border-[#ff007f] py-2 text-xs opacity-80 hover:opacity-100">
-                VIEW CHART (IF YOU DARE)
+            <button class="w-full border-2 border-white/20 py-3 text-xs pixel-font hover:bg-white hover:text-black transition-colors">
+                VIEW LUNC CHART 📉
             </button>
         </div>
 
-        <section class="mt-32 w-full max-w-md broken-card p-6 relative">
-            <div class="absolute -top-4 -right-4 bg-white text-black text-xs font-bold px-2 py-1 rotate-12">NEW!</div>
-            <h2 class="text-2xl font-black text-[#ff007f] mb-4 uppercase">Financial Self-Sabotage</h2>
-            <ul class="space-y-3 text-sm">
-                <li>🔥 0% TAX (We forgot how to code it)</li>
-                <li>📉 100% CHANCE OF ADRENALINE</li>
-                <li>🤡 COMMUNITY COPING AGGRESSIVELY</li>
-            </ul>
+        <section class="w-full max-w-sm broken-box bg-zinc-900 p-6 space-y-6">
+            <h2 class="text-3xl font-black text-[#ff007f] uppercase italic">The Bad News:</h2>
+            
+            <div class="space-y-4 text-sm pixel-font">
+                <div class="flex items-center gap-3">
+                    <span class="text-2xl">🧸</span>
+                    <p>SUPPLY: 1 Trillion (Most are lost in space)</p>
+                </div>
+                <div class="flex items-center gap-3">
+                    <span class="text-2xl">🔥</span>
+                    <p>BURN: 1.2% (Watching the world burn is cute)</p>
+                </div>
+                <div class="flex items-center gap-3">
+                    <span class="text-2xl">📉</span>
+                    <p>UTILITY: Absolute zero. Pure vibes.</p>
+                </div>
+            </div>
         </section>
 
-        <footer class="mt-40 opacity-20 text-[10px] text-center pb-10">
-            © 2026 SAFU LABS. PROBABLY A RUG. DEFINITELY A MISTAKE.
+        <footer class="mt-32 text-[10px] opacity-40 text-center uppercase tracking-[0.2em]">
+            built on a phone <br>
+            powered by broken dreams <br>
+            terra classic 2026
         </footer>
+
     </main>
+
+    <script>
+        function createShard() {
+            const symbols = ['✦', '✧', '☄️', '✨', 'SAFU', 'LUNC'];
+            const shard = document.createElement('div');
+            shard.className = 'shard';
+            shard.innerHTML = symbols[Math.floor(Math.random() * symbols.length)];
+            
+            shard.style.left = Math.random() * 100 + 'vw';
+            shard.style.top = '-5vh';
+            shard.style.fontSize = Math.random() * 20 + 10 + 'px';
+            shard.style.color = Math.random() > 0.5 ? '#ff007f' : '#ffffff';
+            shard.style.opacity = Math.random() * 0.6;
+            
+            document.body.appendChild(shard);
+
+            const duration = 4000 + Math.random() * 3000;
+            
+            shard.animate([
+                { top: '-5vh', transform: 'rotate(0deg)' },
+                { top: '105vh', transform: `rotate(${Math.random() * 360}deg) translateX(${Math.random() * 100 - 50}px)` }
+            ], {
+                duration: duration,
+                easing: 'linear'
+            });
+
+            setTimeout(() => shard.remove(), duration);
+        }
+        
+        // Create shards periodically
+        setInterval(createShard, 400);
+    </script>
 
 </body>
 </html>
