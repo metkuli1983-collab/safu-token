@@ -80,3 +80,10 @@ main, section, nav {
     50% { transform: translate(-5px, -5px); } 
     100% { transform: translate(2px, 2px); } 
 }
+.shard { 
+    position: fixed; 
+    pointer-events: none; 
+    z-index: -1 !important;  /* THIS IS THE KEY */
+    color: #ff007f; 
+    font-weight: bold; 
+}
