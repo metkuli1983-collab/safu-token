@@ -16,118 +16,38 @@
         #chaos-timer { text-shadow: 0 0 15px #ff007f; font-variant-numeric: tabular-nums; }
         .void-active { animation: flash 0.1s infinite; color: white !important; text-shadow: 0 0 20px white !important; }
         @keyframes flash { 0% { opacity: 1; } 50% { opacity: 0; } 100% { opacity: 1; } }
+        
+        /* Mobile tap effect: Inverts screen briefly on touch */
+        body:active { filter: invert(1) hue-rotate(90deg); transition: 0.02s; }
     </style>
 </head>
 <body>
 
-    <nav class="flex justify-between p-4 border-b border-[#ff007f] bg-black sticky top-0 z-[100] text-xs">
+    <nav class="flex justify-between p-4 border-b border-[#ff007f] bg-black sticky top-0 z-[100] text-[10px]">
         <div class="font-black text-[#ff007f] animate-pulse">$SAFU_NODE_01</div>
-        <div class="flex gap-4 uppercase font-bold">
-            <a href="memes.html" class="text-white underline">Wall of Pain</a>
-            <a href="regret.html" class="text-white underline">Regret Calc</a>
+        <div class="flex gap-3 uppercase font-bold">
+            <a href="manifesto.html" class="text-white underline italic">Manifesto/QA</a>
+            <a href="memes.html" class="text-white underline">Wall_of_Pain</a>
         </div>
     </nav>
 
     <main class="flex flex-col items-center py-12 px-6 relative z-10">
-        <h1 class="font-black mb-0 safu-neon italic shake-effect">SAFU</h1>
-        <div class="bg-[#ff007f] text-black font-black text-xl px-4 py-1 -mt-4 mb-12 rotate-2 uppercase">So Absolutely F#ked Up</div>
+        <h1 class="font-black mb-0 safu-neon italic shake-effect text-center">SAFU</h1>
+        <div class="bg-[#ff007f] text-white font-black text-xl px-4 py-1 -mt-4 mb-12 rotate-2 uppercase">
+            So Absolutely F#ked Up
+        </div>
 
         <p class="text-center max-w-sm mb-12 text-xl leading-tight tracking-tighter uppercase text-zinc-400">
             THE DEVS ARE ASLEEP. <br> THE LIQUIDITY IS A MYTH. <br> YOUR PORTFOLIO IS SCREAMING.
         </p>
 
         <div class="flex flex-col gap-4 w-full max-w-xs mb-12">
-            <button class="bg-[#ff007f] text-white font-black py-6 text-2xl border-4 border-white uppercase shadow-[5px_5px_0px_0px_white] active:translate-y-1">
+            <button onclick="alert('SYSTEM_ERROR: LIQUIDITY_VALVE_STUCK. TRY AGAIN IN 4320 HOURS.')" class="bg-[#ff007f] text-white font-black py-6 text-2xl border-4 border-white uppercase shadow-[5px_5px_0px_0px_white] active:translate-y-1 transition-all">
                 Buy The Disaster
             </button>
         </div>
 
         <div class="mb-20 text-center">
             <div class="text-[10px] uppercase tracking-[0.3em] opacity-40 mb-2">Protocol_Stabilization_In_Progress</div>
-            <div id="chaos-timer" class="text-5xl font-black text-[#ff007f] tracking-widest shake-effect">00:00:00:00</div>
-            <div id="status-msg" class="mt-2 text-[9px] uppercase text-zinc-500 italic">"The wait is long. The pain is eternal."</div>
-        </div>
-
-        <section class="w-full max-w-md broken-box p-6 relative mb-12">
-            <span class="absolute -top-10 -left-6 text-6xl">👽</span>
-            <span class="absolute -bottom-10 -right-6 text-6xl rotate-12">🛸</span>
-            <h2 class="text-2xl font-black text-[#ff007f] mb-4 uppercase italic">Financial Self-Sabotage</h2>
-            <ul class="space-y-3 text-sm uppercase">
-                <li>🔥 0% TAX (Encoded in the void)</li>
-                <li>📉 100% CHANCE OF ADRENALINE</li>
-                <li>🤡 COMMUNITY COPING AGGRESSIVELY</li>
-            </ul>
-        </section>
-
-        <div class="w-full max-w-xs p-3 bg-[#050505] border border-[#ff007f]/20 rounded font-mono text-[9px] overflow-hidden relative mb-20">
-            <div id="system-log" class="text-zinc-500 leading-tight">
-                <p class="text-[#ff007f] opacity-70">> SYSTEM_UPTIME: STABLE</p>
-            </div>
-        </div>
-
-        <footer class="mt-10 opacity-20 text-[10px] text-center pb-10 uppercase tracking-widest">STRICTLY CONFIDENTIAL // SAFU LABS 2026</footer>
-    </main>
-
-    <script>
-        // --- DOOMSDAY: OCT 31, 2026 ---
-        const targetDate = new Date("October 31, 2026 00:00:00").getTime(); 
-
-        function updateTimer() {
-            const now = new Date().getTime();
-            const diff = targetDate - now;
-
-            if (diff <= 0) {
-                document.getElementById('chaos-timer').innerText = "00:00:00:00";
-                document.getElementById('chaos-timer').classList.add('void-active');
-                document.getElementById('status-msg').innerText = ">> ASCENSION COMMENCING.";
-                setTimeout(() => { window.location.href = 'dev-room.html'; }, 3000);
-                return;
-            }
-
-            const d = Math.floor(diff / (1000 * 60 * 60 * 24));
-            const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-            const s = Math.floor((diff % (1000 * 60)) / 1000);
-
-            document.getElementById('chaos-timer').innerText = 
-                `${d.toString().padStart(2, '0')}:${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
-        }
-        setInterval(updateTimer, 1000);
-
-        // System Logs
-        const logs = [
-            "SCANNING_DEGEN_SENTIMENT...", 
-            "VOID_STABILITY: 44%", 
-            "BYPASSING_SANITY...", 
-            "HINT: lunc_lives", 
-            "PHASE_1_LOADED",
-            "UPDATING_TERMINAL_NODES...",
-            "ALIEN_TECH_DETECTED"
-        ];
-        function addLog() {
-            const logContainer = document.getElementById('system-log');
-            const p = document.createElement('p');
-            p.innerText = `> ${logs[Math.floor(Math.random() * logs.length)]}`;
-            logContainer.prepend(p);
-            if (logContainer.children.length > 5) logContainer.removeChild(logContainer.lastChild);
-        }
-        setInterval(addLog, 3000);
-
-        // Falling Shards
-        function createShard() {
-            const symbols = ['✦', '☄️', 'SAFU', '👽', '🛸'];
-            const shard = document.createElement('div');
-            shard.className = 'shard';
-            shard.innerHTML = symbols[Math.floor(Math.random() * symbols.length)];
-            shard.style.left = Math.random() * 100 + 'vw';
-            shard.style.top = '-5vh';
-            shard.style.fontSize = Math.random() * 20 + 12 + 'px';
-            document.body.appendChild(shard);
-            const duration = 5000 + Math.random() * 3000;
-            shard.animate([{ top: '-5vh' }, { top: '105vh' }], { duration: duration, easing: 'linear' });
-            setTimeout(() => shard.remove(), duration);
-        }
-        setInterval(createShard, 700);
-    </script>
-</body>
-</html>
+            <div id="chaos-timer" class="text-5xl font-black text-[#ff007f] tracking-widest shake-effect">000:00:00:00</div>
+            <div id="status-msg" class="mt-2 text-[9px]
