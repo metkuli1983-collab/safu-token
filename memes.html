@@ -2,137 +2,48 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>SAFU | INTEL_WALL</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAFU | THE_WALL</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="madness.css">
     <style>
-        .meme-card {
-            border: 1px solid #333;
-            filter: grayscale(100%) contrast(150%);
-            transition: all 0.2s ease;
-            background: #000;
-        }
-        .meme-card:active {
-            filter: grayscale(0%) contrast(100%);
-            border-color: #ff007f;
-        }
-        .terminal-input {
-            caret-color: #ff007f;
-            background: transparent;
-            border: none;
-            outline: none;
-            color: #ff007f;
-            width: 100%;
-            font-family: monospace;
-        }
-        #terminal-content {
-            max-height: 150px;
-            overflow-y: auto;
-            scrollbar-width: none;
-        }
-        #terminal-content::-webkit-scrollbar { display: none; }
+        @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+        body { background: #050505; color: #ff007f; font-family: 'VT323', monospace; }
+        .intel-card { border: 1px solid #ff007f; background: rgba(255, 0, 127, 0.05); transition: all 0.3s; }
+        .intel-card:hover { transform: scale(1.02); background: rgba(255, 0, 127, 0.1); border-width: 2px; }
     </style>
 </head>
-<body class="bg-[#050505] text-zinc-400 p-6 font-mono">
+<body class="p-6">
 
-    <nav class="mb-10 flex justify-between items-center text-[9px] uppercase tracking-widest">
-        <a href="index.html" class="text-[#ff007f] font-black">[ <- DISCONNECT ]</a>
-        <span class="animate-pulse text-green-500">● SECURE_CONNECTION_ESTABLISHED</span>
+    <nav class="mb-10 uppercase text-xs">
+        <a href="index.html" class="border border-[#ff007f] px-3 py-1 hover:bg-[#ff007f] hover:text-black transition-all"><- Back_To_Node</a>
     </nav>
 
-    <header class="text-center mb-12">
-        <h1 class="text-4xl font-black uppercase italic text-white tracking-tighter">Wall of Pain</h1>
-        <p class="text-[9px] opacity-30 mt-2 uppercase">Unauthorized Archive // Classified Intel</p>
-    </header>
+    <h1 class="text-5xl font-black italic mb-2 uppercase underline decoration-double">Wall of Pain</h1>
+    <p class="text-xs mb-10 opacity-60 uppercase">Unauthorized Archive // Classified Intel // Do Not Share</p>
 
-    <div class="grid grid-cols-2 gap-4 mb-16">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         
-        <div class="meme-card aspect-square relative overflow-hidden">
-            <img src="https://placehold.co/400x400/000000/333333?text=NO+SIGNAL" class="w-full h-full object-cover opacity-50">
+        <div class="intel-card p-4">
+            <div class="bg-black mb-4 border border-[#ff007f]/20 p-2">
+                <img src="logo.png" class="w-full grayscale hover:grayscale-0 transition-all duration-500">
+            </div>
+            <div class="flex justify-between items-end">
+                <div>
+                    <h3 class="font-bold text-lg uppercase leading-none">The_Origin.png</h3>
+                    <p class="text-[10px] opacity-50 uppercase">Date: 11_MAY_2026</p>
+                </div>
+                <div class="text-[10px] border border-[#ff007f] px-1 bg-[#ff007f] text-black font-bold">VERIFIED</div>
+            </div>
+            <p class="text-[11px] mt-4 leading-tight opacity-80 uppercase italic">
+                "The prophecy was written in red candles and broken dreams."
+            </p>
         </div>
 
-        <div class="border-2 border-dashed border-[#ff007f]/30 aspect-square flex flex-col items-center justify-center text-center p-4">
-            <div class="text-[#ff007f] text-xl mb-2">📁</div>
-            <a href="https://wormhole.app/" target="_blank" class="text-[9px] bg-[#ff007f] text-black px-2 py-1 font-bold uppercase mb-2">Dead Drop</a>
-            <p class="text-[7px] uppercase leading-tight opacity-40">Drop file. Copy Link. <br>Submit via Terminal below.</p>
+        <div class="intel-card p-4 flex items-center justify-center border-dashed opacity-30">
+            <p class="uppercase text-sm italic">[ Awaiting_Next_Disaster ]</p>
         </div>
+
     </div>
 
-    <section class="max-w-md mx-auto">
-        <div class="bg-black border border-zinc-800 p-4 text-[10px] shadow-2xl">
-            <div class="flex gap-1.5 mb-3">
-                <div class="w-2 h-2 rounded-full bg-zinc-900 border border-zinc-700"></div>
-                <div class="w-2 h-2 rounded-full bg-zinc-900 border border-zinc-700"></div>
-                <div class="w-2 h-2 rounded-full bg-zinc-900 border border-zinc-700"></div>
-            </div>
-            <div id="terminal-content" class="mb-2">
-                <p class="text-green-500">> SYSTEM READY.</p>
-                <p class="mb-2 text-zinc-500">> TO SUBMIT: PASTE WORMHOLE LINK BELOW.</p>
-            </div>
-            <div class="flex items-center">
-                <span class="text-[#ff007f] mr-2">SAFU@NODE:~$</span>
-                <input type="text" class="terminal-input" id="termInput" placeholder="..." spellcheck="false" autocomplete="off">
-            </div>
-        </div>
-    </section>
-
-    <script>
-        const input = document.getElementById('termInput');
-        const content = document.getElementById('terminal-content');
-        
-        input.addEventListener('keydown', function(e) {
-            if (e.key === 'Enter') {
-                const val = this.value.toLowerCase().trim();
-                const p = document.createElement('p');
-                
-                // Show what the user typed
-                const userLine = document.createElement('p');
-                userLine.className = "text-zinc-600";
-                userLine.innerText = `> ${val}`;
-                content.appendChild(userLine);
-
-                // SECRET TRIGGER: DEV ROOM
-                if (val === 'lunc_lives' || val === 'admin' || val === 'root') {
-                    p.innerText = ">> ACCESS GRANTED. BYPASSING FIREWALL...";
-                    p.className = "text-green-400 font-bold animate-pulse";
-                    content.appendChild(p);
-                    
-                    // Redirect after a small delay for effect
-                    setTimeout(() => {
-                        window.location.href = 'dev-room.html';
-                    }, 1200);
-                } 
-                // Link Submission Logic
-                else if (val.includes('http')) {
-                    p.innerText = ">> INTEL RECEIVED. ENCRYPTING FOR UPLOAD...";
-                    p.className = "text-[#ff007f] italic";
-                    content.appendChild(p);
-                } 
-                // Help Command
-                else if (val === 'help') {
-                    p.innerText = ">> COMMANDS: STATUS, CLEAR, [REDACTED_KEY]";
-                    p.className = "text-blue-400";
-                    content.appendChild(p);
-                } 
-                // Clear Command
-                else if (val === 'clear') {
-                    content.innerHTML = '<p class="text-green-500">> SYSTEM RESET.</p>';
-                }
-                // Fail state
-                else {
-                    p.innerText = `>> ERROR: '${val}' NOT RECOGNIZED.`;
-                    p.className = "text-red-900";
-                    content.appendChild(p);
-                }
-                
-                this.value = '';
-                // Keep terminal scrolled to bottom
-                content.scrollTop = content.scrollHeight;
-            }
-        });
-    </script>
-
-    <script src="shards.js"></script>
 </body>
 </html>
