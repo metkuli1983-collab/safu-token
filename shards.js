@@ -122,4 +122,4 @@ if (calcBtn) {
 }
 // Hidden Intel for the curious
 console.log("%c SECRET PIZZA FUND FOUND ", "background: #00ff00; color: #000; font-weight: bold;");
-console.log("Oracle Wallet: terra1wuv0u97tmmmceqc06kr28kzygnaqatqzqs2aqg");
+console.log("Oracle Wallet: terra1dae4yxcqlkczzcnj7xzc3y7qxcss85rauv69wh");
