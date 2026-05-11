@@ -101,6 +101,31 @@ input {
     text-shadow: 0 0 10px #ff007f, 0 0 20px #ff007f; 
     color: white; 
 }
+/* --- DEV ROOM SPECIFIC (Green Terminal) --- */
+
+/* This targets the body ONLY when you are on the dev page */
+.dev-body {
+    background-color: #000 !important;
+    color: #00ff00 !important;
+    font-family: 'Courier New', monospace !important;
+}
+
+/* The Green Horizontal Glitch from your screenshot */
+.glitch { 
+    animation: glitch-anim 1s linear infinite; 
+}
+
+@keyframes glitch-anim {
+    2%, 64% { transform: translate(2px,0) skew(0deg); }
+    4%, 60% { transform: translate(-2px,0) skew(0deg); }
+    62% { transform: translate(0,0) skew(5deg); }
+}
+
+/* Forces the rain to be green in the dev room */
+.dev-body .shard {
+    color: #00ff00 !important;
+    text-shadow: 0 0 5px #00ff00;
+}
 
 #chaos-timer { 
     text-shadow: 0 0 15px #ff007f; 
