@@ -48,19 +48,6 @@
         </div>
     </div>
 
-    <script>
-        function submitIntel() {
-            const input = document.getElementById('intel-input');
-            const msg = document.getElementById('status-msg');
-            if(input.value.length > 5) {
-                msg.innerText = ">> INTEL RECEIVED. ENCRYPTING FOR UPLOAD...";
-                msg.style.opacity = "1";
-                input.value = "";
-                setTimeout(() => { msg.innerText = ">> UPLOAD COMPLETE. NODE DISCONNECTED."; }, 3000);
-            }
-        }
-    </script>
-
     <script src="shards.js"></script>
     
 </body>
