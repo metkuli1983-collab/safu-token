@@ -3,40 +3,82 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>$SAFU - So Absolutely F#ked Up</title>
+    <title>$SAFU | PURE CHAOS</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @keyframes glitch {
-            0% { transform: skew(0deg); }
-            20% { transform: skew(-10deg); color: #ff00ff; }
-            40% { transform: skew(10deg); color: #00ffff; }
-            60% { transform: skew(-5deg); }
-            100% { transform: skew(0deg); }
+        @keyframes pulse-glow {
+            0%, 100% { text-shadow: 0 0 10px #ff007f, 0 0 20px #ff007f; }
+            50% { text-shadow: 0 0 30px #ff007f, 0 0 50px #ff007f, 0 0 70px #ff007f; }
         }
-        .glitch-text:hover { animation: glitch 0.2s infinite; }
-        body { background-color: #050505; color: #39FF14; font-family: 'Courier New', Courier, monospace; }
+        .safu-glow { animation: pulse-glow 1.5s infinite; color: white; }
+        
+        /* CRT Scanline Effect */
+        body::before {
+            content: " ";
+            display: block;
+            position: fixed;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            z-index: 2;
+            background-size: 100% 2px, 3px 100%;
+            pointer-events: none;
+        }
+
+        .broken-card {
+            background: rgba(20, 20, 20, 0.9);
+            border: 3px solid #ff007f;
+            box-shadow: 10px 10px 0px #444;
+            transform: rotate(-1deg);
+        }
     </style>
 </head>
-<body class="flex flex-col items-center justify-center min-h-screen p-6 text-center">
+<body class="bg-[#0a0a0a] text-zinc-300 font-mono overflow-x-hidden">
 
-    <h1 class="text-7xl font-black mb-2 glitch-text cursor-wait">$SAFU</h1>
-    <p class="bg-green-500 text-black font-bold px-2 mb-8 uppercase tracking-widest">So Absolutely F#ked Up</p>
+    <nav class="flex justify-between p-4 border-b border-[#ff007f] bg-black sticky top-0 z-10">
+        <div class="font-black text-[#ff007f]">$SAFU</div>
+        <div class="flex gap-4 text-xs pt-1">
+            <span class="line-through opacity-50">UTILITY</span>
+            <span class="line-through opacity-50">WHITEPAPER</span>
+            <span class="animate-bounce">PAIN</span>
+        </div>
+    </nav>
 
-    <div class="border-2 border-dashed border-green-500 p-6 max-w-sm">
-        <p class="text-sm mb-4">"I bought the top and all I got was this stupid website."</p>
-        <p class="text-xs opacity-60 italic">— Anonymous Degen</p>
-    </div>
+    <main class="flex flex-col items-center py-20 px-6">
+        
+        <h1 class="text-8xl md:text-9xl font-black mb-0 safu-glow italic">SAFU</h1>
+        <div class="bg-[#ff007f] text-black font-black text-xl px-4 py-1 -mt-4 mb-12 rotate-2 uppercase">
+            So Absolutely F#ked Up
+        </div>
 
-    <div class="mt-10 space-y-4">
-        <button class="w-full bg-red-600 text-white font-bold py-4 px-8 border-b-4 border-red-900 active:border-b-0 hover:bg-red-500">
-            BUY THE DIP (PLEASE)
-        </button>
-        <p class="text-[10px] uppercase opacity-40">Contract Address: 0x_COMING_SOON_TO_RECK_YOU</p>
-    </div>
+        <p class="text-center max-w-sm mb-12 text-lg leading-tight tracking-tighter">
+            THE DEVS ARE ASLEEP. <br>
+            THE LIQUIDITY IS A MYTH. <br>
+            YOUR PORTFOLIO IS SCREAMING.
+        </p>
 
-    <footer class="mt-20 text-[10px] opacity-30">
-        NO ROADMAP. NO UTILITY. JUST PAIN.
-    </footer>
+        <div class="flex flex-col gap-4 w-full max-w-xs">
+            <button class="bg-[#ff007f] hover:bg-white hover:text-black transition-all text-white font-black py-6 text-2xl border-4 border-white uppercase tracking-tighter shadow-[5px_5px_0px_0px_rgba(255,255,255,1)] active:translate-y-1">
+                Buy The Disaster
+            </button>
+            <button class="border-2 border-[#ff007f] py-2 text-xs opacity-80 hover:opacity-100">
+                VIEW CHART (IF YOU DARE)
+            </button>
+        </div>
+
+        <section class="mt-32 w-full max-w-md broken-card p-6 relative">
+            <div class="absolute -top-4 -right-4 bg-white text-black text-xs font-bold px-2 py-1 rotate-12">NEW!</div>
+            <h2 class="text-2xl font-black text-[#ff007f] mb-4 uppercase">Financial Self-Sabotage</h2>
+            <ul class="space-y-3 text-sm">
+                <li>🔥 0% TAX (We forgot how to code it)</li>
+                <li>📉 100% CHANCE OF ADRENALINE</li>
+                <li>🤡 COMMUNITY COPING AGGRESSIVELY</li>
+            </ul>
+        </section>
+
+        <footer class="mt-40 opacity-20 text-[10px] text-center pb-10">
+            © 2026 SAFU LABS. PROBABLY A RUG. DEFINITELY A MISTAKE.
+        </footer>
+    </main>
 
 </body>
 </html>
