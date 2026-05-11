@@ -10,7 +10,7 @@
         body { background-color: #000; color: #fff; font-family: 'VT323', monospace; margin: 0; overflow-x: hidden; }
         .safu-neon { text-shadow: 0 0 10px #ff007f, 0 0 20px #ff007f; color: white; font-size: 6rem; line-height: 1; }
         .broken-box { background: rgba(15, 15, 15, 0.9); border: 3px solid #ff007f; box-shadow: 8px 8px 0px #444; transform: rotate(-1deg); }
-        .shard { position: fixed; pointer-events: none; z-index: 1; color: #ff007f; }
+        .shard { position: fixed; pointer-events: none; z-index: 1; color: #ff007f; font-weight: bold; }
         .shake-effect { animation: crt-shake 0.15s infinite; }
         @keyframes crt-shake { 0% { transform: translate(1px, 1px); } 50% { transform: translate(-1px, -1px); } 100% { transform: translate(1px, 1px); } }
         #chaos-timer { text-shadow: 0 0 15px #ff007f; font-variant-numeric: tabular-nums; }
@@ -37,14 +37,14 @@
         </p>
 
         <div class="flex flex-col gap-4 w-full max-w-xs mb-12">
-            <button onclick="alert('SYSTEM_ERROR: LIQUIDITY_VALVE_STUCK.')" class="bg-[#ff007f] text-white font-black py-6 text-2xl border-4 border-white uppercase shadow-[5px_5px_0px_0px_white] active:translate-y-1">
+            <button onclick="alert('SYSTEM_ERROR: LIQUIDITY_VALVE_STUCK.')" class="bg-[#ff007f] text-white font-black py-6 text-2xl border-4 border-white uppercase shadow-[5px_5px_0px_0px_white] active:translate-y-1 transition-all">
                 Buy The Disaster
             </button>
         </div>
 
         <div class="mb-20 text-center">
             <div class="text-[10px] uppercase tracking-[0.3em] opacity-40 mb-2">Protocol_Stabilization_In_Progress</div>
-            <div id="chaos-timer" class="text-4xl font-black text-[#ff007f] tracking-widest shake-effect">000:00:00:00</div>
+            <div id="chaos-timer" class="text-5xl font-black text-[#ff007f] tracking-widest shake-effect">000:00:00:00</div>
             <div id="status-msg" class="mt-2 text-[9px] uppercase text-zinc-500 italic">"The wait is long. The pain is eternal."</div>
         </div>
 
@@ -69,7 +69,7 @@
     </main>
 
     <script>
-        // USE ISO DATE FORMAT FOR ULTIMATE COMPATIBILITY
+        // --- FIXED DATE FORMAT ---
         const targetDate = new Date("2026-10-31T00:00:00").getTime(); 
 
         function updateTimer() {
@@ -91,7 +91,38 @@
         }
         setInterval(updateTimer, 1000);
 
-        const logs = ["SCANNING_DEGEN_SENTIMENT...", "VOID_STABILITY: 44%", "HINT: lunc_lives", "ALIEN_TECH_DETECTED"];
+        // --- RAINING ELEMENTS SCRIPT ---
+        function createShard() {
+            const symbols = ['SAFU', 'LUNC', '👽', '🛸', '✦', '☄️', '?', '!', '📉', '🔥'];
+            const shard = document.createElement('div');
+            shard.className = 'shard';
+            shard.innerHTML = symbols[Math.floor(Math.random() * symbols.length)];
+            
+            shard.style.left = Math.random() * 100 + 'vw';
+            shard.style.top = '-10vh';
+            shard.style.fontSize = Math.random() * 20 + 10 + 'px';
+            shard.style.opacity = Math.random() * 0.6 + 0.2;
+            
+            document.body.appendChild(shard);
+
+            const duration = 4000 + Math.random() * 4000;
+            const rotation = Math.random() * 360;
+
+            shard.animate([
+                { transform: `translateY(0) rotate(0deg)`, opacity: shard.style.opacity },
+                { transform: `translateY(110vh) rotate(${rotation}deg)`, opacity: 0 }
+            ], {
+                duration: duration,
+                easing: 'linear'
+            });
+
+            setTimeout(() => shard.remove(), duration);
+        }
+        // Frequency of rain
+        setInterval(createShard, 400);
+
+        // --- SYSTEM LOGS ---
+        const logs = ["SCANNING_DEGEN_SENTIMENT...", "VOID_STABILITY: 44%", "HINT: lunc_lives", "ALIEN_TECH_DETECTED", "BYPASSING_SANITY..."];
         function addLog() {
             const logContainer = document.getElementById('system-log');
             if(!logContainer) return;
@@ -101,18 +132,6 @@
             if (logContainer.children.length > 5) logContainer.removeChild(logContainer.lastChild);
         }
         setInterval(addLog, 3000);
-
-        function createShard() {
-            const shard = document.createElement('div');
-            shard.className = 'shard';
-            shard.innerHTML = '✦';
-            shard.style.left = Math.random() * 100 + 'vw';
-            shard.style.top = '-5vh';
-            document.body.appendChild(shard);
-            shard.animate([{ top: '-5vh' }, { top: '105vh' }], { duration: 6000 });
-            setTimeout(() => shard.remove(), 6000);
-        }
-        setInterval(createShard, 1000);
     </script>
 </body>
 </html>
