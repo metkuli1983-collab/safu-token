@@ -172,9 +172,3 @@ input {
     padding-left: 20px;
     margin-top: 50px;
 }
-body:active { filter: invert(1); }
-/* FORCE GREEN RAIN IN DEV ROOM */
-.dev-body .shard {
-    color: #00ff00 !important;
-    text-shadow: 0 0 5px #00ff00 !important;
-}
