@@ -10,6 +10,43 @@ body {
     transition: filter 0.5s;
 }
 
+/* 1. RESTORE THE GLOW & FLICKER */
+.safu-neon {
+    text-shadow: 0 0 10px #ff007f, 0 0 20px #ff007f, 0 0 30px #ff007f;
+    color: white;
+    animation: flicker 1.5s infinite;
+}
+
+@keyframes flicker {
+    0%, 18%, 22%, 25%, 53%, 57%, 100% { opacity: 1; }
+    20%, 24%, 55% { opacity: 0.3; }
+}
+
+/* 2. RESTORE THE CHAOS SHAKE */
+.shake-effect { 
+    animation: crt-shake 0.1s infinite; 
+}
+
+@keyframes crt-shake {
+    0% { transform: translate(1px, 1px); }
+    25% { transform: translate(-1px, -1px); }
+    50% { transform: translate(1px, -1px); }
+    75% { transform: translate(-1px, 1px); }
+    100% { transform: translate(1px, 1px); }
+}
+
+/* 3. FIX THE Z-INDEX (Rain should be visible but behind text) */
+.shard {
+    position: fixed;
+    pointer-events: none;
+    z-index: 1 !important; /* Changed from -1 to 1 so it's above background */
+    color: #ff007f;
+}
+
+main, .content-wrapper {
+    position: relative;
+    z-index: 10; /* Keeps text above the rain */
+}
 /* --- THE RAIN (BACKGROUND LAYER) --- */
 .shard { 
     position: fixed; 
