@@ -7,12 +7,14 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
-        body { background-color: #000; color: #fff; font-family: 'VT323', monospace; margin: 0; overflow-x: hidden; }
+        body { background-color: #000; color: #fff; font-family: 'VT323', monospace; margin: 0; overflow-x: hidden; transition: filter 0.5s; }
         .safu-neon { text-shadow: 0 0 10px #ff007f, 0 0 20px #ff007f; color: white; font-size: 6rem; line-height: 1; }
         .broken-box { background: rgba(15, 15, 15, 0.9); border: 3px solid #ff007f; box-shadow: 8px 8px 0px #444; transform: rotate(-1deg); }
         .shard { position: fixed; pointer-events: none; z-index: 1; color: #ff007f; font-weight: bold; }
         .shake-effect { animation: crt-shake 0.15s infinite; }
         @keyframes crt-shake { 0% { transform: translate(1px, 1px); } 50% { transform: translate(-1px, -1px); } 100% { transform: translate(1px, 1px); } }
+        .reality-glitch { animation: glitch-flash 0.2s infinite; filter: invert(1) hue-rotate(180deg) !important; }
+        @keyframes glitch-flash { 0% { transform: translate(2px, 2px); } 50% { transform: translate(-5px, -5px); } 100% { transform: translate(2px, 2px); } }
         #chaos-timer { text-shadow: 0 0 15px #ff007f; font-variant-numeric: tabular-nums; }
         body:active { filter: invert(1) hue-rotate(90deg); transition: 0.02s; }
     </style>
@@ -28,7 +30,7 @@
         </div>
     </nav>
 
-    <main class="flex flex-col items-center py-12 px-6 relative z-10">
+    <main id="main-content" class="flex flex-col items-center py-12 px-6 relative z-10">
         <h1 class="font-black mb-0 safu-neon italic shake-effect text-center">SAFU</h1>
         <div class="bg-[#ff007f] text-white font-black text-xl px-4 py-1 -mt-4 mb-12 rotate-2 uppercase">So Absolutely F#ked Up</div>
 
@@ -36,20 +38,23 @@
             THE DEVS ARE ASLEEP. <br> THE LIQUIDITY IS A MYTH. <br> YOUR PORTFOLIO IS SCREAMING.
         </p>
 
-        <div class="flex flex-col gap-4 w-full max-w-xs mb-12">
-            <button onclick="alert('SYSTEM_ERROR: LIQUIDITY_VALVE_STUCK.')" class="bg-[#ff007f] text-white font-black py-6 text-2xl border-4 border-white uppercase shadow-[5px_5px_0px_0px_white] active:translate-y-1 transition-all">
+        <div class="flex flex-col gap-4 w-full max-w-xs mb-8">
+            <button onclick="alert('SYSTEM_ERROR: LIQUIDITY_VALVE_STUCK.')" class="bg-[#ff007f] text-white font-black py-6 text-2xl border-4 border-white uppercase shadow-[5px_5px_0px_0px_white] active:translate-y-1">
                 Buy The Disaster
+            </button>
+            
+            <button id="wallet-btn" class="border-2 border-[#ff007f] text-[#ff007f] py-2 px-4 text-xs uppercase font-bold hover:bg-[#ff007f] hover:text-black transition-all">
+                [ CONNECT_NEURAL_LINK ]
             </button>
         </div>
 
         <div class="mb-20 text-center">
-            <div class="text-[10px] uppercase tracking-[0.3em] opacity-40 mb-2">Protocol_Stabilization_In_Progress</div>
             <div id="chaos-timer" class="text-5xl font-black text-[#ff007f] tracking-widest shake-effect">000:00:00:00</div>
             <div id="status-msg" class="mt-2 text-[9px] uppercase text-zinc-500 italic">"The wait is long. The pain is eternal."</div>
         </div>
 
         <section class="w-full max-w-md broken-box p-6 relative mb-12">
-            <span class="absolute -top-10 -left-6 text-6xl">👽</span>
+            <span id="alien-boss" class="absolute -top-10 -left-6 text-6xl transition-all duration-500">👽</span>
             <span class="absolute -bottom-10 -right-6 text-6xl rotate-12">🛸</span>
             <h2 class="text-2xl font-black text-[#ff007f] mb-4 uppercase italic">Financial Self-Sabotage</h2>
             <ul class="space-y-3 text-sm uppercase">
@@ -59,7 +64,7 @@
             </ul>
         </section>
 
-        <div class="w-full max-w-xs p-3 bg-[#050505] border border-[#ff007f]/20 rounded font-mono text-[9px] overflow-hidden relative mb-20">
+        <div class="w-full max-w-xs p-3 bg-[#050505] border border-[#ff007f]/20 rounded font-mono text-[9px] overflow-hidden mb-20">
             <div id="system-log" class="text-zinc-500 leading-tight">
                 <p class="text-[#ff007f] opacity-70">> SYSTEM_UPTIME: STABLE</p>
             </div>
@@ -69,69 +74,64 @@
     </main>
 
     <script>
-        // --- FIXED DATE FORMAT ---
         const targetDate = new Date("2026-10-31T00:00:00").getTime(); 
 
         function updateTimer() {
             const now = new Date().getTime();
             const diff = targetDate - now;
-
-            if (diff <= 0) {
-                document.getElementById('chaos-timer').innerText = "000:00:00:00";
-                return;
-            }
-
+            if (diff <= 0) return;
             const d = Math.floor(diff / (1000 * 60 * 60 * 24));
             const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
             const s = Math.floor((diff % (1000 * 60)) / 1000);
-
-            document.getElementById('chaos-timer').innerText = 
-                `${d.toString().padStart(3, '0')}:${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+            document.getElementById('chaos-timer').innerText = `${d.toString().padStart(3, '0')}:${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
         }
         setInterval(updateTimer, 1000);
 
-        // --- RAINING ELEMENTS SCRIPT ---
+        // WEIRD WALLET CONNECT LOGIC
+        document.getElementById('wallet-btn').addEventListener('click', function() {
+            const btn = this;
+            const alien = document.getElementById('alien-boss');
+            btn.innerText = "> UPLOADING_CONSCIOUSNESS...";
+            
+            setTimeout(() => {
+                document.body.classList.add('reality-glitch');
+                alien.style.transform = "scale(5) rotate(360deg)";
+                alien.style.zIndex = "1000";
+                
+                setTimeout(() => {
+                    alert("👽: 'YOUR WALLET IS TOO SMALL FOR THIS DIMENSION.'");
+                    alert("SYSTEM ERROR: PORTFOLIO_KARMA_INSUFFICIENT.");
+                    document.body.classList.remove('reality-glitch');
+                    alien.style.transform = "scale(1) rotate(0deg)";
+                    btn.innerText = "[ ACCESS_DENIED ]";
+                }, 2000);
+            }, 1000);
+        });
+
         function createShard() {
-            const symbols = ['SAFU', 'LUNC', '👽', '🛸', '✦', '☄️', '?', '!', '📉', '🔥'];
+            const symbols = ['SAFU', 'LUNC', '👽', '🛸', '📉', '🔥'];
             const shard = document.createElement('div');
             shard.className = 'shard';
             shard.innerHTML = symbols[Math.floor(Math.random() * symbols.length)];
-            
             shard.style.left = Math.random() * 100 + 'vw';
             shard.style.top = '-10vh';
             shard.style.fontSize = Math.random() * 20 + 10 + 'px';
-            shard.style.opacity = Math.random() * 0.6 + 0.2;
-            
             document.body.appendChild(shard);
-
             const duration = 4000 + Math.random() * 4000;
-            const rotation = Math.random() * 360;
-
-            shard.animate([
-                { transform: `translateY(0) rotate(0deg)`, opacity: shard.style.opacity },
-                { transform: `translateY(110vh) rotate(${rotation}deg)`, opacity: 0 }
-            ], {
-                duration: duration,
-                easing: 'linear'
-            });
-
+            shard.animate([{ transform: `translateY(0) rotate(0deg)` }, { transform: `translateY(110vh) rotate(360deg)` }], { duration: duration });
             setTimeout(() => shard.remove(), duration);
         }
-        // Frequency of rain
         setInterval(createShard, 400);
 
-        // --- SYSTEM LOGS ---
-        const logs = ["SCANNING_DEGEN_SENTIMENT...", "VOID_STABILITY: 44%", "HINT: lunc_lives", "ALIEN_TECH_DETECTED", "BYPASSING_SANITY..."];
-        function addLog() {
+        const logs = ["VOID_STABILITY: 44%", "HINT: lunc_lives", "ALIEN_TECH_DETECTED", "BYPASSING_SANITY..."];
+        setInterval(() => {
             const logContainer = document.getElementById('system-log');
-            if(!logContainer) return;
             const p = document.createElement('p');
             p.innerText = `> ${logs[Math.floor(Math.random() * logs.length)]}`;
             logContainer.prepend(p);
             if (logContainer.children.length > 5) logContainer.removeChild(logContainer.lastChild);
-        }
-        setInterval(addLog, 3000);
+        }, 3000);
     </script>
 </body>
 </html>
