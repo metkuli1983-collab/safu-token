@@ -253,17 +253,99 @@
         <section class="w-full max-w-md broken-box p-6 relative mb-20">
             <span class="absolute -top-10 -left-6 text-5xl">👽</span>
             <span class="absolute -bottom-10 -right-6 text-5xl rotate-12">🛸</span>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>$SAFU | ORIGINAL CHAOS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+        
+        body {
+            background-color: #000;
+            color: #fff;
+            font-family: 'VT323', monospace;
+            margin: 0;
+            overflow-x: hidden;
+        }
+
+        /* The exact Pink Glow from your screenshot */
+        .safu-neon {
+            text-shadow: 0 0 10px #ff007f, 0 0 20px #ff007f;
+            color: white;
+            font-size: 7rem;
+            line-height: 1;
+        }
+
+        .broken-box {
+            background: rgba(15, 15, 15, 0.9);
+            border: 3px solid #ff007f;
+            box-shadow: 8px 8px 0px #444;
+            transform: rotate(-1deg);
+        }
+
+        /* Falling Shards */
+        .shard {
+            position: fixed;
+            pointer-events: none;
+            z-index: 1;
+            color: #ff007f;
+        }
+
+        @keyframes crt-shake {
+            0% { transform: translate(1px, 1px); }
+            50% { transform: translate(-1px, -1px); }
+            100% { transform: translate(1px, 1px); }
+        }
+        .shake-effect { animation: crt-shake 0.15s infinite; }
+    </style>
+</head>
+<body>
+
+    <nav class="flex justify-between p-4 border-b border-[#ff007f] bg-black sticky top-0 z-[100] text-xs">
+        <div class="font-black text-[#ff007f]">$SAFU</div>
+        <div class="flex gap-4">
+            <a href="memes.html" class="text-white underline">WALL OF PAIN</a>
+            <a href="regret.html" class="text-white underline">REGRET CALC</a>
+            <span class="line-through opacity-50">UTILITY</span>
+        </div>
+    </nav>
+
+    <main class="flex flex-col items-center py-12 px-6 relative z-10">
+        
+        <h1 class="font-black mb-0 safu-neon italic shake-effect">SAFU</h1>
+        <div class="bg-[#ff007f] text-black font-black text-xl px-4 py-1 -mt-4 mb-12 rotate-2 uppercase">
+            So Absolutely F#ked Up
+        </div>
+
+        <p class="text-center max-w-sm mb-12 text-xl leading-tight tracking-tighter uppercase">
+            THE DEVS ARE ASLEEP. <br>
+            THE LIQUIDITY IS A MYTH. <br>
+            YOUR PORTFOLIO IS SCREAMING.
+        </p>
+
+        <div class="flex flex-col gap-4 w-full max-w-xs mb-20">
+            <button class="bg-[#ff007f] text-white font-black py-6 text-2xl border-4 border-white uppercase shadow-[5px_5px_0px_0px_white] active:translate-y-1 transition-all">
+                Buy The Disaster
+            </button>
+        </div>
+
+        <section class="w-full max-w-md broken-box p-6 relative mb-20">
+            <span class="absolute -top-10 -left-6 text-6xl">👽</span>
+            <span class="absolute -bottom-10 -right-6 text-6xl rotate-12">🛸</span>
             
-            <h2 class="text-xl font-black text-[#ff007f] mb-4 uppercase italic">Financial Self-Sabotage</h2>
-            <ul class="space-y-3 text-sm uppercase opacity-90 tracking-tight">
-                <li>🔥 0% TAX (Encoded in the void)</li>
+            <h2 class="text-2xl font-black text-[#ff007f] mb-4 uppercase italic">Financial Self-Sabotage</h2>
+            <ul class="space-y-3 text-sm uppercase">
+                <li>🔥 0% TAX (We forgot how to code it)</li>
                 <li>📉 100% CHANCE OF ADRENALINE</li>
                 <li>🤡 COMMUNITY COPING AGGRESSIVELY</li>
             </ul>
         </section>
 
-        <footer class="mt-20 opacity-20 text-[9px] text-center pb-10 uppercase tracking-[0.4em]">
-            STRICTLY CONFIDENTIAL // SAFU LABS 2026
+        <footer class="mt-20 opacity-20 text-[10px] text-center pb-10 uppercase tracking-widest">
+            © 2026 SAFU LABS. PROBABLY A RUG. DEFINITELY A MISTAKE.
         </footer>
     </main>
 
@@ -275,15 +357,24 @@
             shard.innerHTML = symbols[Math.floor(Math.random() * symbols.length)];
             shard.style.left = Math.random() * 100 + 'vw';
             shard.style.top = '-5vh';
-            shard.style.fontSize = Math.random() * 20 + 10 + 'px';
-            shard.style.opacity = Math.random() * 0.6;
+            shard.style.fontSize = Math.random() * 20 + 12 + 'px';
+            shard.style.opacity = Math.random() * 0.7;
             document.body.appendChild(shard);
-            const duration = 4000 + Math.random() * 3000;
+
+            const duration = 5000 + Math.random() * 3000;
             shard.animate([
                 { top: '-5vh', transform: 'rotate(0deg)' },
                 { top: '105vh', transform: `rotate(${Math.random() * 720}deg) translateX(${Math.random() * 100 - 50}px)` }
             ], { duration: duration, easing: 'linear' });
+
             setTimeout(() => shard.remove(), duration);
+        }
+        setInterval(createShard, 500);
+    </script>
+
+</body>
+</html>
+uration);
         }
         setInterval(createShard, 600);
     </script>
