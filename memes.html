@@ -3,17 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>SAFU | Wall of Pain</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="madness.css">
-    <style>
-        /* Mobile-first: Images are B&W until you tap them */
-        .meme-card {
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>SAFU | INTEL_WALL</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="madness.css">
@@ -35,14 +24,21 @@
             outline: none;
             color: #ff007f;
             width: 100%;
+            font-family: monospace;
         }
+        #terminal-content {
+            max-height: 150px;
+            overflow-y: auto;
+            scrollbar-width: none;
+        }
+        #terminal-content::-webkit-scrollbar { display: none; }
     </style>
 </head>
 <body class="bg-[#050505] text-zinc-400 p-6 font-mono">
 
     <nav class="mb-10 flex justify-between items-center text-[9px] uppercase tracking-widest">
         <a href="index.html" class="text-[#ff007f] font-black">[ <- DISCONNECT ]</a>
-        <span class="animate-pulse">● SECURE_CONNECTION_ESTABLISHED</span>
+        <span class="animate-pulse text-green-500">● SECURE_CONNECTION_ESTABLISHED</span>
     </nav>
 
     <header class="text-center mb-12">
@@ -66,17 +62,17 @@
     <section class="max-w-md mx-auto">
         <div class="bg-black border border-zinc-800 p-4 text-[10px] shadow-2xl">
             <div class="flex gap-1.5 mb-3">
-                <div class="w-2 h-2 rounded-full bg-zinc-800"></div>
-                <div class="w-2 h-2 rounded-full bg-zinc-800"></div>
-                <div class="w-2 h-2 rounded-full bg-zinc-800"></div>
+                <div class="w-2 h-2 rounded-full bg-zinc-900 border border-zinc-700"></div>
+                <div class="w-2 h-2 rounded-full bg-zinc-900 border border-zinc-700"></div>
+                <div class="w-2 h-2 rounded-full bg-zinc-900 border border-zinc-700"></div>
             </div>
-            <div id="terminal-content">
+            <div id="terminal-content" class="mb-2">
                 <p class="text-green-500">> SYSTEM READY.</p>
-                <p class="mb-2">> TO SUBMIT: PASTE WORMHOLE LINK BELOW.</p>
+                <p class="mb-2 text-zinc-500">> TO SUBMIT: PASTE WORMHOLE LINK BELOW.</p>
             </div>
-            <div class="flex">
+            <div class="flex items-center">
                 <span class="text-[#ff007f] mr-2">SAFU@NODE:~$</span>
-                <input type="text" class="terminal-input" id="termInput" placeholder="..." spellcheck="false">
+                <input type="text" class="terminal-input" id="termInput" placeholder="..." spellcheck="false" autocomplete="off">
             </div>
         </div>
     </section>
@@ -87,36 +83,56 @@
         
         input.addEventListener('keydown', function(e) {
             if (e.key === 'Enter') {
-                const val = this.value.toLowerCase();
+                const val = this.value.toLowerCase().trim();
                 const p = document.createElement('p');
-                p.className = "text-zinc-500";
                 
-                if (val.includes('http'))
-000/ff007f?text=MEME+1" class="w-full h-full object-cover">
-        </div>
+                // Show what the user typed
+                const userLine = document.createElement('p');
+                userLine.className = "text-zinc-600";
+                userLine.innerText = `> ${val}`;
+                content.appendChild(userLine);
 
-        <div class="meme-card aspect-square relative overflow-hidden">
-            <span class="absolute top-1 left-1 text-[8px] bg-[#ff007f] text-black px-1 font-bold italic">#02</span>
-            <img src="https://placehold.co/400x400/000000/ff007f?text=MEME+2" class="w-full h-full object-cover">
-        </div>
-
-        <div class="meme-card aspect-square relative overflow-hidden">
-            <span class="absolute top-1 left-1 text-[8px] bg-[#ff007f] text-black px-1 font-bold italic">#03</span>
-            <img src="https://placehold.co/400x400/000000/ff007f?text=MEME+3" class="w-full h-full object-cover">
-        </div>
-
-        <div class="border-2 border-dashed border-zinc-800 aspect-square flex flex-col items-center justify-center text-center p-4">
-            <span class="text-3xl mb-2">💀</span>
-            <p class="text-[9px] uppercase opacity-40">Your Meme Here?<br>Post on Telegram</p>
-        </div>
-
-    </div>
-
-    <div class="w-full border-t border-b border-[#ff007f] py-4 text-center">
-        <p class="text-xs italic opacity-80 italic italic">"I bought the top and all I got was this stupid website."</p>
-    </div>
+                // SECRET TRIGGER: DEV ROOM
+                if (val === 'lunc_lives' || val === 'admin' || val === 'root') {
+                    p.innerText = ">> ACCESS GRANTED. BYPASSING FIREWALL...";
+                    p.className = "text-green-400 font-bold animate-pulse";
+                    content.appendChild(p);
+                    
+                    // Redirect after a small delay for effect
+                    setTimeout(() => {
+                        window.location.href = 'dev-room.html';
+                    }, 1200);
+                } 
+                // Link Submission Logic
+                else if (val.includes('http')) {
+                    p.innerText = ">> INTEL RECEIVED. ENCRYPTING FOR UPLOAD...";
+                    p.className = "text-[#ff007f] italic";
+                    content.appendChild(p);
+                } 
+                // Help Command
+                else if (val === 'help') {
+                    p.innerText = ">> COMMANDS: STATUS, CLEAR, [REDACTED_KEY]";
+                    p.className = "text-blue-400";
+                    content.appendChild(p);
+                } 
+                // Clear Command
+                else if (val === 'clear') {
+                    content.innerHTML = '<p class="text-green-500">> SYSTEM RESET.</p>';
+                }
+                // Fail state
+                else {
+                    p.innerText = `>> ERROR: '${val}' NOT RECOGNIZED.`;
+                    p.className = "text-red-900";
+                    content.appendChild(p);
+                }
+                
+                this.value = '';
+                // Keep terminal scrolled to bottom
+                content.scrollTop = content.scrollHeight;
+            }
+        });
+    </script>
 
     <script src="shards.js"></script>
-
 </body>
 </html>
