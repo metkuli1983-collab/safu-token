@@ -1,4 +1,17 @@
-/* --- GLOBAL CONFIG --- */
+/* KILL MOBILE OVERLAYS */
+* {
+    -webkit-tap-highlight-color: transparent !important;
+    -webkit-touch-callout: none !important;
+    -webkit-user-select: none !important;
+    outline: none !important;
+}
+
+/* Allow users to still type in the input boxes */
+input, textarea {
+    -webkit-user-select: text !important;
+    user-select: text !important;
+    
+}/* --- GLOBAL CONFIG --- */
 @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
 
 body { 
