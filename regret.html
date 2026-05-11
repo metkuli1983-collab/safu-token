@@ -2,29 +2,85 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>SAFU | Regret_Calc.exe</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="madness.css">
+    <style>
+        /* Extra mobile fix for tapping */
+        button { -webkit-tap-highlight-color: transparent; cursor: pointer; }
+        .safu-glow { text-shadow: 0 0 10px #ff007f, 0 0 20px #ff007f; color: white; }
+    </style>
 </head>
-<body class="flex flex-col items-center justify-center min-h-screen p-6">
-    <a href="index.html" class="mb-10 text-[#ff007f] underline font-bold"><- BACK TO CHAOS</a>
+<body class="flex flex-col items-center justify-center min-h-screen bg-black p-6 font-mono">
 
-    <section class="w-full max-w-md border-4 border-dashed border-white p-6 bg-black relative shadow-[10px_10px_0px_#ff007f]">
-        <h2 class="text-3xl font-black text-white mb-6 uppercase italic text-center">Regret Calculator</h2>
-        <input type="number" id="loss" placeholder="LUNC LOSS AMOUNT" class="w-full bg-zinc-900 border-2 border-[#ff007f] p-4 text-[#ff007f] mb-4 outline-none">
-        <button onclick="calc()" class="w-full bg-white text-black font-black py-4 uppercase shadow-[4px_4px_0px_#ff007f]">Process Trauma</button>
-        <div id="out" class="mt-6 text-center text-xl font-bold uppercase hidden animate-pulse text-[#ff007f]"></div>
+    <a href="index.html" class="mb-8 text-[#ff007f] underline font-bold tracking-tighter">[ <- BACK TO CHAOS ]</a>
+
+    <section class="w-full max-w-md border-4 border-dashed border-[#ff007f] p-6 bg-zinc-900 shadow-[10px_10px_0px_#444] relative">
+        <div class="absolute -top-3 left-4 bg-[#ff007f] text-black px-2 text-[10px] font-black uppercase">v1.0-trauma-patch</div>
+        
+        <h1 class="text-3xl font-black text-white mb-6 uppercase italic text-center safu-glow">Regret Calculator</h1>
+        
+        <div class="space-y-4">
+            <label class="text-[10px] uppercase opacity-50 block">Input LUNC loss from 2022:</label>
+            <input type="number" id="lossInput" placeholder="0.00" 
+                class="w-full bg-black border-2 border-[#ff007f] p-4 text-[#ff007f] outline-none text-xl">
+            
+            <button id="calcBtn" type="button"
+                class="w-full bg-[#ff007f] text-white font-black py-5 uppercase border-b-4 border-pink-900 active:border-0 active:translate-y-1 shadow-lg">
+                Process My Pain
+            </button>
+        </div>
+
+        <div id="outputBox" class="hidden mt-8 p-4 border-2 border-white/20 bg-black">
+            <p id="mainResult" class="text-xl font-black uppercase text-[#ff007f] mb-1"></p>
+            <p id="subResult" class="text-[10px] leading-tight opacity-70"></p>
+        </div>
     </section>
 
+    <p class="mt-12 text-[10px] opacity-30 text-center uppercase">Not Financial Advice.<br>Just pure unadulterated cope.</p>
+
     <script>
-        function calc() {
-            const val = document.getElementById('loss').value;
-            const out = document.getElementById('out');
-            out.classList.remove('hidden');
-            out.innerText = val > 1000000 ? "ABSOLUTELY F#KED UP. BUY MORE $SAFU." : "ROOKIE LOSSES. COPE HARDER.";
+        const btn = document.getElementById('calcBtn');
+        const input = document.getElementById('lossInput');
+        const outputBox = document.getElementById('outputBox');
+        const mainRes = document.getElementById('mainResult');
+        const subRes = document.getElementById('subResult');
+
+        function runLogic() {
+            const val = parseFloat(input.value);
+            
+            if (!val || val <= 0) {
+                mainRes.innerText = "ERROR: COWARD";
+                subRes.innerText = "Input a real number to proceed with the trauma simulation.";
+            } else if (val < 1000) {
+                mainRes.innerText = "ROOKIE NUMBERS";
+                subRes.innerText = "You barely felt it. Buy $SAFU to experience real volatility.";
+            } else if (val < 1000000) {
+                mainRes.innerText = "SYSTEM CRITICAL";
+                subRes.innerText = "High levels of regret detected. Re-balancing soul with $SAFU tokens...";
+            } else {
+                mainRes.innerText = "ABSOLUTELY F#KED UP";
+                subRes.innerText = "Your portfolio is a historic tragedy. You are officially SAFU.";
+            }
+            
+            outputBox.classList.remove('hidden');
+            window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
         }
+
+        // Handle both Click and Touch for mobile responsiveness
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            runLogic();
+        });
+
+        btn.addEventListener('touchstart', function(e) {
+            // No preventDefault here to allow the active: state to show
+            runLogic();
+        }, {passive: true});
     </script>
+
     <script src="shards.js"></script>
+
 </body>
 </html>
