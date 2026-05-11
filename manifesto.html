@@ -2,42 +2,47 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>$SAFU | THE_MANIFESTO</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>$SAFU | MANIFESTO</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="madnesss.css">
     <style>
-      /* Emergency override in case style.css is lost */
-      body { background-color: black !important; color: white !important; }
-      main { position: relative; z-index: 10; padding: 20px; }   
+        /* This is the 'Nuclear' fix. If this doesn't turn it black, 
+           the file isn't saving correctly on the server. */
+        html, body { 
+            background: #000000 !important; 
+            color: #ffffff !important; 
+            margin: 0; 
+            padding: 0;
+            min-height: 100vh;
+        }
+        .shard { position: fixed; z-index: -1 !important; pointer-events: none; }
+        main { position: relative; z-index: 10; }
     </style>
 </head>
 <body>
-    <nav class="flex justify-between p-4 border-b border-[#ff007f] bg-black sticky top-0 z-[100] text-[9px]">
-        <div class="font-black text-[#ff007f] animate-pulse">$SAFU_NODE_01</div>
-        <div class="flex gap-2 uppercase font-bold">
-            <a href="index.html" class="text-[#ff007f] underline italic"><- BACK</a>
-            <a href="memes.html" class="text-white underline">Wall</a>
-            <a href="regret.html" class="text-white underline">Regret</a>
+    <nav class="p-4 border-b border-[#ff007f] flex justify-between bg-black sticky top-0 z-50">
+        <span class="text-[#ff007f]">$SAFU_NODE_01</span>
+        <div class="space-x-4">
+            <a href="index.html" class="hover:line-through"><- BACK</a>
+            <a href="wall.html" class="underline">WALL</a>
         </div>
     </nav>
 
-    <main class="flex flex-col items-center py-12 px-6 relative z-10">
-        <h1 class="font-black mb-8 safu-neon italic text-center underline uppercase">Manifesto</h1>
+    <main class="p-8 max-w-2xl mx-auto">
+        <h1 class="text-4xl font-bold mb-12 italic underline decoration-[#ff007f] text-center">MANIFESTO</h1>
+        
+        <div class="border-l-4 border-[#ff007f] pl-6 space-y-12 text-xl italic uppercase tracking-widest">
+            <p>2. LIQUIDITY IS A SOCIAL CONSTRUCT. CHAOS IS THE ONLY CURRENCY.</p>
+            <p>3. WE DON'T BUY THE DIP. WE EMBRACE THE ABYSS.</p>
+            <p>4. $SAFU ISN'T A TOKEN. IT'S A DIAGNOSIS.</p>
+        </div>
 
-        <section class="w-full max-w-md broken-box p-6 mb-12">
-            <div class="space-y-6 text-xl uppercase italic leading-tight">
-                <p class="border-l-4 border-[#ff007f] pl-4 text-white">1. The devs are asleep. We are the nightmare.</p>
-                <p class="pl-4">2. Liquidity is a social construct. Chaos is the only currency.</p>
-                <p class="pl-4">3. We don't buy the dip. We embrace the abyss.</p>
-                <p class="pl-4">4. $SAFU isn't a token. It's a diagnosis.</p>
-            </div>
-        </section>
-
-        <div class="text-center opacity-50 text-xs uppercase tracking-tighter">
+        <div class="mt-20 text-center opacity-30 text-sm">
             [END_OF_TRANSMISSION]
         </div>
     </main>
-    <script src="shards.js"></script>
+
+    <script src="script.js"></script>
 </body>
 </html>
