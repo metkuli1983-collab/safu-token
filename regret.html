@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAFU | Regret_Calc.exe</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="madness.css">
+</head>
+<body class="flex flex-col items-center justify-center min-h-screen p-6">
+    <a href="index.html" class="mb-10 text-[#ff007f] underline font-bold"><- BACK TO CHAOS</a>
+
+    <section class="w-full max-w-md border-4 border-dashed border-white p-6 bg-black relative shadow-[10px_10px_0px_#ff007f]">
+        <h2 class="text-3xl font-black text-white mb-6 uppercase italic text-center">Regret Calculator</h2>
+        <input type="number" id="loss" placeholder="LUNC LOSS AMOUNT" class="w-full bg-zinc-900 border-2 border-[#ff007f] p-4 text-[#ff007f] mb-4 outline-none">
+        <button onclick="calc()" class="w-full bg-white text-black font-black py-4 uppercase shadow-[4px_4px_0px_#ff007f]">Process Trauma</button>
+        <div id="out" class="mt-6 text-center text-xl font-bold uppercase hidden animate-pulse text-[#ff007f]"></div>
+    </section>
+
+    <script>
+        function calc() {
+            const val = document.getElementById('loss').value;
+            const out = document.getElementById('out');
+            out.classList.remove('hidden');
+            out.innerText = val > 1000000 ? "ABSOLUTELY F#KED UP. BUY MORE $SAFU." : "ROOKIE LOSSES. COPE HARDER.";
+        }
+    </script>
+    <script src="shards.js"></script>
+</body>
+</html>
