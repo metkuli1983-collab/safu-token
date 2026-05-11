@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAFU | ROOT_ACCESS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { background-color: #000; color: #00ff00; font-family: 'Courier New', monospace; overflow: hidden; }
+        .glitch { animation: glitch 1s linear infinite; }
+        @keyframes glitch {
+            2%, 64% { transform: translate(2px,0) skew(0deg); }
+            4%, 60% { transform: translate(-2px,0) skew(0deg); }
+            62% { transform: translate(0,0) skew(5deg); }
+        }
+    </style>
+</head>
+<body class="flex flex-col items-center justify-center min-h-screen p-6">
+    <div class="border-2 border-[#00ff00] p-10 bg-black shadow-[0_0_20px_#00ff00]">
+        <h1 class="text-4xl font-black mb-6 glitch uppercase">Dev Room Access</h1>
+        <div class="space-y-4 text-xs">
+            <p>> PROJECT: $SAFU</p>
+            <p>> STATUS: UNHINGED</p>
+            <p>> TARGET: LUNC RECOVERY (COPE MODE)</p>
+            <p>> DEV_NOTE: The liquidity is locked in a box at the bottom of the ocean. Don't tell the telegram.</p>
+        </div>
+        <a href="index.html" class="mt-10 inline-block border border-[#00ff00] px-4 py-1 hover:bg-[#00ff00] hover:text-black transition-all">EXIT_TO_SURFACE</a>
+    </div>
+    
+    <script>
+        function createRain() {
+            const shard = document.createElement('div');
+            shard.innerText = Math.random() > 0.5 ? "0" : "1";
+            shard.style.position = "fixed";
+            shard.style.top = "-20px";
+            shard.style.left = Math.random() * 100 + "vw";
+            shard.style.color = "#00ff00";
+            shard.style.fontSize = "10px";
+            shard.style.opacity = "0.5";
+            document.body.appendChild(shard);
+            shard.animate([{ top: "-20px" }, { top: "100vh" }], { duration: 2000 + Math.random() * 3000 });
+            setTimeout(() => shard.remove(), 5000);
+        }
+        setInterval(createRain, 50);
+    </script>
+</body>
+</html>
