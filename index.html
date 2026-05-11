@@ -2,58 +2,61 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>$SAFU | ORIGIN</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
-        body { background: #000; color: #fff; font-family: 'VT323', monospace; overflow-x: hidden; margin: 0; }
+        body { background: #000; color: #fff; font-family: 'VT323', monospace; margin: 0; padding: 0; overflow-x: hidden; }
+        .logo-container { position: relative; width: 100%; max-width: 400px; margin: 0 auto; }
+        .logo-img { width: 100%; height: auto; filter: drop-shadow(0 0 20px rgba(255, 0, 127, 0.5)); border-radius: 15px; }
+        .tagline-box { 
+            position: absolute; bottom: -15px; left: 50%; transform: translateX(-50%) rotate(-2deg);
+            background: #ff007f; color: white; padding: 5px 15px; font-weight: 900; 
+            text-transform: uppercase; white-space: nowrap; z-index: 50; box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+        }
         .reality-glitch { filter: invert(1) hue-rotate(180deg) !important; animation: shake 0.2s infinite; }
         @keyframes shake { 0% { transform: translate(2px, 2px); } 50% { transform: translate(-3px, -3px); } 100% { transform: translate(2px, 2px); } }
-        .logo-glow { filter: drop-shadow(0 0 20px rgba(255, 0, 127, 0.4)); }
     </style>
 </head>
 <body class="flex flex-col min-h-screen">
 
-    <nav class="flex justify-between items-center p-4 border-b border-[#ff007f] bg-black sticky top-0 z-[100]">
-        <div class="text-[#ff007f] animate-pulse text-sm">SAFU_NODE_01</div>
-        <div class="flex gap-4 uppercase text-[10px]">
-            <a href="index.html" class="underline">Home</a>
-            <a href="memes.html" class="underline">The_Wall</a>
+    <nav class="flex justify-between items-center px-6 py-4 border-b border-[#ff007f] bg-black z-[100]">
+        <div class="text-[#ff007f] animate-pulse text-lg tracking-tighter">SAFU_NODE_01</div>
+        <div class="flex gap-6 uppercase text-sm font-bold">
+            <a href="index.html" class="text-white border-b border-white">Home</a>
+            <a href="memes.html" class="text-[#ff007f]">The_Wall</a>
         </div>
     </nav>
 
-    <main class="flex-grow flex flex-col items-center py-6 px-4 text-center">
-        <div class="relative w-full max-w-[350px] mb-6">
-            <img src="logo.png" alt="SAFU" class="w-full h-auto logo-glow rounded-lg">
-            <div class="absolute -bottom-3 left-1/2 -translate-x-1/2 bg-[#ff007f] text-white font-black px-3 py-1 rotate-[-2deg] uppercase text-sm shadow-lg whitespace-nowrap z-10">
-                So Absolutely F#ked Up
-            </div>
+    <main class="flex-grow flex flex-col items-center py-8 px-4 text-center">
+        
+        <div class="logo-container mb-12">
+            <img src="logo.png" alt="SAFU" class="logo-img">
+            <div class="tagline-box text-lg">So Absolutely F#ked Up</div>
         </div>
 
-        <div class="mt-4 mb-8">
-            <p class="text-lg text-zinc-400 uppercase leading-none tracking-tighter">
-                The liquidity is a myth.
-            </p>
-            <p class="text-lg text-zinc-400 uppercase leading-none tracking-tighter">
-                Your portfolio is a memory.
-            </p>
+        <div class="space-y-1 mb-10">
+            <p class="text-xl text-zinc-400 uppercase tracking-tight">The liquidity is a myth.</p>
+            <p class="text-xl text-zinc-400 uppercase tracking-tight">Your portfolio is a memory.</p>
         </div>
 
-        <div class="flex flex-col gap-3 w-full max-w-[280px] mb-10">
-            <button onclick="alert('ERROR: VALVE_LOCKED_BY_EXTRATERRESTRIALS')" class="bg-[#ff007f] text-white font-black py-4 text-xl border-2 border-white shadow-[4px_4px_0px_white] active:translate-y-1 transition-all">
+        <div class="w-full max-w-[300px] space-y-4 mb-12">
+            <button onclick="alert('ERROR: VALVE_LOCKED_BY_EXTRATERRESTRIALS')" class="w-full bg-[#ff007f] text-white font-black py-5 text-2xl border-4 border-white shadow-[6px_6px_0px_#444] active:translate-y-1 active:shadow-none transition-all uppercase">
                 Buy The Disaster
             </button>
-            <button id="wallet-btn" class="border border-[#ff007f] text-[#ff007f] py-2 text-[10px] uppercase font-bold tracking-widest active:bg-[#ff007f] active:text-black">
+            <button id="wallet-btn" class="w-full border-2 border-[#ff007f] text-[#ff007f] py-3 text-sm uppercase font-bold tracking-[0.2em] bg-transparent active:bg-[#ff007f] active:text-black transition-colors">
                 [ CONNECT_NEURAL_LINK ]
             </button>
         </div>
 
-        <div id="chaos-timer" class="text-4xl font-black text-[#ff007f] tracking-tighter mb-1">000:00:00:00</div>
-        <p class="text-[9px] uppercase opacity-40 tracking-[0.2em]">Time remaining until the void closes.</p>
+        <div class="mt-auto pb-6">
+            <div id="chaos-timer" class="text-5xl font-black text-[#ff007f] tracking-tighter mb-1">000:00:00:00</div>
+            <p class="text-[10px] uppercase opacity-50 tracking-widest">Time remaining until the void closes.</p>
+        </div>
     </main>
 
-    <div id="alien-popup" class="fixed -bottom-40 -left-40 text-9xl transition-all duration-500 opacity-0 pointer-events-none z-[200]">👽</div>
+    <div id="alien-popup" class="fixed -bottom-60 -left-60 text-9xl transition-all duration-500 opacity-0 pointer-events-none z-[200]">👽</div>
 
     <script>
         const target = new Date("2026-10-31T00:00:00").getTime();
@@ -68,19 +71,17 @@
         }, 1000);
 
         document.getElementById('wallet-btn').addEventListener('click', function() {
-            const btn = this;
             const alien = document.getElementById('alien-popup');
-            btn.innerText = "> SCANNING_SOUL...";
+            this.innerText = "> SCANNING_SOUL...";
             document.body.classList.add('reality-glitch');
             alien.style.opacity = "1";
-            alien.style.transform = "scale(4) rotate(20deg) translate(20%, -20%)";
+            alien.style.transform = "scale(5) rotate(20deg) translate(25%, -25%)";
             
             setTimeout(() => {
                 alert("👽: 'INSUFFICIENT KARMA DETECTED.'");
                 document.body.classList.remove('reality-glitch');
                 alien.style.opacity = "0";
-                alien.style.transform = "scale(1) rotate(0deg)";
-                btn.innerText = "[ ACCESS_DENIED ]";
+                this.innerText = "[ ACCESS_DENIED ]";
             }, 2000);
         });
     </script>
