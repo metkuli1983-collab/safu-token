@@ -48,6 +48,16 @@
             text-shadow: 0 0 15px #ff007f;
             font-variant-numeric: tabular-nums;
         }
+
+        /* Log styling */
+        #system-log p {
+            animation: fadeIn 0.3s ease-out;
+            white-space: nowrap;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
     </style>
 </head>
 <body>
@@ -89,7 +99,7 @@
             </div>
         </div>
 
-        <section class="w-full max-w-md broken-box p-6 relative mb-20">
+        <section class="w-full max-w-md broken-box p-6 relative mb-12">
             <span class="absolute -top-10 -left-6 text-6xl">👽</span>
             <span class="absolute -bottom-10 -right-6 text-6xl rotate-12">🛸</span>
             
@@ -101,19 +111,25 @@
             </ul>
         </section>
 
-        <footer class="mt-20 opacity-20 text-[10px] text-center pb-10 uppercase tracking-widest">
+        <div class="w-full max-w-xs p-3 bg-[#050505] border border-[#ff007f]/20 rounded font-mono text-[9px] overflow-hidden relative mb-20">
+            <div class="absolute top-0 left-0 w-full h-[1px] bg-[#ff007f]/30"></div>
+            <div id="system-log" class="text-zinc-500 leading-tight">
+                <p class="text-[#ff007f] opacity-70">> BOOTING_SAFU_CORE...</p>
+            </div>
+        </div>
+
+        <footer class="mt-10 opacity-20 text-[10px] text-center pb-10 uppercase tracking-widest">
             STRICTLY CONFIDENTIAL // SAFU LABS 2026
         </footer>
     </main>
 
     <script>
-        // Set target date for 7 days from now
+        // --- TIMER SCRIPT ---
         const targetDate = new Date().getTime() + (7 * 24 * 60 * 60 * 1000); 
 
         function updateTimer() {
             const now = new Date().getTime();
             const diff = targetDate - now;
-
             const d = Math.floor(diff / (1000 * 60 * 60 * 24));
             const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
@@ -129,7 +145,32 @@
         }
         setInterval(updateTimer, 1000);
 
-        // Falling Shards Script
+        // --- SYSTEM LOG SCRIPT ---
+        const logs = [
+            "SCANNING TERRA_CLASSIC_NODE...",
+            "LIQUIDITY_VOID_DETECTED",
+            "ENCRYPTING COPE_SESSION...",
+            "BYPASSING LUNC_FIREWALL...",
+            "PORTFOLIO_CRITICAL_FAILURE",
+            "SYNCING_CHAOS_CLOCK...",
+            "ALIEN_TECH_HANDSHAKE: OK",
+            "REDACTED_TRANSACTION_FOUND",
+            "HINT: lunc_lives",
+            "DEVS_STILL_ASLEEP_STATUS:TRUE"
+        ];
+
+        function addLog() {
+            const logContainer = document.getElementById('system-log');
+            const p = document.createElement('p');
+            p.innerText = `> ${logs[Math.floor(Math.random() * logs.length)]}`;
+            logContainer.prepend(p);
+            if (logContainer.children.length > 5) {
+                logContainer.removeChild(logContainer.lastChild);
+            }
+        }
+        setInterval(addLog, 2500);
+
+        // --- FALLING SHARDS SCRIPT ---
         function createShard() {
             const symbols = ['✦', '☄️', 'SAFU', 'LUNC', '💖', '?', '!', '👽', '🛸'];
             const shard = document.createElement('div');
