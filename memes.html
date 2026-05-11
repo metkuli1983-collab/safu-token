@@ -7,43 +7,63 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
-        body { background: #050505; color: #ff007f; font-family: 'VT323', monospace; }
+        body { background: #050505; color: #ff007f; font-family: 'VT323', monospace; margin: 0; padding: 0; }
         .intel-card { border: 1px solid #ff007f; background: rgba(255, 0, 127, 0.05); transition: all 0.3s; }
-        .intel-card:hover { transform: scale(1.02); background: rgba(255, 0, 127, 0.1); border-width: 2px; }
+        input { background: transparent; border-bottom: 1px solid #ff007f; color: #ff007f; outline: none; }
     </style>
 </head>
 <body class="p-6">
-
     <nav class="mb-10 uppercase text-xs">
-        <a href="index.html" class="border border-[#ff007f] px-3 py-1 hover:bg-[#ff007f] hover:text-black transition-all"><- Back_To_Node</a>
+        <a href="index.html" class="border border-[#ff007f] px-4 py-2 hover:bg-[#ff007f] hover:text-black transition-all font-bold"><- Back_To_Node</a>
     </nav>
 
-    <h1 class="text-5xl font-black italic mb-2 uppercase underline decoration-double">Wall of Pain</h1>
-    <p class="text-xs mb-10 opacity-60 uppercase">Unauthorized Archive // Classified Intel // Do Not Share</p>
+    <h1 class="text-5xl font-black italic mb-2 uppercase underline">Wall of Pain</h1>
+    <p class="text-xs mb-10 opacity-60 uppercase tracking-widest">Unauthorized Archive // Classified Intel</p>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        
+    <div class="max-w-xl border-2 border-[#ff007f] p-6 bg-zinc-950 mb-12 shadow-[4px_4px_0px_#ff007f]">
+        <h2 class="text-xl font-bold mb-4 italic uppercase underline">Dead_Drop_Terminal</h2>
+        <p class="text-xs mb-1">> SYSTEM_READY.</p>
+        <p class="text-xs mb-4">> TO SUBMIT: PASTE WORMHOLE LINK BELOW.</p>
+        <div class="flex flex-col gap-4">
+            <input type="text" id="intel-input" placeholder="https://wormhole.app/vybbel#..." class="w-full py-2 font-mono text-sm">
+            <button onclick="submitIntel()" class="bg-[#ff007f] text-black font-black py-2 uppercase text-sm hover:bg-white transition-all">Submit_Encrypted_Intel</button>
+        </div>
+        <p id="status-msg" class="text-[10px] mt-4 opacity-0 transition-opacity uppercase font-bold italic"></p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         <div class="intel-card p-4">
             <div class="bg-black mb-4 border border-[#ff007f]/20 p-2">
-                <img src="logo.png" class="w-full grayscale hover:grayscale-0 transition-all duration-500">
+                <img src="logo.png" class="w-full grayscale hover:grayscale-0 transition-all duration-500 rounded">
             </div>
-            <div class="flex justify-between items-end">
+            <div class="flex justify-between items-end mb-4">
                 <div>
-                    <h3 class="font-bold text-lg uppercase leading-none">The_Origin.png</h3>
+                    <h3 class="font-bold text-lg uppercase leading-none italic underline">The_Origin.png</h3>
                     <p class="text-[10px] opacity-50 uppercase">Date: 11_MAY_2026</p>
                 </div>
                 <div class="text-[10px] border border-[#ff007f] px-1 bg-[#ff007f] text-black font-bold">VERIFIED</div>
             </div>
-            <p class="text-[11px] mt-4 leading-tight opacity-80 uppercase italic">
+            <p class="text-[11px] leading-tight opacity-80 uppercase font-bold border-l-2 border-[#ff007f] pl-2">
                 "The prophecy was written in red candles and broken dreams."
             </p>
         </div>
 
-        <div class="intel-card p-4 flex items-center justify-center border-dashed opacity-30">
+        <div class="intel-card p-8 flex items-center justify-center border-dashed opacity-30 text-center">
             <p class="uppercase text-sm italic">[ Awaiting_Next_Disaster ]</p>
         </div>
-
     </div>
 
+    <script>
+        function submitIntel() {
+            const input = document.getElementById('intel-input');
+            const msg = document.getElementById('status-msg');
+            if(input.value.length > 5) {
+                msg.innerText = ">> INTEL RECEIVED. ENCRYPTING FOR UPLOAD...";
+                msg.style.opacity = "1";
+                input.value = "";
+                setTimeout(() => { msg.innerText = ">> UPLOAD COMPLETE. NODE DISCONNECTED."; }, 3000);
+            }
+        }
+    </script>
 </body>
 </html>
