@@ -31,6 +31,20 @@ main, .broken-box, section {
     border: 3px solid #ff007f; 
     box-shadow: 8px 8px 0px #444; 
     transform: rotate(-1deg); 
+
+    
+}
+
+/* This prevents that ugly blue/grey box when you tap buttons on a phone */
+button, a { 
+    -webkit-tap-highlight-color: transparent; 
+    cursor: pointer; 
+}
+
+/* A smaller glow utility class */
+.safu-glow { 
+    text-shadow: 0 0 10px #ff007f, 0 0 20px #ff007f; 
+    color: white; 
 }
 
 .shake-effect { animation: crt-shake 0.15s infinite; }
