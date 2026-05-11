@@ -1,1 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>$SAFU - So Absolutely F#ked Up</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @keyframes glitch {
+            0% { transform: skew(0deg); }
+            20% { transform: skew(-10deg); color: #ff00ff; }
+            40% { transform: skew(10deg); color: #00ffff; }
+            60% { transform: skew(-5deg); }
+            100% { transform: skew(0deg); }
+        }
+        .glitch-text:hover { animation: glitch 0.2s infinite; }
+        body { background-color: #050505; color: #39FF14; font-family: 'Courier New', Courier, monospace; }
+    </style>
+</head>
+<body class="flex flex-col items-center justify-center min-h-screen p-6 text-center">
 
+    <h1 class="text-7xl font-black mb-2 glitch-text cursor-wait">$SAFU</h1>
+    <p class="bg-green-500 text-black font-bold px-2 mb-8 uppercase tracking-widest">So Absolutely F#ked Up</p>
+
+    <div class="border-2 border-dashed border-green-500 p-6 max-w-sm">
+        <p class="text-sm mb-4">"I bought the top and all I got was this stupid website."</p>
+        <p class="text-xs opacity-60 italic">— Anonymous Degen</p>
+    </div>
+
+    <div class="mt-10 space-y-4">
+        <button class="w-full bg-red-600 text-white font-bold py-4 px-8 border-b-4 border-red-900 active:border-b-0 hover:bg-red-500">
+            BUY THE DIP (PLEASE)
+        </button>
+        <p class="text-[10px] uppercase opacity-40">Contract Address: 0x_COMING_SOON_TO_RECK_YOU</p>
+    </div>
+
+    <footer class="mt-20 text-[10px] opacity-30">
+        NO ROADMAP. NO UTILITY. JUST PAIN.
+    </footer>
+
+</body>
+</html>
