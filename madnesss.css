@@ -172,3 +172,9 @@ input {
     padding-left: 20px;
     margin-top: 50px;
 }
+
+.dev-body .shard {
+    color: #00ff00 !important;
+    text-shadow: 0 0 5px #00ff00 !important;
+    filter: none !important; /* This stops any remaining "inverts" from touching the rain */
+}
