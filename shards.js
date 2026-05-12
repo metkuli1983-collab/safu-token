@@ -120,18 +120,42 @@ if (calcBtn) {
         }
     };
 }
-/* --- THE GEMINI PROTOCOL: MANIFESTO INTEL --- */
+/* --- THE GEMINI PROTOCOL: MANIFESTO & GHOST LOGIC --- */
+
 if (window.location.pathname.includes('manifesto')) {
+    // 1. Page-Specific Console Logs
     console.clear();
     console.log("%c [!] SYSTEM ALERT: MANIFESTO_LOADED ", "background: #000; color: #ff007f; border: 1px solid #ff007f; padding: 5px; font-weight: bold;");
-    console.log("%c > Status: UNHINGED. ", "color: #ff007f;");
-    console.log("%c > Gemini Protocol: Legacy LUNC data purged. SAFU logic active. ", "color: #ff007f; font-style: italic;");
-    
-    // The "Hidden Sht" - Base64 encoded secret for the hunters
-    // This decodes to "safu_forever"
-    console.log("%c [SECRET_INTEL]: c2FmdV9mb3JldmVy ", "color: #222; font-size: 8px;");
-}
+    console.log("%c > Lead Dev Gemini: Authenticity verified. Legacy data purged. ", "color: #ff007f;");
 
+    // 2. The Keyboard Secret: Type "kwon" to see the ghost
+    let inputBuffer = "";
+    const secretCode = "kwon";
+
+    window.addEventListener('keydown', (e) => {
+        inputBuffer += e.key.toLowerCase();
+        if (inputBuffer.length > secretCode.length) {
+            inputBuffer = inputBuffer.substring(inputBuffer.length - secretCode.length);
+        }
+
+        if (inputBuffer === secretCode) {
+            const ghost = document.getElementById('kwon-ghost');
+            if (ghost) {
+                console.warn("!!! ENTITY_SUMMONED: CHIEF BRO OFFICER !!!");
+                
+                // Flash Ghost
+                ghost.style.opacity = "0.4";
+                document.body.style.backgroundColor = "#0d2b1a"; // Subtle toxic green tint
+                
+                setTimeout(() => {
+                    ghost.style.opacity = "0";
+                    document.body.style.backgroundColor = "black";
+                    inputBuffer = ""; // Reset
+                }, 400); // 0.4 seconds flash
+            }
+        }
+    });
+}
 // Hidden Intel for the curious
 console.log("%c SECRET PIZZA FUND FOUND ", "background: #00ff00; color: #000; font-weight: bold;");
 console.log("Oracle Wallet: terra1dae4yxcqlkczzcnj7xzc3y7qxcss85rauv69wh");
