@@ -3,52 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>$SAFU | HOLDER_TERMINAL</title>
+    <title>$SAFU | THE_ORACLE</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="madnesss.css">
-</head>
-<body class="bg-black text-white font-mono p-4">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+        
+        body {
+            font-family: 'Space+Mono', monospace;
+            background-color: #000;
+            color: #00ff41; /* Classic Terminal Green */
+        }
 
-    <main class="max-w-4xl mx-auto py-10">
-        <div class="flex justify-between items-center border-b border-pink-900 pb-4 mb-10">
-            <h1 class="text-2xl font-black italic text-pink-600 tracking-tighter">HOLDER_ZONE</h1>
-            <a href="index.html" class="text-[10px] hover:text-pink-500 uppercase">← Return_to_Wall</a>
+        .crt-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
+                        linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            background-size: 100% 2px, 3px 100%;
+            pointer-events: none;
+            z-index: 99;
+        }
+
+        .chat-box::-webkit-scrollbar { display: none; }
+        
+        .glow-text {
+            text-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
+        }
+
+        input::placeholder {
+            color: rgba(0, 255, 65, 0.2);
+        }
+    </style>
+</head>
+<body class="overflow-x-hidden">
+    <div class="crt-overlay"></div>
+
+    <main class="max-w-5xl mx-auto p-4 md:p-10 relative z-10">
+        
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-end border-b border-zinc-800 pb-4 mb-8">
+            <div>
+                <h1 class="text-3xl font-black italic tracking-tighter glow-text">SAFU_ORACLE</h1>
+                <p class="text-[10px] opacity-60 tracking-[0.2em]">TYPE: CHAOTIC_CHAIN_OBSERVER // STATUS: ONLINE</p>
+            </div>
+            <a href="index.html" class="text-[10px] mt-4 md:mt-0 border border-zinc-700 px-3 py-1 hover:bg-white hover:text-black transition-all">
+                DISCONNECT_SESSION
+            </a>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
             
-            <div class="space-y-6">
-                <div class="bg-zinc-950 border border-pink-900/50 p-6 shadow-[0_0_20px_rgba(255,0,127,0.05)]">
-                    <p class="text-[9px] text-pink-500 mb-2 uppercase tracking-[0.3em]">Identity_Scanner</p>
-                    <input type="text" id="wallet-input" placeholder="ENTER_TERRA_ADDR" 
-                           class="w-full bg-transparent border-b border-pink-900 py-3 text-sm outline-none focus:border-pink-500 uppercase transition-all">
-                    <button id="scan-btn" class="w-full mt-6 py-4 bg-pink-600 text-black font-black uppercase text-xs hover:bg-white transition-all shadow-lg">
-                        PROVE_OWNERSHIP
+            <div class="lg:col-span-4 space-y-6">
+                
+                <div class="bg-zinc-950 border border-zinc-800 p-6 shadow-2xl">
+                    <label class="text-[9px] block mb-4 opacity-50 tracking-widest uppercase">Target_Coordinates</label>
+                    <input type="text" id="wallet-input" placeholder="terra1..." 
+                           class="w-full bg-transparent border-b border-zinc-800 py-2 text-sm outline-none focus:border-green-500 mb-6 transition-all">
+                    
+                    <button id="scan-btn" class="w-full py-4 bg-zinc-900 border border-zinc-700 text-[10px] font-bold tracking-[0.3em] hover:bg-white hover:text-black transition-all active:scale-95">
+                        SCAN_SIGNAL
                     </button>
                 </div>
 
-                <div id="badge-container" class="hidden animate-in fade-in zoom-in duration-700">
-                    </div>
-            </div>
-
-            <div class="border-2 border-pink-900 bg-black flex flex-col h-[500px] shadow-[0_0_30px_rgba(0,0,0,1)]">
-                <div class="bg-pink-900/10 p-3 border-b border-pink-900 flex justify-between items-center">
-                    <span class="text-[10px] font-bold tracking-widest text-pink-500 italic">ORACLE_LINK_ESTABLISHED</span>
-                    <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                </div>
-                
-                <div id="chat-box" class="flex-grow p-4 overflow-y-auto space-y-4 text-[12px] scrollbar-hide">
-                    <p class="text-gray-600 italic leading-relaxed">[SYSTEM]: AWAITING IDENTITY SCAN. THE ORACLE DOES NOT SPEAK TO THE UNVERIFIED.</p>
-                </div>
-
-                <div class="p-4 border-t border-pink-900 bg-zinc-950">
-                    <input type="text" id="chat-input" placeholder="SPEAK_TO_THE_VOID..." 
-                           class="bg-transparent w-full outline-none text-pink-500 uppercase text-xs placeholder:text-pink-900">
-                </div>
-            </div>
-        </div>
-    </main>
-
-    <script src="holders.js"></script>
-</body>
-</html>
+                <div id="badge-container" class="hidden animate-in fade-in slide-in-from-bottom-4
