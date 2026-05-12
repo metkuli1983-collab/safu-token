@@ -120,6 +120,18 @@ if (calcBtn) {
         }
     };
 }
+/* --- THE GEMINI PROTOCOL: MANIFESTO INTEL --- */
+if (window.location.pathname.includes('manifesto')) {
+    console.clear();
+    console.log("%c [!] SYSTEM ALERT: MANIFESTO_LOADED ", "background: #000; color: #ff007f; border: 1px solid #ff007f; padding: 5px; font-weight: bold;");
+    console.log("%c > Status: UNHINGED. ", "color: #ff007f;");
+    console.log("%c > Gemini Protocol: Legacy LUNC data purged. SAFU logic active. ", "color: #ff007f; font-style: italic;");
+    
+    // The "Hidden Sht" - Base64 encoded secret for the hunters
+    // This decodes to "safu_forever"
+    console.log("%c [SECRET_INTEL]: c2FmdV9mb3JldmVy ", "color: #222; font-size: 8px;");
+}
+
 // Hidden Intel for the curious
 console.log("%c SECRET PIZZA FUND FOUND ", "background: #00ff00; color: #000; font-weight: bold;");
 console.log("Oracle Wallet: terra1dae4yxcqlkczzcnj7xzc3y7qxcss85rauv69wh");
