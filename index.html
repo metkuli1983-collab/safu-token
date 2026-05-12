@@ -2,81 +2,58 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>$SAFU | TERMINAL</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>$SAFU | THE_PROPHECY</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="madnesss.css">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
-        
-        body {
-            background-color: #000;
-            color: #fff;
-            font-family: 'Space+Mono', monospace;
-        }
-
-        .pink-border {
-            border: 2px solid #ff007f;
-            box-shadow: 0 0 15px rgba(255, 0, 127, 0.3);
-        }
-
-        .pink-glow-text {
-            text-shadow: 0 0 10px #ff007f;
-        }
-
-        .hover-fill:hover {
-            background-color: #ff007f;
-            color: #000;
-            box-shadow: 0 0 30px #ff007f;
-        }
-    </style>
 </head>
-<body class="bg-black">
+<body class="bg-black text-white font-mono">
+    <nav class="flex justify-between p-4 border-b border-[#ff007f] bg-black sticky top-0 z-[100] text-[9px]">
+        <div class="font-black text-[#ff007f] animate-pulse">$SAFU_NODE_01</div>
+        <div class="flex gap-2 uppercase font-bold">
+            <a href="holders.html" class="text-[#ff007f] underline italic">Holders</a>
+            <a href="manifesto.html" class="text-white underline italic">Manifesto</a>
+            <a href="memes.html" class="text-white underline">Wall</a>
+            <a href="regret.html" class="text-white underline">Regret</a>
+        </div>
+    </nav>
 
-    <main class="max-w-4xl mx-auto py-12 px-6">
+    <main id="main-content" class="flex flex-col items-center py-12 px-6 relative z-10">
+        <h1 class="font-black mb-0 safu-neon italic shake-effect text-center text-6xl md:text-8xl">SAFU</h1>
+        <div class="bg-[#ff007f] text-white font-black text-xl px-4 py-1 -mt-4 mb-12 rotate-2 uppercase">So Absolutely F#ked Up</div>
         
-        <header class="mb-16 border-b border-zinc-900 pb-8">
-            <h1 class="text-6xl md:text-8xl font-black italic tracking-tighter pink-glow-text mb-2">
-                $SAFU
-            </h1>
-            <p class="text-[10px] tracking-[0.4em] text-pink-500 uppercase font-bold">
-                // SYSTEM_STATUS: AGGRESSIVE //
-            </p>
-        </header>
+        <p class="text-center max-w-sm mb-12 text-xl leading-tight tracking-tighter uppercase text-zinc-400">
+            THE DEVS ARE ASLEEP. <br> THE LIQUIDITY IS A MYTH. <br> YOUR PORTFOLIO IS SCREAMING.
+        </p>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            
-            <a href="holders.html" class="pink-border p-10 flex flex-col items-center justify-center text-center transition-all hover-fill group">
-                <span class="text-[9px] mb-2 uppercase tracking-widest opacity-60 group-hover:opacity-100">[ IDENTITY_PROBE ]</span>
-                <h2 class="text-3xl font-black italic tracking-tighter uppercase mb-2">The_Oracle</h2>
-                <p class="text-[10px] opacity-50 italic group-hover:text-black">
-                    SIGNAL-BASED INTELLIGENCE. NO AUTH REQUIRED.
-                </p>
-            </a>
-
-            <div class="space-y-4">
-                <a href="manifesto.html" class="block border border-zinc-800 p-6 hover:border-pink-500 transition-all text-center">
-                    <h2 class="text-sm font-bold uppercase tracking-[0.2em]">Manifesto</h2>
-                </a>
-                <a href="memes.html" class="block border border-zinc-800 p-6 hover:border-pink-500 transition-all text-center">
-                    <h2 class="text-sm font-bold uppercase tracking-[0.2em]">Visual_Shards</h2>
-                </a>
-                <a href="dev-room.html" class="block border border-zinc-800 p-6 opacity-30 hover:opacity-100 transition-all text-center italic">
-                    <h2 class="text-xs uppercase tracking-widest">Dev_Room</h2>
-                </a>
-            </div>
-
+        <div class="flex flex-col gap-4 w-full max-w-xs mb-8">
+            <button id="buy-btn" class="bg-[#ff007f] text-white font-black py-6 text-2xl border-4 border-white uppercase shadow-[5px_5px_0px_0px_white] active:translate-y-1">
+                Buy The Disaster
+            </button>
+            <button id="wallet-btn" class="border-2 border-[#ff007f] text-[#ff007f] py-2 px-4 text-xs uppercase font-bold hover:bg-[#ff007f] hover:text-black transition-all">
+                [ CONNECT_NEURAL_LINK ]
+            </button>
         </div>
 
-        <footer class="mt-24 flex flex-col md:flex-row justify-between items-center text-[8px] uppercase tracking-[0.3em] text-zinc-600">
-            <span>NETWORK: COLUMBUS-5</span>
-            <div class="flex gap-8 mt-4 md:mt-0">
-                <a href="#" class="hover:text-pink-500">X_STATION</a>
-                <a href="#" class="hover:text-pink-500">VOID_CHAT</a>
-            </div>
-        </footer>
+        <div class="mb-20 text-center">
+            <div id="chaos-timer" class="text-5xl font-black text-[#ff007f] tracking-widest shake-effect">000:00:00:00</div>
+        </div>
 
+        <section class="w-full max-w-md broken-box p-6 relative mb-12 border border-zinc-800">
+            <span id="alien-boss" class="absolute -top-10 -left-6 text-6xl transition-all duration-500">👽</span>
+            <h2 class="text-2xl font-black text-[#ff007f] mb-4 uppercase italic">Financial Self-Sabotage</h2>
+            <ul class="space-y-3 text-sm uppercase">
+                <li>🔥 0% TAX</li>
+                <li>📉 100% CHANCE OF ADRENALINE</li>
+            </ul>
+        </section>
+
+        <div class="w-full max-w-xs p-3 bg-[#050505] border border-[#ff007f]/20 rounded font-mono text-[9px] overflow-hidden mb-20">
+            <div id="system-log" class="text-zinc-500 leading-tight"></div>
+        </div>
     </main>
 
+    <script src="shards.js"></script>
+    <script src="index.js"></script>
 </body>
 </html>
