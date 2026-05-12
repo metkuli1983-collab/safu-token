@@ -1,87 +1,56 @@
-export default async function handler(req, res) {
+const scanBtn = document.getElementById("scan-btn");
+const walletInput = document.getElementById("wallet-input");
+const chatBox = document.getElementById("chat-box");
+const shareBtn = document.getElementById("share-btn");
 
-    if (req.method !== "POST") {
-        return res.status(405).json({
-            error: "METHOD_NOT_ALLOWED"
-        });
-    }
+let currentAddress = null;
+let lastData = null;
 
-    const { address, message } = req.body || {};
+if (shareBtn) shareBtn.style.display = "none";
 
-    // -----------------------------
-    // SAFE DEFAULTS
-    // -----------------------------
-    let balance = 0;
-    let mode = "VOID";
+function add(msg) {
+    if (!chatBox) return;
+    chatBox.innerHTML += `<p>${msg}</p>`;
+}
+
+scanBtn?.addEventListener("click", async () => {
+
+    const addr = walletInput?.value?.trim();
+    if (!addr) return;
+
+    currentAddress = addr;
+
+    scanBtn.innerText = "SCANNING...";
 
     try {
 
-        // -----------------------------
-        // WALLET CHECK (SAFE)
-        // -----------------------------
-        if (address && address.startsWith("terra1")) {
-
-            const lcdRes = await fetch(
-                `https://terra-classic-lcd.publicnode.com/cosmos/bank/v1beta1/balances/${address}`
-            );
-
-            if (lcdRes.ok) {
-                const data = await lcdRes.json();
-
-                const token = data?.balances?.find(b =>
-                    b.denom?.includes("safu")
-                );
-
-                balance = Number(token?.amount || 0) / 1_000_000;
-            }
-        }
-
-        // -----------------------------
-        // MODE LOGIC
-        // -----------------------------
-        if (balance <= 0) mode = "VOID";
-        else if (balance < 10000) mode = "HOLDER";
-        else if (balance < 10000000) mode = "ECHO";
-        else mode = "WHALE";
-
-        // -----------------------------
-        // SIMPLE ORACLE (NO AI = NO BREAKS)
-        // -----------------------------
-        let reply = "";
-
-        if (mode === "VOID") reply = "NO SIGNAL DETECTED.";
-        if (mode === "HOLDER") reply = "MINOR SIGNAL REGISTERED.";
-        if (mode === "ECHO") reply = "SIGNAL REFLECTS BACK.";
-        if (mode === "WHALE") reply = "REALITY DISTORTION ACTIVE.";
-
-        // -----------------------------
-        // SHARE TEXT (ALWAYS SAFE)
-        // -----------------------------
-        const shareText =
-`$SAFU ORACLE REPORT
-
-MODE: ${mode}
-BALANCE: ${balance}
-
-${reply}`;
-
-        // -----------------------------
-        // RESPONSE
-        // -----------------------------
-        return res.status(200).json({
-            reply,
-            mode,
-            balance,
-            shareText
+        const res = await fetch("/api/oracle", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ address: addr, message: "scan" })
         });
 
-    } catch (err) {
+        const data = await res.json();
+        lastData = data;
 
-        return res.status(200).json({
-            reply: "ORACLE TEMPORARILY SILENT.",
-            mode: "VOID",
-            balance: 0,
-            shareText: "ORACLE DOWN"
-        });
+        if (shareBtn) shareBtn.style.display = "block";
+
+        add(`MODE: ${data.mode}`);
+        add(`BALANCE: ${data.balance}`);
+        add(`REPLY: ${data.reply}`);
+
+    } catch (e) {
+        add("SCAN FAILED");
     }
-}
+
+    scanBtn.innerText = "SCAN";
+});
+
+shareBtn?.addEventListener("click", async () => {
+
+    if (!lastData?.shareText) return;
+
+    await navigator.clipboard.writeText(lastData.shareText);
+
+    add("COPIED");
+});
