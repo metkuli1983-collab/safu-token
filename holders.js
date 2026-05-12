@@ -1,4 +1,22 @@
+function debug(msg) {
+    const el = document.createElement("div");
+    el.style.position = "fixed";
+    el.style.bottom = "0";
+    el.style.left = "0";
+    el.style.right = "0";
+    el.style.background = "black";
+    el.style.color = "#00ff99";
+    el.style.fontSize = "10px";
+    el.style.padding = "6px";
+    el.style.zIndex = "99999";
+    el.innerText = msg;
+    document.body.appendChild(el);
+}
+
+debug("HOLDERS JS LOADED");
+
 const scanBtn = document.getElementById("scan-btn");
+
 const walletInput = document.getElementById("wallet-input");
 const chatBox = document.getElementById("chat-box");
 const shareBtn = document.getElementById("share-btn");
