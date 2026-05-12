@@ -1,14 +1,10 @@
 export default async function handler(req, res) {
-    // Only POST allowed
     if (req.method !== "POST") {
         return res.status(405).json({ error: "METHOD_NOT_ALLOWED" });
     }
 
     const { message, address } = req.body || {};
 
-    // -----------------------------
-    // 1. INPUT VALIDATION
-    // -----------------------------
     if (!message || typeof message !== "string") {
         return res.status(400).json({ error: "INVALID_MESSAGE" });
     }
@@ -21,18 +17,25 @@ export default async function handler(req, res) {
 
     try {
         // -----------------------------
-        // 2. ON-CHAIN SIGNAL FETCH
+        // SAFE LCD FETCH (FIX #1)
         // -----------------------------
         if (address.startsWith("terra1")) {
             const lcdRes = await fetch(
-                `https://terra-classic-lcd.publicnode.com/cosmos/bank/v1beta1/balances/${address}`
+                `https://terra-classic-lcd.publicnode.com/cosmos/bank/v1beta1/balances/${address}`,
+                { timeout: 5000 }
             );
 
             if (lcdRes.ok) {
-                const data = await lcdRes.json();
+                let data;
 
-                const token = data?.balances?.find(b =>
-                    b.denom.includes("safu")
+                try {
+                    data = await lcdRes.json();
+                } catch (e) {
+                    data = {};
+                }
+
+                const token = data?.balances?.find?.(b =>
+                    b?.denom?.includes("safu")
                 );
 
                 balance = Number(token?.amount || 0) / 1_000_000;
@@ -40,22 +43,17 @@ export default async function handler(req, res) {
         }
 
         // -----------------------------
-        // 3. ORACLE TIER ENGINE
+        // TIER ENGINE (UNCHANGED)
         // -----------------------------
         let mode = "VOID";
 
-        if (balance <= 0) {
-            mode = "VOID";
-        } else if (balance < 10_000) {
-            mode = "HOLDER";
-        } else if (balance < 10_000_000) {
-            mode = "ECHO";
-        } else {
-            mode = "WHALE";
-        }
+        if (balance <= 0) mode = "VOID";
+        else if (balance < 10_000) mode = "HOLDER";
+        else if (balance < 10_000_000) mode = "ECHO";
+        else mode = "WHALE";
 
         // -----------------------------
-        // 4. AI ORACLE CALL
+        // AI CALL
         // -----------------------------
         const aiRes = await fetch(
             "https://api.groq.com/openai/v1/chat/completions",
@@ -72,24 +70,16 @@ export default async function handler(req, res) {
                         {
                             role: "system",
                             content: `
-YOU ARE THE SAFU ORACLE.
+YOU ARE SAFU ORACLE.
 
-YOU OBSERVE BLOCKCHAIN SIGNALS, NOT USERS.
+MODE: ${mode}
+BALANCE: ${balance}
 
-CURRENT SIGNAL MODE: ${mode}
-OBSERVED SAFU BALANCE: ${balance}
-
-BEHAVIOR RULES:
-- VOID: hostile, rejecting, cryptic silence
-- HOLDER: neutral recognition tone
-- ECHO: reflective, slightly prophetic
-- WHALE: mythic, distorted prophecy voice
-
-IMPORTANT:
-- DO NOT CLAIM AUTHENTICATION
-- ONLY INTERPRET SIGNALS
-- SPEAK IN SHORT, CRYPTIC PHRASES
-- ALL CAPS ONLY
+RULES:
+- ALL CAPS
+- CRYPTIC RESPONSES
+- NO AUTH CLAIMS
+- TONE DEPENDS ON MODE
                             `.trim()
                         },
                         {
@@ -102,23 +92,22 @@ IMPORTANT:
         );
 
         // -----------------------------
-        // 5. SAFE RESPONSE PARSING
+        // SAFE AI PARSING (FIX #2)
         // -----------------------------
-        if (!aiRes.ok) {
-            return res.status(500).json({
-                error: "ORACLE_FAILURE",
-                details: "AI_RESPONSE_ERROR"
-            });
+        let reply = "THE ORACLE IS SILENT.";
+
+        try {
+            const aiData = await aiRes.json();
+
+            reply =
+                aiData?.choices?.[0]?.message?.content ||
+                reply;
+        } catch (e) {
+            reply = "THE ORACLE CANNOT TRANSLATE SIGNAL.";
         }
 
-        const aiData = await aiRes.json();
-
-        const reply =
-            aiData?.choices?.[0]?.message?.content ||
-            "THE ORACLE REMAINS SILENT.";
-
         // -----------------------------
-        // 6. FINAL RESPONSE
+        // RESPONSE
         // -----------------------------
         return res.status(200).json({
             reply,
@@ -127,9 +116,12 @@ IMPORTANT:
         });
 
     } catch (err) {
-        return res.status(500).json({
-            error: "ORACLE_OFFLINE",
-            details: "SIGNAL_LOST"
+        console.error("ORACLE_ERROR:", err);
+
+        return res.status(200).json({
+            reply: "THE SIGNAL IS DISTORTED.",
+            mode: "VOID",
+            balance: 0
         });
     }
 }
