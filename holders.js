@@ -12,9 +12,12 @@ const badgeContainer = document.getElementById("badge-container");
 const oracleState = document.getElementById("oracle-state");
 const shareBtn = document.getElementById("share-btn");
 
-// SAFE INIT (no crash if missing)
-if (shareBtn) shareBtn.style.display = "none";
+// SAFE INIT
+if (shareBtn) {
+    shareBtn.style.display = "none";
+}
 
+// -----------------------------
 function setState(text) {
     if (oracleState) oracleState.innerText = `ORACLE_STATUS: ${text}`;
 }
@@ -22,7 +25,7 @@ function setState(text) {
 // -----------------------------
 // 1. SCAN SIGNAL
 // -----------------------------
-scanBtn.addEventListener("click", async () => {
+scanBtn?.addEventListener("click", async () => {
     const addr = walletInput.value.trim();
 
     if (!addr.startsWith("terra1")) {
@@ -48,17 +51,11 @@ scanBtn.addEventListener("click", async () => {
         const data = await res.json();
         lastOracleData = data;
 
-        // SAFE SHOW BUTTON
         if (shareBtn) shareBtn.style.display = "block";
 
         renderBadge(addr, data.balance, data.mode);
 
-        addMessage(
-            "SYSTEM",
-            `SIGNAL_LOCKED: ${data.balance} $SAFU`,
-            "text-green-400"
-        );
-
+        addMessage("SYSTEM", `SIGNAL_LOCKED: ${data.balance} $SAFU`, "text-green-400");
         addMessage("ORACLE", data.reply, "text-pink-400");
 
         setState("LOCKED");
@@ -72,9 +69,9 @@ scanBtn.addEventListener("click", async () => {
 });
 
 // -----------------------------
-// 2. CHAT WITH ORACLE
+// 2. CHAT
 // -----------------------------
-chatInput.addEventListener("keypress", async (e) => {
+chatInput?.addEventListener("keypress", async (e) => {
     if (e.key !== "Enter") return;
     if (!currentAddress) return alert("NO_SIGNAL_ACTIVE");
 
@@ -99,11 +96,7 @@ chatInput.addEventListener("keypress", async (e) => {
         const data = await res.json();
         lastOracleData = data;
 
-        addMessage(
-            "ORACLE",
-            data.reply || "THE_ORACLE_IS_SILENT",
-            "text-pink-400"
-        );
+        addMessage("ORACLE", data.reply || "THE_ORACLE_IS_SILENT", "text-pink-400");
 
         setState("LOCKED");
 
@@ -114,7 +107,7 @@ chatInput.addEventListener("keypress", async (e) => {
 });
 
 // -----------------------------
-// 3. BADGE RENDER
+// 3. BADGE
 // -----------------------------
 function renderBadge(addr, balance, mode) {
     if (!badgeContainer) return;
@@ -161,35 +154,4 @@ function renderBadge(addr, balance, mode) {
 }
 
 // -----------------------------
-// 4. CHAT UI
-// -----------------------------
-function addMessage(sender, text, colorClass) {
-    if (!chatBox) return;
-
-    const el = document.createElement("p");
-    el.className = `${colorClass} uppercase font-semibold`;
-
-    el.innerHTML = `<span class="opacity-50">[${sender}]</span> ${text}`;
-
-    chatBox.appendChild(el);
-    chatBox.scrollTop = chatBox.scrollHeight;
-}
-
-// -----------------------------
-// 5. SHARE BUTTON (SAFE)
-// -----------------------------
-if (shareBtn) {
-    shareBtn.addEventListener("click", async () => {
-        if (!lastOracleData?.shareText) {
-            alert("NO_ORACLE_DATA");
-            return;
-        }
-
-        try {
-            await navigator.clipboard.writeText(lastOracleData.shareText);
-            addMessage("SYSTEM", "COPIED_TO_CLIPBOARD", "text-green-400");
-        } catch (e) {
-            addMessage("SYSTEM", "COPY_FAILED", "text-red-500");
-        }
-    });
-}
+//
