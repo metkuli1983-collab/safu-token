@@ -167,3 +167,17 @@ function addMessage(sender, text, colorClass) {
     chatBox.appendChild(el);
     chatBox.scrollTop = chatBox.scrollHeight;
 }
+
+document.getElementById("share-btn")?.addEventListener("click", async () => {
+    if (!lastOracleData?.shareText) {
+        alert("NO_ORACLE_DATA");
+        return;
+    }
+
+    try {
+        await navigator.clipboard.writeText(lastOracleData.shareText);
+        addMessage("SYSTEM", "COPIED_TO_CLIPBOARD", "text-green-400");
+    } catch (e) {
+        addMessage("SYSTEM", "COPY_FAILED", "text-red-500");
+    }
+});
