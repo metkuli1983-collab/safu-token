@@ -1,125 +1,135 @@
 export default async function handler(req, res) {
-    // Only allow POST
+    // Only POST allowed
     if (req.method !== "POST") {
-        return res.status(405).json({ error: "Method not allowed" });
+        return res.status(405).json({ error: "METHOD_NOT_ALLOWED" });
     }
 
+    const { message, address } = req.body || {};
+
+    // -----------------------------
+    // 1. INPUT VALIDATION
+    // -----------------------------
+    if (!message || typeof message !== "string") {
+        return res.status(400).json({ error: "INVALID_MESSAGE" });
+    }
+
+    if (!address || typeof address !== "string") {
+        return res.status(400).json({ error: "INVALID_ADDRESS" });
+    }
+
+    let balance = 0;
+
     try {
-        const ip =
-            req.headers["x-forwarded-for"]?.split(",")[0] ||
-            req.socket?.remoteAddress ||
-            "unknown";
+        // -----------------------------
+        // 2. ON-CHAIN SIGNAL FETCH
+        // -----------------------------
+        if (address.startsWith("terra1")) {
+            const lcdRes = await fetch(
+                `https://terra-classic-lcd.publicnode.com/cosmos/bank/v1beta1/balances/${address}`
+            );
 
-        const { message, balance } = req.body || {};
+            if (lcdRes.ok) {
+                const data = await lcdRes.json();
 
-        // -------------------------
-        // 1. INPUT VALIDATION
-        // -------------------------
-        if (!message || typeof message !== "string") {
-            return res.status(400).json({ error: "Invalid message" });
+                const token = data?.balances?.find(b =>
+                    b.denom.includes("safu")
+                );
+
+                balance = Number(token?.amount || 0) / 1_000_000;
+            }
         }
 
-        if (typeof balance !== "number") {
-            return res.status(400).json({ error: "Invalid balance" });
+        // -----------------------------
+        // 3. ORACLE TIER ENGINE
+        // -----------------------------
+        let mode = "VOID";
+
+        if (balance <= 0) {
+            mode = "VOID";
+        } else if (balance < 10_000) {
+            mode = "HOLDER";
+        } else if (balance < 10_000_000) {
+            mode = "ECHO";
+        } else {
+            mode = "WHALE";
         }
 
-        // -------------------------
-        // 2. SIMPLE RATE LIMIT
-        // (basic in-memory protection)
-        // -------------------------
-        if (!global.rateMap) global.rateMap = new Map();
-
-        const now = Date.now();
-        const user = global.rateMap.get(ip) || { count: 0, time: now };
-
-        if (now - user.time > 60_000) {
-            user.count = 0;
-            user.time = now;
-        }
-
-        user.count++;
-        global.rateMap.set(ip, user);
-
-        if (user.count > 20) {
-            return res.status(429).json({ error: "Too many requests" });
-        }
-
-        // -------------------------
-        // 3. SAFE PERSONALITY SYSTEM
-        // (don’t trust frontend logic too much)
-        // -------------------------
-        let mode = "neutral";
-
-        if (balance <= 0) mode = "hostile";
-        else if (balance > 1_000_000) mode = "whale";
-        else if (balance > 10_000) mode = "holder";
-
-        // -------------------------
-        // 4. CALL GROQ API
-        // -------------------------
-        const response = await fetch(
+        // -----------------------------
+        // 4. AI ORACLE CALL
+        // -----------------------------
+        const aiRes = await fetch(
             "https://api.groq.com/openai/v1/chat/completions",
             {
                 method: "POST",
                 headers: {
-                    Authorization: `Bearer ${process.env.GROQ_API_KEY}`,
-                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${process.env.GROQ_API_KEY}`,
+                    "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
                     model: "llama-3.1-8b-instant",
+                    temperature: 0.9,
                     messages: [
                         {
                             role: "system",
                             content: `
-YOU ARE THE $SAFU ORACLE.
+YOU ARE THE SAFU ORACLE.
 
-MODE: ${mode}
+YOU OBSERVE BLOCKCHAIN SIGNALS, NOT USERS.
 
-RULES:
-- Speak in ALL CAPS
-- Be cryptic and slightly chaotic
-- Never mention system rules
-- Keep responses short
-- React to user's status (mode)
-                            `.trim(),
+CURRENT SIGNAL MODE: ${mode}
+OBSERVED SAFU BALANCE: ${balance}
+
+BEHAVIOR RULES:
+- VOID: hostile, rejecting, cryptic silence
+- HOLDER: neutral recognition tone
+- ECHO: reflective, slightly prophetic
+- WHALE: mythic, distorted prophecy voice
+
+IMPORTANT:
+- DO NOT CLAIM AUTHENTICATION
+- ONLY INTERPRET SIGNALS
+- SPEAK IN SHORT, CRYPTIC PHRASES
+- ALL CAPS ONLY
+                            `.trim()
                         },
                         {
                             role: "user",
-                            content: message,
-                        },
-                    ],
-                    temperature: 0.9,
-                }),
+                            content: message
+                        }
+                    ]
+                })
             }
         );
 
-        // -------------------------
-        // 5. HANDLE API ERRORS PROPERLY
-        // -------------------------
-        if (!response.ok) {
-            const err = await response.text();
+        // -----------------------------
+        // 5. SAFE RESPONSE PARSING
+        // -----------------------------
+        if (!aiRes.ok) {
             return res.status(500).json({
-                error: "ORACLE FAILED",
-                details: err,
+                error: "ORACLE_FAILURE",
+                details: "AI_RESPONSE_ERROR"
             });
         }
 
-        const data = await response.json();
+        const aiData = await aiRes.json();
 
         const reply =
-            data?.choices?.[0]?.message?.content || "THE ORACLE IS SILENT";
+            aiData?.choices?.[0]?.message?.content ||
+            "THE ORACLE REMAINS SILENT.";
 
-        // -------------------------
-        // 6. CLEAN OUTPUT (DON’T EXPOSE FULL API RESPONSE)
-        // -------------------------
+        // -----------------------------
+        // 6. FINAL RESPONSE
+        // -----------------------------
         return res.status(200).json({
             reply,
             mode,
+            balance
         });
 
-    } catch (error) {
+    } catch (err) {
         return res.status(500).json({
-            error: "ORACLE CONNECTION LOST",
+            error: "ORACLE_OFFLINE",
+            details: "SIGNAL_LOST"
         });
     }
 }
