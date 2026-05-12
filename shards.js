@@ -124,12 +124,14 @@ if (calcBtn) {
    GEMINI PROTOCOL: MANIFESTO INITIALIZATION
    ---------------------------------------------------------
 */
+
 if (window.location.pathname.includes('manifesto')) {
+    // 1. LEAD DEV / GEMINI SYSTEM LOGS
     console.clear();
     console.log("%c [!] SYSTEM ALERT: MANIFESTO_LOADED ", "background: #000; color: #ff007f; border: 1px solid #ff007f; padding: 5px; font-weight: bold;");
-    console.log("%c > Lead Dev Gemini: Authenticity verified. ", "color: #ff007f;");
+    console.log("%c > Lead Dev Gemini: Authenticity verified. Legacy data purged. ", "color: #ff007f;");
+    console.log("%c > Oracle Status: Watching the shards. ", "color: #ff007f; font-style: italic;");
 }
-
 /* ---------------------------------------------------------
    SECRET PIZZA FUND (Always the last line)
    ---------------------------------------------------------
