@@ -10,6 +10,10 @@ const chatInput = document.getElementById("chat-input");
 const chatBox = document.getElementById("chat-box");
 const badgeContainer = document.getElementById("badge-container");
 const oracleState = document.getElementById("oracle-state");
+const shareBtn = document.getElementById("share-btn");
+
+// SAFE INIT (no crash if missing)
+if (shareBtn) shareBtn.style.display = "none";
 
 function setState(text) {
     if (oracleState) oracleState.innerText = `ORACLE_STATUS: ${text}`;
@@ -43,6 +47,9 @@ scanBtn.addEventListener("click", async () => {
 
         const data = await res.json();
         lastOracleData = data;
+
+        // SAFE SHOW BUTTON
+        if (shareBtn) shareBtn.style.display = "block";
 
         renderBadge(addr, data.balance, data.mode);
 
@@ -168,16 +175,21 @@ function addMessage(sender, text, colorClass) {
     chatBox.scrollTop = chatBox.scrollHeight;
 }
 
-document.getElementById("share-btn")?.addEventListener("click", async () => {
-    if (!lastOracleData?.shareText) {
-        alert("NO_ORACLE_DATA");
-        return;
-    }
+// -----------------------------
+// 5. SHARE BUTTON (SAFE)
+// -----------------------------
+if (shareBtn) {
+    shareBtn.addEventListener("click", async () => {
+        if (!lastOracleData?.shareText) {
+            alert("NO_ORACLE_DATA");
+            return;
+        }
 
-    try {
-        await navigator.clipboard.writeText(lastOracleData.shareText);
-        addMessage("SYSTEM", "COPIED_TO_CLIPBOARD", "text-green-400");
-    } catch (e) {
-        addMessage("SYSTEM", "COPY_FAILED", "text-red-500");
-    }
-});
+        try {
+            await navigator.clipboard.writeText(lastOracleData.shareText);
+            addMessage("SYSTEM", "COPIED_TO_CLIPBOARD", "text-green-400");
+        } catch (e) {
+            addMessage("SYSTEM", "COPY_FAILED", "text-red-500");
+        }
+    });
+}
