@@ -1,10 +1,24 @@
 let currentAddress = null;
 
 // -----------------------------
-// 1. SCAN / VERIFY SIGNAL
+// 0. HELPERS
 // -----------------------------
-document.getElementById("scan-btn").addEventListener("click", async () => {
-    const addr = document.getElementById("wallet-input").value.trim();
+const scanBtn = document.getElementById("scan-btn");
+const walletInput = document.getElementById("wallet-input");
+const chatInput = document.getElementById("chat-input");
+const chatBox = document.getElementById("chat-box");
+const badgeContainer = document.getElementById("badge-container");
+const oracleState = document.getElementById("oracle-state");
+
+function setState(text) {
+    if (oracleState) oracleState.innerText = `ORACLE_STATUS: ${text}`;
+}
+
+// -----------------------------
+// 1. SCAN SIGNAL
+// -----------------------------
+scanBtn.addEventListener("click", async () => {
+    const addr = walletInput.value.trim();
 
     if (!addr.startsWith("terra1")) {
         alert("INVALID_SIGNAL");
@@ -13,15 +27,13 @@ document.getElementById("scan-btn").addEventListener("click", async () => {
 
     currentAddress = addr;
 
-    const btn = document.getElementById("scan-btn");
-    btn.innerText = "SCANNING SIGNAL...";
+    scanBtn.innerText = "SCANNING_SIGNAL...";
+    setState("SCANNING");
 
     try {
         const res = await fetch("/api/oracle", {
             method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
                 address: addr,
                 message: "INIT_SIGNAL_SCAN"
@@ -31,36 +43,44 @@ document.getElementById("scan-btn").addEventListener("click", async () => {
         const data = await res.json();
 
         renderBadge(addr, data.balance, data.mode);
-        addMessage("SYSTEM", `SIGNAL LOCKED: ${data.balance} $SAFU`, "text-green-400");
+
+        addMessage(
+            "SYSTEM",
+            `SIGNAL_LOCKED: ${data.balance} $SAFU`,
+            "text-green-400"
+        );
+
         addMessage("ORACLE", data.reply, "text-pink-400");
 
+        setState("LOCKED");
+
     } catch (err) {
-        addMessage("SYSTEM", "SIGNAL FAILURE", "text-red-500");
+        addMessage("SYSTEM", "SIGNAL_FAILURE", "text-red-500");
+        setState("ERROR");
     } finally {
-        btn.innerText = "SCAN SIGNAL";
+        scanBtn.innerText = "INITIATE_SCAN";
     }
 });
-
 
 // -----------------------------
 // 2. CHAT WITH ORACLE
 // -----------------------------
-document.getElementById("chat-input").addEventListener("keypress", async (e) => {
+chatInput.addEventListener("keypress", async (e) => {
     if (e.key !== "Enter") return;
     if (!currentAddress) return alert("NO_SIGNAL_ACTIVE");
 
-    const msg = e.target.value.trim();
+    const msg = chatInput.value.trim();
     if (!msg) return;
 
     addMessage("YOU", msg, "text-white");
-    e.target.value = "";
+    chatInput.value = "";
+
+    setState("TRANSMITTING");
 
     try {
         const res = await fetch("/api/oracle", {
             method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
                 address: currentAddress,
                 message: msg
@@ -71,42 +91,45 @@ document.getElementById("chat-input").addEventListener("keypress", async (e) => 
 
         addMessage(
             "ORACLE",
-            data.reply || "THE ORACLE IS SILENT.",
+            data.reply || "THE_ORACLE_IS_SILENT",
             "text-pink-400"
         );
 
+        setState("LOCKED");
+
     } catch (err) {
-        addMessage("SYSTEM", "ORACLE DISCONNECTED", "text-red-500");
+        addMessage("SYSTEM", "ORACLE_DISCONNECTED", "text-red-500");
+        setState("OFFLINE");
     }
 });
 
-
 // -----------------------------
-// 3. BADGE RENDER (DISPLAY ONLY)
+// 3. BADGE RENDER
 // -----------------------------
 function renderBadge(addr, balance, mode) {
-    const container = document.getElementById("badge-container");
-    container.classList.remove("hidden");
+    if (!badgeContainer) return;
 
-    let tier = "VOID SIGNAL";
+    badgeContainer.classList.remove("hidden");
+
+    let tier = "VOID_SIGNAL";
     let color = "#444";
 
     if (mode === "HOLDER") {
-        tier = "RECOGNIZED SIGNAL";
+        tier = "RECOGNIZED_SIGNAL";
         color = "#00ff99";
     }
 
     if (mode === "ECHO") {
-        tier = "ECHO ENTITY";
+        tier = "ECHO_ENTITY";
         color = "#7c3aed";
     }
 
     if (mode === "WHALE") {
-        tier = "DISTORTION ENTITY";
+        tier = "DISTORTION_ENTITY";
         color = "#ff007f";
     }
 
-    container.innerHTML = `
+    badgeContainer.innerHTML = `
         <div class="border-2 p-6 text-center bg-black" style="border-color:${color}">
             <p class="text-xs uppercase mb-2" style="color:${color}">
                 SIGNAL_CLASSIFICATION
@@ -127,18 +150,17 @@ function renderBadge(addr, balance, mode) {
     `;
 }
 
-
 // -----------------------------
 // 4. CHAT UI
 // -----------------------------
 function addMessage(sender, text, colorClass) {
-    const box = document.getElementById("chat-box");
+    if (!chatBox) return;
 
     const el = document.createElement("p");
     el.className = `${colorClass} uppercase font-semibold`;
 
     el.innerHTML = `<span class="opacity-50">[${sender}]</span> ${text}`;
 
-    box.appendChild(el);
-    box.scrollTop = box.scrollHeight;
+    chatBox.appendChild(el);
+    chatBox.scrollTop = chatBox.scrollHeight;
 }
