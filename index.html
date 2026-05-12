@@ -6,12 +6,21 @@
     <title>$SAFU | THE_PROPHECY</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="madnesss.css">
+    <style>
+        /* Exact fix for the logo text style in your screenshot */
+        .safu-logo {
+            font-family: 'Arial Black', 'Inter', sans-serif; /* Heavy block style */
+            font-style: italic;
+            letter-spacing: -0.05em;
+            text-shadow: 0 0 15px #ff007f;
+            -webkit-text-stroke: 1px #ff007f;
+        }
+    </style>
 </head>
 <body class="bg-black text-white font-mono overflow-x-hidden">
 
-    <!-- NAVIGATION (Restored to Screenshot_20260511-173831_3.jpg + Holders) -->
     <nav class="flex justify-between p-4 border-b border-[#ff007f] bg-black sticky top-0 z-[100] text-[9px]">
-        <div class="font-black text-[#ff007f] opacity-80 uppercase tracking-tighter">$SAFU_NODE_01</div>
+        <div class="font-black text-[#ff007f] opacity-80 uppercase">$SAFU_NODE_01</div>
         <div class="flex gap-2 uppercase font-bold italic">
             <a href="holders.html" class="text-[#ff007f] underline">Holders</a>
             <a href="manifesto.html" class="text-white underline">Manifesto</a>
@@ -22,20 +31,17 @@
 
     <main class="flex flex-col items-center pt-10 px-6 relative z-10">
         
-        <!-- LOGO STACK -->
-        <div class="relative mb-14 text-center">
-            <h1 class="text-7xl font-black italic text-white drop-shadow-[0_0_15px_#ff007f] tracking-tighter leading-none">SAFU</h1>
-            <div class="bg-[#ff007f] text-white font-black text-xl px-4 py-1 mt-1 -rotate-2 uppercase shadow-lg inline-block">
+        <div class="text-center mb-10">
+            <h1 class="text-8xl font-black safu-logo leading-none">SAFU</h1>
+            <div class="bg-[#ff007f] text-white font-black text-xl px-4 py-1 mt-[-10px] -rotate-2 uppercase inline-block shadow-lg">
                 So Absolutely F#ked Up
             </div>
         </div>
         
-        <!-- FLAVOR TEXT -->
         <p class="text-center max-w-xs mb-10 text-xl leading-[1.1] tracking-tighter uppercase text-zinc-400 font-bold">
             THE DEVS ARE ASLEEP. <br> THE LIQUIDITY IS A MYTH. <br> YOUR PORTFOLIO IS SCREAMING.
         </p>
 
-        <!-- BUTTONS -->
         <div class="flex flex-col gap-4 w-full max-w-xs mb-10">
             <button id="buy-btn" class="bg-[#ff007f] text-white font-black py-6 text-3xl border-4 border-white uppercase shadow-[8px_8px_0px_0px_white] active:translate-y-1 active:shadow-none transition-all">
                 Buy The Disaster
@@ -46,20 +52,18 @@
             </button>
         </div>
 
-        <!-- TIMER -->
         <div class="mb-16 text-center">
             <div id="chaos-timer" class="text-5xl font-black text-[#ff007f] tracking-tight drop-shadow-[0_0_10px_#ff007f]">
                 000:00:00:00
             </div>
-            <p class="text-[9px] uppercase text-zinc-600 italic mt-2 tracking-widest">
+            <p class="text-[9px] uppercase text-zinc-600 italic mt-2">
                 "THE WAIT IS LONG. THE PAIN IS ETERNAL."
             </p>
         </div>
 
-        <!-- BOTTOM BOX (Matches Screenshot_20260511-173831_3.jpg) -->
         <section class="w-full max-w-md border-2 border-[#ff007f] p-6 relative mb-12 bg-black shadow-[10px_10px_0px_0px_#1a1a1a]">
             <span id="alien-boss" class="absolute -top-10 -left-6 text-6xl">👽</span>
-            <h2 class="text-2xl font-black text-[#ff007f] mb-4 uppercase italic italic tracking-tighter">Financial Self-Sabotage</h2>
+            <h2 class="text-2xl font-black text-[#ff007f] mb-4 uppercase italic tracking-tighter">Financial Self-Sabotage</h2>
             <ul class="space-y-3 text-sm uppercase font-bold tracking-tighter">
                 <li>🔥 0% TAX (ENCODED IN THE VOID)</li>
                 <li>📉 100% CHANCE OF ADRENALINE</li>
@@ -67,19 +71,11 @@
             </ul>
         </section>
 
-        <!-- SYSTEM LOG -->
-        <div class="w-full max-w-xs p-3 bg-[#080808] border border-[#ff007f]/20 rounded font-mono text-[9px] overflow-hidden mb-20">
-            <div id="system-log" class="text-zinc-600 leading-tight">
-                <p class="text-[#ff007f] opacity-50">> SYSTEM_UPTIME: STABLE</p>
-            </div>
+        <div id="system-log" class="w-full max-w-xs p-3 bg-[#080808] border border-[#ff007f]/20 rounded font-mono text-[9px] text-zinc-600 mb-20">
+            <p class="text-[#ff007f] opacity-50">> SYSTEM_UPTIME: STABLE</p>
         </div>
-
-        <footer class="mt-10 opacity-20 text-[10px] text-center pb-10 uppercase tracking-[0.4em]">
-            STRICTLY CONFIDENTIAL // SAFU LABS 2026
-        </footer>
     </main>
 
-    <!-- EXTERNAL LOGIC ONLY -->
     <script src="shards.js"></script>
     <script src="index.js"></script>
 </body>
