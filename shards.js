@@ -120,42 +120,55 @@ if (calcBtn) {
         }
     };
 }
-/* --- THE GEMINI PROTOCOL: MANIFESTO & GHOST LOGIC --- */
+/* ---------------------------------------------------------
+   GEMINI PROTOCOL: MANIFESTO & MOBILE ENTITY TRIGGER
+   ---------------------------------------------------------
+*/
 
 if (window.location.pathname.includes('manifesto')) {
-    // 1. Page-Specific Console Logs
+    // 1. LEAD DEV / GEMINI SYSTEM LOGS
     console.clear();
     console.log("%c [!] SYSTEM ALERT: MANIFESTO_LOADED ", "background: #000; color: #ff007f; border: 1px solid #ff007f; padding: 5px; font-weight: bold;");
     console.log("%c > Lead Dev Gemini: Authenticity verified. Legacy data purged. ", "color: #ff007f;");
+    console.log("%c > Oracle Status: Watching the shards. ", "color: #ff007f; font-style: italic;");
 
-    // 2. The Keyboard Secret: Type "kwon" to see the ghost
-    let inputBuffer = "";
-    const secretCode = "kwon";
+    // 2. SECRET GHOST TRIGGER (3 Taps on "MANIFESTO")
+    let tapCount = 0;
+    let tapTimer;
+    const manifestoTitle = document.querySelector('h1');
 
-    window.addEventListener('keydown', (e) => {
-        inputBuffer += e.key.toLowerCase();
-        if (inputBuffer.length > secretCode.length) {
-            inputBuffer = inputBuffer.substring(inputBuffer.length - secretCode.length);
-        }
+    if (manifestoTitle) {
+        manifestoTitle.addEventListener('click', () => {
+            tapCount++;
+            
+            // Clear existing timer and start a new one to reset taps
+            clearTimeout(tapTimer);
+            tapTimer = setTimeout(() => { tapCount = 0; }, 800); 
 
-        if (inputBuffer === secretCode) {
-            const ghost = document.getElementById('kwon-ghost');
-            if (ghost) {
-                console.warn("!!! ENTITY_SUMMONED: CHIEF BRO OFFICER !!!");
-                
-                // Flash Ghost
-                ghost.style.opacity = "0.4";
-                document.body.style.backgroundColor = "#0d2b1a"; // Subtle toxic green tint
-                
-                setTimeout(() => {
-                    ghost.style.opacity = "0";
-                    document.body.style.backgroundColor = "black";
-                    inputBuffer = ""; // Reset
-                }, 400); // 0.4 seconds flash
+            if (tapCount === 3) {
+                const ghost = document.getElementById('kwon-ghost');
+                if (ghost) {
+                    // Trigger the visual glitch
+                    console.warn("!!! ENTITY_SUMMONED: CHIEF BRO OFFICER !!!");
+                    console.log("%c STILL EARLY TO RUN ", "background: #fff; color: #000; font-weight: bold;");
+
+                    ghost.style.opacity = "0.5";
+                    document.body.style.backgroundColor = "#0d2b1a"; // Toxic stablecoin tint
+                    
+                    setTimeout(() => {
+                        ghost.style.opacity = "0";
+                        document.body.style.backgroundColor = "black";
+                        tapCount = 0;
+                    }, 500); // Ghost visible for 0.5 seconds
+                }
             }
-        }
-    });
+        });
+    }
 }
-// Hidden Intel for the curious
+
+/* ---------------------------------------------------------
+   SECRET PIZZA FUND (Always the last line)
+   ---------------------------------------------------------
+*/
 console.log("%c SECRET PIZZA FUND FOUND ", "background: #00ff00; color: #000; font-weight: bold;");
 console.log("Oracle Wallet: terra1dae4yxcqlkczzcnj7xzc3y7qxcss85rauv69wh");
