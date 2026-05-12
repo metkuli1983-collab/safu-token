@@ -7,32 +7,64 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="madnesss.css">
 </head>
+
 <body class="bg-black text-white font-mono p-4">
 
+    <!-- NAV -->
     <nav class="flex justify-between items-center border-b border-[#ff007f] pb-2 mb-10 text-[9px]">
         <div class="font-black text-[#ff007f] italic underline">SAFU_ORACLE</div>
         <a href="index.html" class="text-white underline italic">Return_Home</a>
     </nav>
 
     <main class="flex flex-col items-center">
-        <h1 class="text-4xl font-black italic text-[#ff007f] drop-shadow-[0_0_10px_#ff007f] mb-8 uppercase">Holders_Scan</h1>
 
+        <!-- TITLE -->
+        <h1 class="text-4xl font-black italic text-[#ff007f] drop-shadow-[0_0_10px_#ff007f] mb-8 uppercase">
+            HOLDERS_SCAN
+        </h1>
+
+        <!-- INPUT CARD -->
         <div class="w-full max-w-sm border-2 border-[#ff007f] p-6 bg-[#050505] shadow-[8px_8px_0px_0px_#1a1a1a]">
-            <label class="block text-[10px] text-[#ff007f] mb-2 uppercase font-bold">Input_Wallet_Address</label>
-            <input type="text" id="wallet-input" placeholder="terra1..." 
-                   class="w-full bg-transparent border-b-2 border-[#ff007f] outline-none py-2 text-[#ff007f] mb-6 placeholder-[#ff007f]/30">
-            
-            <button id="scan-btn" class="w-full bg-[#ff007f] text-white font-black py-4 uppercase border-2 border-white shadow-[4px_4px_0px_0px_white] active:translate-y-1">
-                Initiate_Scan
+
+            <label class="block text-[10px] text-[#ff007f] mb-2 uppercase font-bold">
+                Input_Wallet_Address
+            </label>
+
+            <input
+                type="text"
+                id="wallet-input"
+                placeholder="terra1..."
+                class="w-full bg-transparent border-b-2 border-[#ff007f] outline-none py-2 text-[#ff007f] mb-6 placeholder-[#ff007f]/30"
+            />
+
+            <button
+                id="scan-btn"
+                class="w-full bg-[#ff007f] text-white font-black py-4 uppercase border-2 border-white shadow-[4px_4px_0px_0px_white] active:translate-y-1 transition-all duration-150"
+            >
+                INITIATE_SCAN
             </button>
         </div>
 
-        <div id="chat-box" class="w-full max-w-sm h-48 mt-8 border border-zinc-900 bg-black p-4 text-[10px] text-zinc-500 overflow-y-auto">
+        <!-- ORACLE STATE (NEW but same style) -->
+        <div
+            id="oracle-state"
+            class="w-full max-w-sm mt-6 text-[9px] text-[#ff007f] uppercase opacity-80"
+        >
+            ORACLE_STATUS: IDLE
+        </div>
+
+        <!-- CHAT BOX (FIXED HEIGHT + STABLE UX) -->
+        <div
+            id="chat-box"
+            class="w-full max-w-sm h-[60vh] mt-4 border border-zinc-900 bg-black p-4 text-[10px] text-zinc-500 overflow-y-auto space-y-1"
+        >
             <p class="italic">> Awaiting signal...</p>
         </div>
+
     </main>
 
     <script src="shards.js"></script>
     <script src="holders.js"></script>
+
 </body>
 </html>
