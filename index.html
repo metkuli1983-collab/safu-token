@@ -10,67 +10,62 @@
         @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap');
         body {
             background-color: #000;
-            color: #00ff41;
+            color: #fff;
             font-family: 'Space+Mono', monospace;
         }
-        .glitch-border {
-            border: 1px solid #00ff41;
-            box-shadow: 0 0 15px rgba(0, 255, 65, 0.2);
+        .pink-glow-border {
+            border: 1px solid #ff007f;
+            box-shadow: 0 0 15px rgba(255, 0, 127, 0.1);
         }
-        .btn-glow:hover {
-            box-shadow: 0 0 25px rgba(0, 255, 65, 0.5);
-            background: #00ff41;
+        .btn-pink-glow:hover {
+            box-shadow: 0 0 25px rgba(255, 0, 127, 0.4);
+            background: #ff007f;
             color: #000;
         }
+        .text-pink-safu { color: #ff007f; }
     </style>
 </head>
 <body class="p-6">
 
     <div class="max-w-4xl mx-auto mt-10 md:mt-20">
-        <header class="text-center mb-12">
-            <h1 class="text-5xl md:text-7xl font-black italic tracking-tighter mb-4 animate-pulse">
-                $SAFU_TOKEN
+        <header class="text-center mb-16">
+            <h1 class="text-6xl md:text-8xl font-black italic tracking-tighter mb-4 text-pink-safu animate-pulse">
+                $SAFU
             </h1>
-            <p class="text-xs tracking-[0.4em] opacity-70 uppercase">
-                Decentralized_Chaos_Engine // Terra_Classic
+            <p class="text-[10px] tracking-[0.5em] opacity-50 uppercase">
+                // Signal_Found_In_The_Abyss //
             </p>
         </header>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             
-            <a href="holders.html" class="glitch-border p-8 flex flex-col items-center justify-center text-center transition-all btn-glow group">
-                <span class="text-[10px] mb-2 opacity-50">[ SIGNAL_SENSITIVE ]</span>
-                <h2 class="text-2xl font-bold mb-2 uppercase italic tracking-tighter">Enter_Oracle</h2>
-                <p class="text-[10px] opacity-70 leading-relaxed group-hover:text-black">
-                    Interrogate the chain. <br> Personality shifts based on signal strength.
+            <a href="holders.html" class="pink-glow-border p-10 flex flex-col items-center justify-center text-center transition-all btn-pink-glow group">
+                <span class="text-[9px] mb-2 text-pink-500 opacity-80 group-hover:text-black uppercase tracking-widest">[ Protocol: Oracle ]</span>
+                <h2 class="text-3xl font-black italic mb-2 uppercase tracking-tighter">Enter_The_Void</h2>
+                <p class="text-[10px] opacity-60 group-hover:text-black italic">
+                    Interrogate the chain signals.
                 </p>
             </a>
 
-            <a href="manifesto.html" class="glitch-border p-8 flex flex-col items-center justify-center text-center transition-all hover:bg-zinc-900">
-                <h2 class="text-xl font-bold mb-2 uppercase tracking-widest">The_Manifesto</h2>
-                <p class="text-[10px] opacity-50 italic">Read the logic of the abyss.</p>
-            </a>
-
-            <a href="memes.html" class="glitch-border p-8 flex flex-col items-center justify-center text-center transition-all hover:bg-zinc-900">
-                <h2 class="text-xl font-bold mb-2 uppercase tracking-widest">Shards_of_Memes</h2>
-                <p class="text-[10px] opacity-50 italic">Visual propaganda for the void.</p>
-            </a>
-
-            <a href="dev-room.html" class="glitch-border p-8 flex flex-col items-center justify-center text-center transition-all hover:border-white hover:text-white">
-                <h2 class="text-xl font-bold mb-2 uppercase tracking-widest text-zinc-700">Dev_Log</h2>
-                <p class="text-[10px] opacity-30 italic">System evolution logs.</p>
-            </a>
+            <div class="grid grid-cols-1 gap-4">
+                <a href="manifesto.html" class="border border-zinc-900 p-6 hover:border-pink-900 transition-all text-center">
+                    <h2 class="text-sm font-bold uppercase tracking-widest">Manifesto</h2>
+                </a>
+                <a href="memes.html" class="border border-zinc-900 p-6 hover:border-pink-900 transition-all text-center">
+                    <h2 class="text-sm font-bold uppercase tracking-widest">Visual_Shards</h2>
+                </a>
+                <a href="dev-room.html" class="border border-zinc-900 p-6 hover:border-pink-900 transition-all text-center">
+                    <h2 class="text-sm font-bold uppercase tracking-widest opacity-30">Dev_Log</h2>
+                </a>
+            </div>
 
         </div>
 
-        <footer class="mt-20 border-t border-zinc-900 pt-6 flex flex-col md:flex-row justify-between text-[9px] opacity-40 uppercase tracking-widest">
-            <div class="mb-4 md:mb-0">
-                Network: Columbus-5 // Signal: Stable
-            </div>
-            <div class="flex gap-6">
-                <a href="#" class="hover:text-white">Twitter_X</a>
-                <a href="#" class="hover:text-white">Telegram_Void</a>
-                <a href="#" class="hover:text-white">Terra_Station</a>
+        <footer class="mt-24 border-t border-zinc-900 pt-6 flex flex-col md:flex-row justify-between text-[8px] opacity-30 uppercase tracking-[0.3em]">
+            <span>Network: Terra_Classic // Signal: Stable</span>
+            <div class="flex gap-4 mt-4 md:mt-0">
+                <a href="#">X_Feed</a>
+                <a href="#">Void_Chat</a>
             </div>
         </footer>
     </div>
