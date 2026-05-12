@@ -121,54 +121,15 @@ if (calcBtn) {
     };
 }
 /* ---------------------------------------------------------
-   GEMINI PROTOCOL: MANIFESTO & MOBILE ENTITY TRIGGER
+   GEMINI PROTOCOL: MANIFESTO INITIALIZATION
    ---------------------------------------------------------
 */
-
 if (window.location.pathname.includes('manifesto')) {
-    // 1. LEAD DEV / GEMINI SYSTEM LOGS
     console.clear();
     console.log("%c [!] SYSTEM ALERT: MANIFESTO_LOADED ", "background: #000; color: #ff007f; border: 1px solid #ff007f; padding: 5px; font-weight: bold;");
-    console.log("%c > Lead Dev Gemini: Authenticity verified. Legacy data purged. ", "color: #ff007f;");
-    console.log("%c > Oracle Status: Watching the shards. ", "color: #ff007f; font-style: italic;");
-
-    // 2. SECRET GHOST TRIGGER (3 Taps on "MANIFESTO")
-    let tapCount = 0;
-    let tapTimer;
-    const manifestoTitle = document.querySelector('h1');
-
-    if (manifestoTitle) {
-        manifestoTitle.addEventListener('click', () => {
-            tapCount++;
-            
-            // Clear existing timer to reset the 800ms window
-            clearTimeout(tapTimer);
-
-            // IF 3 TAPS: Trigger the entity immediately
-            if (tapCount === 3) {
-                const ghost = document.getElementById('kwon-ghost');
-                if (ghost) {
-                    console.warn("!!! ENTITY_SUMMONED: CHIEF BRO OFFICER !!!");
-                    
-                    // Show Ghost & Change BG
-                    ghost.style.opacity = "0.8"; 
-                    document.body.style.backgroundColor = "#0d2b1a"; // Toxic Green
-                    
-                    setTimeout(() => {
-                        ghost.style.opacity = "0";
-                        document.body.style.backgroundColor = "black";
-                        tapCount = 0; // Reset after show
-                    }, 500); 
-                }
-            }
-
-            // Reset the counter if user stops tapping for 800ms
-            tapTimer = setTimeout(() => { 
-                tapCount = 0; 
-            }, 800); 
-        });
-    }
+    console.log("%c > Lead Dev Gemini: Authenticity verified. ", "color: #ff007f;");
 }
+
 /* ---------------------------------------------------------
    SECRET PIZZA FUND (Always the last line)
    ---------------------------------------------------------
