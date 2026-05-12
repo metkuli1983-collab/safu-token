@@ -3,72 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>$SAFU | MAIN_TERMINAL</title>
+    <title>$SAFU | TERMINAL</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="madnesss.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+        
         body {
             background-color: #000;
             color: #fff;
             font-family: 'Space+Mono', monospace;
         }
-        .pink-glow-border {
-            border: 1px solid #ff007f;
-            box-shadow: 0 0 15px rgba(255, 0, 127, 0.1);
+
+        .pink-border {
+            border: 2px solid #ff007f;
+            box-shadow: 0 0 15px rgba(255, 0, 127, 0.3);
         }
-        .btn-pink-glow:hover {
-            box-shadow: 0 0 25px rgba(255, 0, 127, 0.4);
-            background: #ff007f;
+
+        .pink-glow-text {
+            text-shadow: 0 0 10px #ff007f;
+        }
+
+        .hover-fill:hover {
+            background-color: #ff007f;
             color: #000;
+            box-shadow: 0 0 30px #ff007f;
         }
-        .text-pink-safu { color: #ff007f; }
     </style>
 </head>
-<body class="p-6">
+<body class="bg-black">
 
-    <div class="max-w-4xl mx-auto mt-10 md:mt-20">
-        <header class="text-center mb-16">
-            <h1 class="text-6xl md:text-8xl font-black italic tracking-tighter mb-4 text-pink-safu animate-pulse">
+    <main class="max-w-4xl mx-auto py-12 px-6">
+        
+        <header class="mb-16 border-b border-zinc-900 pb-8">
+            <h1 class="text-6xl md:text-8xl font-black italic tracking-tighter pink-glow-text mb-2">
                 $SAFU
             </h1>
-            <p class="text-[10px] tracking-[0.5em] opacity-50 uppercase">
-                // Signal_Found_In_The_Abyss //
+            <p class="text-[10px] tracking-[0.4em] text-pink-500 uppercase font-bold">
+                // SYSTEM_STATUS: AGGRESSIVE //
             </p>
         </header>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             
-            <a href="holders.html" class="pink-glow-border p-10 flex flex-col items-center justify-center text-center transition-all btn-pink-glow group">
-                <span class="text-[9px] mb-2 text-pink-500 opacity-80 group-hover:text-black uppercase tracking-widest">[ Protocol: Oracle ]</span>
-                <h2 class="text-3xl font-black italic mb-2 uppercase tracking-tighter">Enter_The_Void</h2>
-                <p class="text-[10px] opacity-60 group-hover:text-black italic">
-                    Interrogate the chain signals.
+            <a href="holders.html" class="pink-border p-10 flex flex-col items-center justify-center text-center transition-all hover-fill group">
+                <span class="text-[9px] mb-2 uppercase tracking-widest opacity-60 group-hover:opacity-100">[ IDENTITY_PROBE ]</span>
+                <h2 class="text-3xl font-black italic tracking-tighter uppercase mb-2">The_Oracle</h2>
+                <p class="text-[10px] opacity-50 italic group-hover:text-black">
+                    SIGNAL-BASED INTELLIGENCE. NO AUTH REQUIRED.
                 </p>
             </a>
 
-            <div class="grid grid-cols-1 gap-4">
-                <a href="manifesto.html" class="border border-zinc-900 p-6 hover:border-pink-900 transition-all text-center">
-                    <h2 class="text-sm font-bold uppercase tracking-widest">Manifesto</h2>
+            <div class="space-y-4">
+                <a href="manifesto.html" class="block border border-zinc-800 p-6 hover:border-pink-500 transition-all text-center">
+                    <h2 class="text-sm font-bold uppercase tracking-[0.2em]">Manifesto</h2>
                 </a>
-                <a href="memes.html" class="border border-zinc-900 p-6 hover:border-pink-900 transition-all text-center">
-                    <h2 class="text-sm font-bold uppercase tracking-widest">Visual_Shards</h2>
+                <a href="memes.html" class="block border border-zinc-800 p-6 hover:border-pink-500 transition-all text-center">
+                    <h2 class="text-sm font-bold uppercase tracking-[0.2em]">Visual_Shards</h2>
                 </a>
-                <a href="dev-room.html" class="border border-zinc-900 p-6 hover:border-pink-900 transition-all text-center">
-                    <h2 class="text-sm font-bold uppercase tracking-widest opacity-30">Dev_Log</h2>
+                <a href="dev-room.html" class="block border border-zinc-800 p-6 opacity-30 hover:opacity-100 transition-all text-center italic">
+                    <h2 class="text-xs uppercase tracking-widest">Dev_Room</h2>
                 </a>
             </div>
 
         </div>
 
-        <footer class="mt-24 border-t border-zinc-900 pt-6 flex flex-col md:flex-row justify-between text-[8px] opacity-30 uppercase tracking-[0.3em]">
-            <span>Network: Terra_Classic // Signal: Stable</span>
-            <div class="flex gap-4 mt-4 md:mt-0">
-                <a href="#">X_Feed</a>
-                <a href="#">Void_Chat</a>
+        <footer class="mt-24 flex flex-col md:flex-row justify-between items-center text-[8px] uppercase tracking-[0.3em] text-zinc-600">
+            <span>NETWORK: COLUMBUS-5</span>
+            <div class="flex gap-8 mt-4 md:mt-0">
+                <a href="#" class="hover:text-pink-500">X_STATION</a>
+                <a href="#" class="hover:text-pink-500">VOID_CHAT</a>
             </div>
         </footer>
-    </div>
+
+    </main>
 
 </body>
 </html>
