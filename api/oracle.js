@@ -16,23 +16,17 @@ export default async function handler(req, res) {
     let balance = 0;
 
     try {
-        // -----------------------------
-        // SAFE LCD FETCH (FIX #1)
-        // -----------------------------
         if (address.startsWith("terra1")) {
             const lcdRes = await fetch(
-                `https://terra-classic-lcd.publicnode.com/cosmos/bank/v1beta1/balances/${address}`,
-                { timeout: 5000 }
+                `https://terra-classic-lcd.publicnode.com/cosmos/bank/v1beta1/balances/${address}`
             );
 
             if (lcdRes.ok) {
-                let data;
+                let data = {};
 
                 try {
                     data = await lcdRes.json();
-                } catch (e) {
-                    data = {};
-                }
+                } catch {}
 
                 const token = data?.balances?.find?.(b =>
                     b?.denom?.includes("safu")
@@ -42,9 +36,6 @@ export default async function handler(req, res) {
             }
         }
 
-        // -----------------------------
-        // TIER ENGINE (UNCHANGED)
-        // -----------------------------
         let mode = "VOID";
 
         if (balance <= 0) mode = "VOID";
@@ -52,9 +43,6 @@ export default async function handler(req, res) {
         else if (balance < 10_000_000) mode = "ECHO";
         else mode = "WHALE";
 
-        // -----------------------------
-        // AI CALL
-        // -----------------------------
         const aiRes = await fetch(
             "https://api.groq.com/openai/v1/chat/completions",
             {
@@ -73,13 +61,13 @@ export default async function handler(req, res) {
 YOU ARE SAFU ORACLE.
 
 MODE: ${mode}
-BALANCE: ${balance}
+SIGNAL: ${balance}
 
 RULES:
 - ALL CAPS
-- CRYPTIC RESPONSES
-- NO AUTH CLAIMS
-- TONE DEPENDS ON MODE
+- CRYPTIC
+- NEVER CLAIM AUTHENTICATION
+- RESPOND LIKE A LIVING SYSTEM
                             `.trim()
                         },
                         {
@@ -91,37 +79,36 @@ RULES:
             }
         );
 
-        // -----------------------------
-        // SAFE AI PARSING (FIX #2)
-        // -----------------------------
         let reply = "THE ORACLE IS SILENT.";
 
         try {
             const aiData = await aiRes.json();
+            reply = aiData?.choices?.[0]?.message?.content || reply;
+        } catch {}
 
-            reply =
-                aiData?.choices?.[0]?.message?.content ||
-                reply;
-        } catch (e) {
-            reply = "THE ORACLE CANNOT TRANSLATE SIGNAL.";
-        }
+        // 🧿 SHARE TEXT (NEW)
+        const shareText = `🔮 SAFU ORACLE REPORT
 
-        // -----------------------------
-        // RESPONSE
-        // -----------------------------
+MODE: ${mode}
+SIGNAL: ${balance} $SAFU
+
+"${reply}"
+
+→ scan: your-site.com`;
+
         return res.status(200).json({
             reply,
             mode,
-            balance
+            balance,
+            shareText
         });
 
     } catch (err) {
-        console.error("ORACLE_ERROR:", err);
-
         return res.status(200).json({
             reply: "THE SIGNAL IS DISTORTED.",
             mode: "VOID",
-            balance: 0
+            balance: 0,
+            shareText: "ORACLE OFFLINE"
         });
     }
 }
