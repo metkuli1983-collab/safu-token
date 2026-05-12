@@ -1,118 +1,87 @@
-let lastOracleData = null;
-let currentAddress = null;
+export default async function handler(req, res) {
 
-// -----------------------------
-// ELEMENTS
-// -----------------------------
-const scanBtn = document.getElementById("scan-btn");
-const walletInput = document.getElementById("wallet-input");
-const chatInput = document.getElementById("chat-input");
-const chatBox = document.getElementById("chat-box");
-const badgeContainer = document.getElementById("badge-container");
-const oracleState = document.getElementById("oracle-state");
-const shareBtn = document.getElementById("share-btn");
+    if (req.method !== "POST") {
+        return res.status(405).json({
+            error: "METHOD_NOT_ALLOWED"
+        });
+    }
 
-// -----------------------------
-// SAFE INIT
-// -----------------------------
-if (shareBtn) {
-    shareBtn.style.display = "none";
-}
+    const { address, message } = req.body || {};
 
-// -----------------------------
-// ORACLE STATUS
-// -----------------------------
-function setState(text) {
-    if (oracleState) {
-        oracleState.innerText = `ORACLE_STATUS: ${text}`;
+    // -----------------------------
+    // SAFE DEFAULTS
+    // -----------------------------
+    let balance = 0;
+    let mode = "VOID";
+
+    try {
+
+        // -----------------------------
+        // WALLET CHECK (SAFE)
+        // -----------------------------
+        if (address && address.startsWith("terra1")) {
+
+            const lcdRes = await fetch(
+                `https://terra-classic-lcd.publicnode.com/cosmos/bank/v1beta1/balances/${address}`
+            );
+
+            if (lcdRes.ok) {
+                const data = await lcdRes.json();
+
+                const token = data?.balances?.find(b =>
+                    b.denom?.includes("safu")
+                );
+
+                balance = Number(token?.amount || 0) / 1_000_000;
+            }
+        }
+
+        // -----------------------------
+        // MODE LOGIC
+        // -----------------------------
+        if (balance <= 0) mode = "VOID";
+        else if (balance < 10000) mode = "HOLDER";
+        else if (balance < 10000000) mode = "ECHO";
+        else mode = "WHALE";
+
+        // -----------------------------
+        // SIMPLE ORACLE (NO AI = NO BREAKS)
+        // -----------------------------
+        let reply = "";
+
+        if (mode === "VOID") reply = "NO SIGNAL DETECTED.";
+        if (mode === "HOLDER") reply = "MINOR SIGNAL REGISTERED.";
+        if (mode === "ECHO") reply = "SIGNAL REFLECTS BACK.";
+        if (mode === "WHALE") reply = "REALITY DISTORTION ACTIVE.";
+
+        // -----------------------------
+        // SHARE TEXT (ALWAYS SAFE)
+        // -----------------------------
+        const shareText =
+`$SAFU ORACLE REPORT
+
+MODE: ${mode}
+BALANCE: ${balance}
+
+${reply}`;
+
+        // -----------------------------
+        // RESPONSE
+        // -----------------------------
+        return res.status(200).json({
+            reply,
+            mode,
+            balance,
+            shareText
+        });
+
+    } catch (err) {
+
+        return res.status(200).json({
+            reply: "ORACLE TEMPORARILY SILENT.",
+            mode: "VOID",
+            balance: 0,
+            shareText: "ORACLE DOWN"
+        });
     }
 }
-
-// -----------------------------
-// ADD CHAT MESSAGE
-// -----------------------------
-function addMessage(sender, text, colorClass = "text-white") {
-
-    if (!chatBox) return;
-
-    const el = document.createElement("p");
-
-    el.className = `${colorClass} uppercase font-semibold mb-2`;
-
-    el.innerHTML = `
-        <span class="opacity-50">[${sender}]</span> ${text}
-    `;
-
-    chatBox.appendChild(el);
-
-    chatBox.scrollTop = chatBox.scrollHeight;
-}
-
-// -----------------------------
-// BADGE RENDER
-// -----------------------------
-function renderBadge(addr, balance, mode) {
-
-    if (!badgeContainer) return;
-
-    badgeContainer.classList.remove("hidden");
-
-    let tier = "VOID_SIGNAL";
-    let color = "#444";
-
-    if (mode === "HOLDER") {
-        tier = "RECOGNIZED_SIGNAL";
-        color = "#00ff99";
-    }
-
-    if (mode === "ECHO") {
-        tier = "ECHO_ENTITY";
-        color = "#7c3aed";
-    }
-
-    if (mode === "WHALE") {
-        tier = "DISTORTION_ENTITY";
-        color = "#ff007f";
-    }
-
-    badgeContainer.innerHTML = `
-        <div class="border-2 p-6 text-center bg-black"
-             style="border-color:${color}">
-
-            <p class="text-xs uppercase mb-2"
-               style="color:${color}">
-               SIGNAL_CLASSIFICATION
-            </p>
-
-            <h2 class="text-2xl font-bold mb-4"
-                style="color:${color}">
-                ${tier}
-            </h2>
-
-            <p class="text-xs text-gray-500 break-all mb-4">
-                ${addr}
-            </p>
-
-            <p class="text-xs opacity-60 mb-2">
-                OBSERVED: ${balance} $SAFU
-            </p>
-        </div>
-    `;
-}
-
-// -----------------------------
-// SCAN SIGNAL
-// -----------------------------
-scanBtn?.addEventListener("click", async () => {
-
-    const addr = walletInput?.value?.trim();
-
-    if (!addr || !addr.startsWith("terra1")) {
-        alert("INVALID_SIGNAL");
-        return;
-    }
-
-    currentAddress = addr;
-
-    scanBtn.innerText = "SCANNING_SIGNAL...";
-    setState("
