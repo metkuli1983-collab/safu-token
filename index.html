@@ -7,53 +7,57 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="madnesss.css">
 </head>
-<body class="bg-black text-white">
+<body class="bg-black text-white font-mono overflow-x-hidden">
 
-    <!-- NAVIGATION (Matches Screenshot_20260511-173831_2.jpg + Holders) -->
+    <!-- NAVIGATION (Restored to Screenshot_20260511-173831_3.jpg + Holders) -->
     <nav class="flex justify-between p-4 border-b border-[#ff007f] bg-black sticky top-0 z-[100] text-[9px]">
-        <div class="font-black text-[#ff007f] opacity-80">$SAFU_NODE_01</div>
-        <div class="flex gap-2 uppercase font-bold">
-            <a href="holders.html" class="text-[#ff007f] underline italic">Holders</a>
-            <a href="manifesto.html" class="text-white underline italic">Manifesto</a>
-            <a href="memes.html" class="text-white underline">Wall</a>
+        <div class="font-black text-[#ff007f] opacity-80 uppercase tracking-tighter">$SAFU_NODE_01</div>
+        <div class="flex gap-2 uppercase font-bold italic">
+            <a href="holders.html" class="text-[#ff007f] underline">Holders</a>
+            <a href="manifesto.html" class="text-white underline">Manifesto</a>
+            <a href="wall.html" class="text-white underline px-1">Wall</a>
             <a href="regret.html" class="text-white underline">Regret</a>
         </div>
     </nav>
 
-    <main id="main-content" class="flex flex-col items-center py-12 px-6 relative z-10">
-        <!-- LOGO AREA -->
-        <h1 class="font-black mb-0 text-6xl md:text-8xl italic text-[#ff007f] drop-shadow-[0_0_15px_#ff007f] tracking-tighter">SAFU</h1>
-        <div class="bg-[#ff007f] text-white font-black text-xl px-4 py-1 -mt-4 mb-12 rotate-2 uppercase tracking-tighter shadow-lg">
-            So Absolutely F#ked Up
+    <main class="flex flex-col items-center pt-10 px-6 relative z-10">
+        
+        <!-- LOGO STACK -->
+        <div class="relative mb-14 text-center">
+            <h1 class="text-7xl font-black italic text-white drop-shadow-[0_0_15px_#ff007f] tracking-tighter leading-none">SAFU</h1>
+            <div class="bg-[#ff007f] text-white font-black text-xl px-4 py-1 mt-1 -rotate-2 uppercase shadow-lg inline-block">
+                So Absolutely F#ked Up
+            </div>
         </div>
         
-        <p class="text-center max-w-sm mb-12 text-xl leading-tight tracking-tighter uppercase text-zinc-400 font-bold">
+        <!-- FLAVOR TEXT -->
+        <p class="text-center max-w-xs mb-10 text-xl leading-[1.1] tracking-tighter uppercase text-zinc-400 font-bold">
             THE DEVS ARE ASLEEP. <br> THE LIQUIDITY IS A MYTH. <br> YOUR PORTFOLIO IS SCREAMING.
         </p>
 
-        <!-- ACTION BUTTONS -->
-        <div class="flex flex-col gap-4 w-full max-w-xs mb-8">
+        <!-- BUTTONS -->
+        <div class="flex flex-col gap-4 w-full max-w-xs mb-10">
             <button id="buy-btn" class="bg-[#ff007f] text-white font-black py-6 text-3xl border-4 border-white uppercase shadow-[8px_8px_0px_0px_white] active:translate-y-1 active:shadow-none transition-all">
                 Buy The Disaster
             </button>
                         
-            <button id="wallet-btn" class="border-2 border-[#ff007f] text-[#ff007f] py-2 px-4 text-xs uppercase font-bold hover:bg-[#ff007f] hover:text-black transition-all">
+            <button id="wallet-btn" class="border-2 border-[#ff007f] text-[#ff007f] py-2 px-4 text-[10px] uppercase font-bold hover:bg-[#ff007f] hover:text-black transition-all">
                 [ CONNECT_NEURAL_LINK ]
             </button>
         </div>
 
-        <!-- TIMER AREA -->
-        <div class="mb-20 text-center">
-            <div id="chaos-timer" class="text-5xl md:text-6xl font-black text-[#ff007f] tracking-widest drop-shadow-[0_0_10px_rgba(255,0,127,0.5)]">
+        <!-- TIMER -->
+        <div class="mb-16 text-center">
+            <div id="chaos-timer" class="text-5xl font-black text-[#ff007f] tracking-tight drop-shadow-[0_0_10px_#ff007f]">
                 000:00:00:00
             </div>
-            <div class="mt-2 text-[9px] uppercase text-zinc-600 italic tracking-widest">
+            <p class="text-[9px] uppercase text-zinc-600 italic mt-2 tracking-widest">
                 "THE WAIT IS LONG. THE PAIN IS ETERNAL."
-            </div>
+            </p>
         </div>
 
-        <!-- INFO BOX -->
-        <section class="w-full max-w-md border-2 border-[#ff007f] p-6 relative mb-12 bg-[#050505] shadow-[10px_10px_0px_0px_rgba(30,30,30,1)]">
+        <!-- BOTTOM BOX (Matches Screenshot_20260511-173831_3.jpg) -->
+        <section class="w-full max-w-md border-2 border-[#ff007f] p-6 relative mb-12 bg-black shadow-[10px_10px_0px_0px_#1a1a1a]">
             <span id="alien-boss" class="absolute -top-10 -left-6 text-6xl">👽</span>
             <h2 class="text-2xl font-black text-[#ff007f] mb-4 uppercase italic italic tracking-tighter">Financial Self-Sabotage</h2>
             <ul class="space-y-3 text-sm uppercase font-bold tracking-tighter">
@@ -64,7 +68,7 @@
         </section>
 
         <!-- SYSTEM LOG -->
-        <div class="w-full max-w-xs p-3 bg-[#080808] border border-[#ff007f]/30 rounded font-mono text-[9px] overflow-hidden mb-20">
+        <div class="w-full max-w-xs p-3 bg-[#080808] border border-[#ff007f]/20 rounded font-mono text-[9px] overflow-hidden mb-20">
             <div id="system-log" class="text-zinc-600 leading-tight">
                 <p class="text-[#ff007f] opacity-50">> SYSTEM_UPTIME: STABLE</p>
             </div>
@@ -75,7 +79,7 @@
         </footer>
     </main>
 
-    <!-- EXTERNAL JS ONLY -->
+    <!-- EXTERNAL LOGIC ONLY -->
     <script src="shards.js"></script>
     <script src="index.js"></script>
 </body>
