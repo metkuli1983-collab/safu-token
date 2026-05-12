@@ -1,3 +1,4 @@
+let lastOracleData = null;
 let currentAddress = null;
 
 // -----------------------------
@@ -41,6 +42,7 @@ scanBtn.addEventListener("click", async () => {
         });
 
         const data = await res.json();
+        lastOracleData = data;
 
         renderBadge(addr, data.balance, data.mode);
 
@@ -88,6 +90,7 @@ chatInput.addEventListener("keypress", async (e) => {
         });
 
         const data = await res.json();
+        lastOracleData = data;
 
         addMessage(
             "ORACLE",
