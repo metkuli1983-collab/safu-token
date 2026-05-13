@@ -179,13 +179,17 @@ function addMessage(sender, text, colorClass) {
 // -----------------------------
 if (shareBtn) {
     shareBtn.addEventListener("click", async () => {
-        if (!lastOracleData?.shareText) {
-            alert("NO_ORACLE_DATA");
-            return;
-        }
+        const textToCopy =
+            lastOracleData?.shareText ||
+            `ORACLE REPORT
+
+MODE: ${lastOracleData?.mode}
+SIGNAL: ${lastOracleData?.balance} $SAFU
+
+"${lastOracleData?.reply || 'NO_SIGNAL'}"`;
 
         try {
-            await navigator.clipboard.writeText(lastOracleData.shareText);
+            await navigator.clipboard.writeText(textToCopy);
             addMessage("SYSTEM", "COPIED_TO_CLIPBOARD", "text-green-400");
         } catch (e) {
             addMessage("SYSTEM", "COPY_FAILED", "text-red-500");
