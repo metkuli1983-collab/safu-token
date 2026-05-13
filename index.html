@@ -87,13 +87,12 @@
                 document.body.classList.add('reality-glitch');
                 cat.style.transform = "scale(5) rotate(360deg)";
                 cat.style.zIndex = "1000";
-                cat.style.transform = "scale(1) rotate(0deg)";
                 
                 setTimeout(() => {
                     alert("🐱: 'YOUR WALLET IS EMOTIONALLY UNSTABLE.'");
                     alert("SYSTEM ERROR: PORTFOLIO_KARMA_INSUFFICIENT.");
                     document.body.classList.remove('reality-glitch');
-                    alien.style.transform = "scale(1) rotate(0deg)";
+                    cat.style.transform = "scale(1) rotate(0deg)";
                     btn.innerText = "[ ACCESS_DENIED ]";
                 }, 2000);
             }, 1000);
