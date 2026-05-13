@@ -80,16 +80,17 @@
         // WEIRD WALLET CONNECT LOGIC
         document.getElementById('wallet-btn').addEventListener('click', function() {
             const btn = this;
-            const alien = document.getElementById('alien-boss');
+            const cat = document.getElementById('cat-boss');
             btn.innerText = "> UPLOADING_CONSCIOUSNESS...";
             
             setTimeout(() => {
                 document.body.classList.add('reality-glitch');
-                alien.style.transform = "scale(5) rotate(360deg)";
-                alien.style.zIndex = "1000";
+                cat.style.transform = "scale(5) rotate(360deg)";
+                cat.style.zIndex = "1000";
+                cat.style.transform = "scale(1) rotate(0deg)";
                 
                 setTimeout(() => {
-                    alert("👽: 'YOUR WALLET IS TOO SMALL FOR THIS DIMENSION.'");
+                    alert("🐱: 'YOUR WALLET IS EMOTIONALLY UNSTABLE.'");
                     alert("SYSTEM ERROR: PORTFOLIO_KARMA_INSUFFICIENT.");
                     document.body.classList.remove('reality-glitch');
                     alien.style.transform = "scale(1) rotate(0deg)";
