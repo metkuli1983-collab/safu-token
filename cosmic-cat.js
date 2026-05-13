@@ -43,10 +43,15 @@ if (!window.__CAT_INIT__) {
                     body: JSON.stringify({ message: msg })
                 });
 
+                if(!res.ok) {
+                    addChat("CAT", "...");
+                    return
+                }
+
                 const data = await res.json();
                 addChat("CAT", data.reply);
-                showBubble(data.reply);
-            } catch {
+            } catch (err) {
+                console.log("CAT api error:", err);
                 addChat("CAT", "...");
             }
         });
@@ -64,8 +69,12 @@ if (!window.__CAT_INIT__) {
             });
 
             const data = await res.json();
-            showBubble(data.reply);
-        } catch {}
+            if (data?.reply) {
+                showBubble(data.reply);
+            }
+        } catch (err) {
+            console.log("Cat idle failed:", err);
+        }
     }
 
     setInterval(() => {
