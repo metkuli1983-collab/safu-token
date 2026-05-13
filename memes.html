@@ -72,11 +72,14 @@
         <p class="text-[10px] text-zinc-500 mb-8 tracking-[0.4em] uppercase">
             Awaiting Neural Injection
         </p>
-
         <div class="relative group mb-8">
-            <input type="text" placeholder="DROP_INTEL_HERE" 
-                   class="w-full bg-transparent border-b-2 border-[#ff007f] py-4 text-center text-[#ff007f] outline-none placeholder-[#ff007f]/30 font-black italic uppercase">
+           <input type="text"
+                  id="intel-input"
+                  placeholder="DROP_INTEL_HERE"
+                  class="w-full bg-transparent border-b-2 border-[#ff007f] py-4 text-center text-[#ff007f] outline-none placeholder-[#ff007f]/30 font-black italic uppercase">
         </div>
+
+        <p id="status-msg" class="mt-6 text-[10px] text-zinc-400 tracking-widest uppercase"></p>
 
         <button onclick="submitIntel()" class="btn-offset w-full py-5 text-xl font-black uppercase tracking-tighter">
             Inject_Intel
