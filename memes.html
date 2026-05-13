@@ -14,73 +14,47 @@
 <!-- NAV -->
 <nav class="mb-10 uppercase text-xs">
     <a href="index.html"
-       class="border border-[#ff007f] px-4 py-2 hover:bg-[#ff007f] hover:text-black transition-all font-bold">
+       class="border-2 border-[#ff007f] px-4 py-2 font-bold hover:bg-[#ff007f] hover:text-black transition-all">
         <- Back_To_Node
     </a>
 </nav>
 
 <!-- TITLE -->
-<h1 class="text-5xl font-black italic mb-2 uppercase underline">
+<h1 class="text-5xl font-black italic uppercase underline mb-2">
     WALL_OF_ECHOES
 </h1>
 
 <p class="text-xs mb-10 opacity-60 uppercase tracking-widest">
-    SYSTEM_FRAGMENT_ARCHIVE
+    SYSTEM_DRIFT_ARCHIVE // unstable feed
 </p>
 
-<!-- GRID (chaotic echo zone) -->
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<!-- ECHO GRID (messy, not uniform on purpose) -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
 
-    <div class="border-2 border-[#ff007f] bg-black p-6 shadow-[4px_4px_0px_#ff007f] rotate-[0.5deg]">
+    <div class="border-2 border-[#ff007f] bg-black p-6 shadow-[4px_4px_0px_#ff007f] rotate-[0.8deg]">
         <h3 class="font-bold uppercase underline mb-2">Echo_01</h3>
-        <p class="text-xs opacity-80">signal corrupted... memory leak detected</p>
+        <p class="text-xs opacity-80">signal corrupted... memory bleeding</p>
     </div>
 
-    <div class="border-2 border-[#ff007f] bg-zinc-950 p-6 rotate-[-1deg] opacity-90">
-        <h3 class="font-bold uppercase underline mb-2">Echo_02</h3>
-        <p class="text-xs">we are not alone in this system</p>
+    <div class="border border-[#ff007f] bg-zinc-950 p-6 rotate-[-1.2deg] opacity-90">
+        <h3 class="uppercase font-bold mb-2">Echo_02</h3>
+        <p class="text-xs">someone else is typing here too</p>
     </div>
 
-    <div class="border-2 border-[#ff007f] bg-black p-6 shadow-[2px_2px_0px_#ff007f] opacity-80">
-        <p class="text-xs uppercase italic">[ awaiting fragment injection ]</p>
+    <div class="border-2 border-[#ff007f] bg-black p-6 shadow-[2px_2px_0px_#ff007f] rotate-[0.4deg] opacity-80">
+        <p class="text-xs uppercase italic">[ fragment not stable ]</p>
     </div>
 
 </div>
 
-<!-- TERMINAL (strong chaotic anchor) -->
-<div class="max-w-xl mt-10 border-2 border-[#ff007f] p-6 bg-black shadow-[6px_6px_0px_#ff007f] rotate-[-1deg]">
+<!-- TERMINAL (MAIN CHARACTER, NOT CLEANED) -->
+<div class="max-w-xl border-2 border-[#ff007f] p-6 bg-black shadow-[6px_6px_0px_#ff007f] rotate-[-1.5deg] mb-10">
 
-    <h2 class="text-xl font-bold mb-4 uppercase underline italic">
+    <h2 class="text-xl font-bold mb-4 italic uppercase underline">
         Dead_Drop_Terminal
     </h2>
 
-    <p class="text-xs mb-1">> SYSTEM_READY</p>
-    <p class="text-xs mb-4">> INPUT SIGNAL FRAGMENT</p>
+    <p class="text-xs mb-1">> SYSTEM_READY.</p>
+    <p class="text-xs mb-4">> PASTE WORMHOLE LINK BELOW.</p>
 
-    <input
-        type="text"
-        id="intel-input"
-        placeholder="https://wormhole.app/..."
-        class="w-full py-2 px-2 bg-black border border-[#ff007f] text-[#ff007f] font-mono text-sm mb-4"
-    >
-
-    <button
-        onclick="submitIntel()"
-        class="bg-[#ff007f] text-black font-black py-2 px-4 uppercase hover:bg-white transition-all"
-    >
-        Inject_Intel
-    </button>
-
-</div>
-
-<!-- GLITCH FOOTER CARD -->
-<div class="mt-10 border border-[#ff007f] p-4 opacity-70 rotate-[1deg]">
-    <p class="text-xs uppercase italic">
-        [ system drift detected // wall unstable ]
-    </p>
-</div>
-
-<script src="shards.js"></script>
-
-</body>
-        </html>
+    <div class="
