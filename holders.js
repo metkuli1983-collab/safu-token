@@ -10,11 +10,8 @@ const chatInput = document.getElementById("chat-input");
 const chatBox = document.getElementById("chat-box");
 const badgeContainer = document.getElementById("badge-container");
 const oracleState = document.getElementById("oracle-state");
-const shareBtn = document.getElementById("share-btn");
 
 // SAFE INIT (no crash if missing)
-if (shareBtn) shareBtn.style.display = "none";
-
 function setState(text) {
     if (oracleState) oracleState.innerText = `ORACLE_STATUS: ${text}`;
 }
