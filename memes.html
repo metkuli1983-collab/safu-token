@@ -1,91 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>$SAFU | THE_WALL</title>
-
-<script src="https://cdn.tailwindcss.com"></script>
-<link rel="stylesheet" href="madnesss.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>$SAFU | THE_WALL</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="madnesss.css">
+    <style>
+        /* Cranking the Glow to match Screenshot_20260513-152432.jpg */
+        .disaster-glow {
+            text-shadow: 0 0 15px rgba(255, 0, 127, 0.9), 0 0 30px rgba(255, 0, 127, 0.4);
+        }
+        .tape-label {
+            background: #ff007f;
+            transform: rotate(-3deg);
+            box-shadow: 4px 4px 0px white;
+        }
+        /* The offset button style from the screenshot */
+        .btn-offset {
+            position: relative;
+            background: #ff007f;
+            color: white;
+            border: 2px solid white;
+            box-shadow: 8px 8px 0px 0px white;
+            transition: all 0.1s;
+        }
+        .btn-offset:active {
+            transform: translate(4px, 4px);
+            box-shadow: 4px 4px 0px 0px white;
+        }
+    </style>
 </head>
-
 <body class="bg-black text-white overflow-x-hidden font-mono">
 
-<!-- NAV (unchanged index style) -->
-<nav class="flex justify-between p-4 border-b border-[#ff007f] bg-black sticky top-0 z-[100] text-[9px]">
-    <div class="font-black text-[#ff007f] animate-pulse">$SAFU_NODE_01</div>
-    <div class="flex gap-2 uppercase font-bold">
-        <a href="index.html" class="text-white underline italic">HOME</a>
-        <a href="#" class="text-white underline">WALL</a>
-        <a href="#" class="text-white underline">ORACLE</a>
+<nav class="flex justify-between p-4 border-b border-[#ff007f] bg-black sticky top-0 z-[100] text-[9px] uppercase font-bold">
+    <div class="text-[#ff007f] animate-pulse">$SAFU_NODE_01</div>
+    <div class="flex gap-4">
+        <a href="index.html" class="hover:line-through">Home</a>
+        <a href="#" class="text-[#ff007f] italic underline">Wall</a>
+        <a href="#" class="hover:line-through">Oracle</a>
+        <a href="#" class="text-zinc-600">Regret</a>
     </div>
 </nav>
 
-<!-- TITLE -->
-<main class="flex flex-col items-center py-12 px-6">
-
-    <h1 class="font-black text-center text-[#ff007f] text-5xl italic shake-effect">
-        WALL_OF_ECHOES
-    </h1>
-
-    <div class="bg-black text-white border border-[#ff007f] font-black text-lg px-4 py-1 rotate-2 uppercase mb-10 shadow-[4px_4px_0px_0px_#ff007f]">
-        Unauthorized Memory Leakage Zone
+<main class="flex flex-col items-center py-20 px-6">
+    
+    <!-- HEADER: Blown out glow like Screenshot_20260513-152432.jpg -->
+    <div class="relative mb-16 text-center">
+        <h1 class="font-black text-6xl italic disaster-glow tracking-tighter uppercase mb-2">
+            Wall_Of_Echoes
+        </h1>
+        <div class="tape-label px-6 py-1 inline-block">
+            <p class="text-white font-black text-xs tracking-[0.3em] uppercase">
+                Memory Leakage Imminent
+            </p>
+        </div>
     </div>
 
-    <p class="text-center max-w-sm mb-12 text-sm uppercase text-zinc-400 leading-tight">
-        THIS WALL IS NOT STABLE.<br>
-        ECHOES ARE PARTIAL.<br>
-        SOMETHING IS STILL WRITING.
-    </p>
-
-    <!-- ECHO CARDS (NO PINK BACKGROUND ANYMORE) -->
-    <section class="w-full max-w-md space-y-6">
-
-        <div class="border-2 border-[#ff007f] p-6 bg-black shadow-[4px_4px_0px_0px_#ff007f] rotate-[-1deg]">
-            <h2 class="text-xl font-black text-[#ff007f] uppercase italic mb-2">Echo_01</h2>
-            <p class="text-sm uppercase">> memory drift detected<br>> system uncertainty rising</p>
+    <!-- ECHO CARDS: Now using the heavy offset shadow style -->
+    <section class="w-full max-w-md space-y-10 mb-20">
+        <div class="border-2 border-[#ff007f] p-6 bg-black shadow-[10px_10px_0px_0px_#ff007f] -rotate-1">
+            <h2 class="text-2xl font-black text-[#ff007f] italic mb-3">ECHO_01</h2>
+            <p class="text-xs tracking-widest text-zinc-300 italic">"THE MEMORY DRIFT IS CONSTANT."</p>
         </div>
 
-        <div class="border border-[#ff007f] p-6 bg-black rotate-[1deg] opacity-90">
-            <h2 class="text-xl font-black text-[#ff007f] uppercase italic mb-2">Echo_02</h2>
-            <p class="text-sm uppercase">> unknown user left fragment<br>> signature incomplete</p>
+        <div class="border-2 border-white p-6 bg-black shadow-[10px_10px_0px_0px_#ff007f] rotate-1">
+            <h2 class="text-2xl font-black text-white italic mb-3">ECHO_02</h2>
+            <p class="text-xs tracking-widest text-zinc-300 italic">"CAT INTERFERENCE DETECTED IN THE VOID."</p>
         </div>
-
-        <div class="border-2 border-[#ff007f] p-6 bg-black shadow-[6px_6px_0px_0px_#ff007f] rotate-[-2deg]">
-            <h2 class="text-xl font-black text-[#ff007f] uppercase italic mb-2">Echo_03</h2>
-            <p class="text-sm uppercase">> cat interference detected<br>> financial reality unstable</p>
-        </div>
-
     </section>
 
-    <!-- TERMINAL (RESTORED SAFE VERSION) -->
-    <div class="max-w-xl mt-10 border-2 border-[#ff007f] p-6 bg-black shadow-[5px_5px_0px_0px_#ff007f]">
+    <!-- TERMINAL: The "Inject Intel" section reimagined -->
+    <div class="w-full max-w-sm text-center">
+        <p class="text-[10px] text-zinc-500 mb-8 tracking-[0.4em] uppercase">
+            Awaiting Neural Injection
+        </p>
 
-        <h2 class="text-xl font-black mb-4 italic uppercase underline text-[#ff007f]">
-            Dead_Drop_Terminal
-        </h2>
+        <div class="relative group mb-8">
+            <input type="text" placeholder="DROP_INTEL_HERE" 
+                   class="w-full bg-transparent border-b-2 border-[#ff007f] py-4 text-center text-[#ff007f] outline-none placeholder-[#ff007f]/30 font-black italic uppercase">
+        </div>
 
-        <p class="text-xs mb-2">> SYSTEM_READY</p>
-        <p class="text-xs mb-4">> AWAITING INPUT</p>
-
-        <input
-            type="text"
-            placeholder="https://wormhole.app/..."
-            class="w-full py-2 px-2 bg-black border border-[#ff007f] text-[#ff007f] font-mono text-sm mb-4"
-        >
-
-        <button
-            onclick="submitIntel()"
-            class="w-full bg-[#ff007f] text-black font-black py-3 uppercase text-sm border border-[#ff007f] hover:bg-black hover:text-[#ff007f] transition-all"
-        >
+        <button onclick="submitIntel()" class="btn-offset w-full py-5 text-xl font-black uppercase tracking-tighter">
             Inject_Intel
         </button>
 
+        <p class="mt-12 text-[#ff007f] text-[9px] tracking-widest animate-pulse">
+            [ CONNECTION_NEURAL_LINK_STABLE ]
+        </p>
     </div>
 
 </main>
 
 <script src="shards.js"></script>
-
 </body>
 </html>
