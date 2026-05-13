@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
 /* KILL MOBILE OVERLAYS */
 * {
     -webkit-tap-highlight-color: transparent !important;
@@ -12,7 +13,6 @@ input, textarea {
     user-select: text !important;
     
 }/* --- GLOBAL CONFIG --- */
-@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
 
 body { 
     background-color: #000; 
