@@ -9,54 +9,78 @@
 <link rel="stylesheet" href="madnesss.css">
 </head>
 
-<body class="bg-black text-white font-mono p-6">
+<body class="bg-black text-white font-mono p-6 overflow-x-hidden">
 
 <!-- NAV -->
 <nav class="mb-10 uppercase text-xs">
     <a href="index.html"
-       class="border-2 border-[#ff007f] px-4 py-2 hover:bg-[#ff007f] hover:text-black transition-all font-bold">
+       class="border border-[#ff007f] px-4 py-2 hover:bg-[#ff007f] hover:text-black transition-all font-bold">
         <- Back_To_Node
     </a>
 </nav>
 
 <!-- TITLE -->
 <h1 class="text-5xl font-black italic mb-2 uppercase underline">
-    Wall of Echoes
+    WALL_OF_ECHOES
 </h1>
 
 <p class="text-xs mb-10 opacity-60 uppercase tracking-widest">
-    Unauthorized Archive // Classified Intel
+    SYSTEM_FRAGMENT_ARCHIVE
 </p>
 
-<!-- ===================== -->
-<!-- ECHO GRID (ONLY CARDS) -->
-<!-- ===================== -->
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+<!-- GRID (chaotic echo zone) -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 
-    <div class="border-2 border-[#ff007f] bg-zinc-950 p-6">
-        <h3 class="font-bold text-lg uppercase italic underline mb-2">
-            SYSTEM_ECHO
-        </h3>
-        <p class="text-[11px] opacity-70">
-            [ NO SIGNALS YET ]
-        </p>
+    <div class="border-2 border-[#ff007f] bg-black p-6 shadow-[4px_4px_0px_#ff007f] rotate-[0.5deg]">
+        <h3 class="font-bold uppercase underline mb-2">Echo_01</h3>
+        <p class="text-xs opacity-80">signal corrupted... memory leak detected</p>
     </div>
 
-    <div class="border-2 border-[#ff007f] bg-zinc-950 p-6 opacity-60">
-        <p class="uppercase text-sm italic">
-            [ Awaiting_Next_Disaster ]
-        </p>
+    <div class="border-2 border-[#ff007f] bg-zinc-950 p-6 rotate-[-1deg] opacity-90">
+        <h3 class="font-bold uppercase underline mb-2">Echo_02</h3>
+        <p class="text-xs">we are not alone in this system</p>
+    </div>
+
+    <div class="border-2 border-[#ff007f] bg-black p-6 shadow-[2px_2px_0px_#ff007f] opacity-80">
+        <p class="text-xs uppercase italic">[ awaiting fragment injection ]</p>
     </div>
 
 </div>
 
-<!-- ===================== -->
-<!-- TERMINAL (NO GRID) -->
-<!-- ===================== -->
-<div class="max-w-xl border-2 border-[#ff007f] bg-zinc-950 p-6">
+<!-- TERMINAL (strong chaotic anchor) -->
+<div class="max-w-xl mt-10 border-2 border-[#ff007f] p-6 bg-black shadow-[6px_6px_0px_#ff007f] rotate-[-1deg]">
 
-    <h2 class="text-xl font-bold mb-4 italic uppercase underline">
+    <h2 class="text-xl font-bold mb-4 uppercase underline italic">
         Dead_Drop_Terminal
     </h2>
 
-    <p class="text-xs mb-1">
+    <p class="text-xs mb-1">> SYSTEM_READY</p>
+    <p class="text-xs mb-4">> INPUT SIGNAL FRAGMENT</p>
+
+    <input
+        type="text"
+        id="intel-input"
+        placeholder="https://wormhole.app/..."
+        class="w-full py-2 px-2 bg-black border border-[#ff007f] text-[#ff007f] font-mono text-sm mb-4"
+    >
+
+    <button
+        onclick="submitIntel()"
+        class="bg-[#ff007f] text-black font-black py-2 px-4 uppercase hover:bg-white transition-all"
+    >
+        Inject_Intel
+    </button>
+
+</div>
+
+<!-- GLITCH FOOTER CARD -->
+<div class="mt-10 border border-[#ff007f] p-4 opacity-70 rotate-[1deg]">
+    <p class="text-xs uppercase italic">
+        [ system drift detected // wall unstable ]
+    </p>
+</div>
+
+<script src="shards.js"></script>
+
+</body>
+        </html>
