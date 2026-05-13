@@ -177,8 +177,17 @@ function addMessage(sender, text, colorClass) {
 // -----------------------------
 // 5. SHARE BUTTON
 // -----------------------------
-if (shareBtn) {
+window.addEventListener("DOMContentLoaded", () => {
+    const shareBtn = document.getElementById("share-btn");
+
+    if (!shareBtn) {
+        console.log("share-btn not found");
+        return;
+    }
+
     shareBtn.addEventListener("click", async () => {
+        console.log("SHARE CLICKED");
+
         const textToCopy =
             lastOracleData?.shareText ||
             `ORACLE REPORT
@@ -192,7 +201,8 @@ SIGNAL: ${lastOracleData?.balance} $SAFU
             await navigator.clipboard.writeText(textToCopy);
             addMessage("SYSTEM", "COPIED_TO_CLIPBOARD", "text-green-400");
         } catch (e) {
+            console.log("COPY ERROR:", e);
             addMessage("SYSTEM", "COPY_FAILED", "text-red-500");
         }
     });
-}
+});
