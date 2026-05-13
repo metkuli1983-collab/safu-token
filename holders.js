@@ -73,44 +73,45 @@ scanBtn.addEventListener("click", async () => {
 // -----------------------------
 // 2. CHAT WITH ORACLE
 // -----------------------------
-chatInput.addEventListener("keypress", async (e) => {
-    if (e.key !== "Enter") return;
-    if (!currentAddress) return alert("NO_SIGNAL_ACTIVE");
+if (chatInput) {
+    chatInput.addEventListener("keypress", async (e) => {
+        if (e.key !== "Enter") return;
 
-    const msg = chatInput.value.trim();
-    if (!msg) return;
+        const msg = chatInput.value.trim();
+        if (!msg) return;
 
-    addMessage("YOU", msg, "text-white");
-    chatInput.value = "";
+        addMessage("YOU", msg, "text-white");
+        chatInput.value = "";
 
-    setState("TRANSMITTING");
+        setState("TRANSMITTING");
 
-    try {
-        const res = await fetch("/api/oracle", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-                address: currentAddress,
-                message: msg
-            })
-        });
+        try {
+            const res = await fetch("/api/oracle", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    address: currentAddress,
+                    message: msg
+                })
+            });
 
-        const data = await res.json();
-        lastOracleData = data;
+            const data = await res.json();
+            lastOracleData = data;
 
-        addMessage(
-            "ORACLE",
-            data.reply || "THE_ORACLE_IS_SILENT",
-            "text-pink-400"
-        );
+            addMessage(
+                "ORACLE",
+                data.reply || "THE_ORACLE_IS_SILENT",
+                "text-pink-400"
+            );
 
-        setState("LOCKED");
+            setState("LOCKED");
 
-    } catch (err) {
-        addMessage("SYSTEM", "ORACLE_DISCONNECTED", "text-red-500");
-        setState("OFFLINE");
-    }
-});
+        } catch (err) {
+            addMessage("SYSTEM", "ORACLE_DISCONNECTED", "text-red-500");
+            setState("OFFLINE");
+        }
+    });
+}
 
 // -----------------------------
 // 3. BADGE RENDER
