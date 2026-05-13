@@ -14,10 +14,23 @@
 
     <h1 class="text-5xl font-black italic mb-2 uppercase underline">Wall of Echoes</h1>
     <p class="text-xs mb-10 opacity-60 uppercase tracking-widest">Unauthorized Archive // Classified Intel</p>
-
-   
-
     
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="intel-card p-4 border-dashed opacity-70">
+    <h3 class="font-bold text-lg uppercase italic underline">
+        SYSTEM_ECHO_LAYER
+    </h3>
+
+    <p class="text-[10px] opacity-50 uppercase mb-3">
+        STATUS: LISTENING_FOR_FRACTURES
+    </p>
+
+    <div id="echo-feed" class="space-y-2 text-[11px] uppercase font-bold border-l-2 border-[#ff007f] pl-2">
+        <p class="opacity-40">[ NO ECHOES DETECTED ]</p>
+    </div>
+        </div>
+    </div>
+
     <div class="max-w-xl border-2 border-[#ff007f] p-6 bg-zinc-950 mb-12 shadow-[4px_4px_0px_#ff007f]">
         <h2 class="text-xl font-bold mb-4 italic uppercase underline">Dead_Drop_Terminal</h2>
         <p class="text-xs mb-1">> SYSTEM_READY.</p>
@@ -29,13 +42,10 @@
         <p id="status-msg" class="text-[10px] mt-4 opacity-0 transition-opacity uppercase font-bold italic"></p>
     </div>
 
-     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-
      <div class="intel-card p-8 flex items-center justify-center border-dashed opacity-30 text-center">
             <p class="uppercase text-sm italic">[ Awaiting_Next_Disaster ]</p>
-        </div>
     </div>
-
+    
     <script src="shards.js"></script>
     
 </body>
