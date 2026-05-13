@@ -12,6 +12,9 @@ const badgeContainer = document.getElementById("badge-container");
 const oracleState = document.getElementById("oracle-state");
 
 // SAFE INIT (no crash if missing)
+const shareBtn = document.querySelector("#share-btn");
+if (shareBtn) shareBtn.style.display = "block";
+
 function setState(text) {
     if (oracleState) oracleState.innerText = `ORACLE_STATUS: ${text}`;
 }
