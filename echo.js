@@ -1,8 +1,8 @@
 // ==========================================
-// WALL OF ECHOES SYSTEM
+// ECHO SYSTEM (CLEAN)
 // ==========================================
 
-// Load existing echoes
+// Load echoes
 let echoes = JSON.parse(localStorage.getItem("echoes") || "[]");
 
 
@@ -12,19 +12,19 @@ let echoes = JSON.parse(localStorage.getItem("echoes") || "[]");
 
 function submitIntel() {
 
-    const intelInput = document.getElementById("intel-input");
-    const statusMsg = document.getElementById("status-msg");
+    const input = document.getElementById("intel-input");
+    const status = document.getElementById("status-msg");
 
-    if (!intelInput) return;
+    if (!input) return;
 
-    const val = intelInput.value.toLowerCase().trim();
+    const val = input.value.toLowerCase().trim();
 
 
-    // SECRET DEVROOM TRIGGER
+    // DEVROOM TRIGGER
     if (val === "lunc") {
 
-        if (statusMsg) {
-            statusMsg.innerText = ">> TRUTH_FOUND. RELOCATING...";
+        if (status) {
+            status.innerText = ">> TRUTH_FOUND. RELOCATING...";
         }
 
         setTimeout(() => {
@@ -35,9 +35,10 @@ function submitIntel() {
     }
 
 
-    // NORMAL ECHO LOGIC
+    // NORMAL ECHO FLOW
     if (val.length > 2) {
 
+        // store locally
         echoes.push({
             text: val,
             time: Date.now()
@@ -45,62 +46,72 @@ function submitIntel() {
 
         localStorage.setItem("echoes", JSON.stringify(echoes));
 
-        if (statusMsg) {
-
-            statusMsg.innerText = ">> ECHO STORED IN THE VOID";
-
+        // feedback
+        if (status) {
+            status.innerText = ">> ECHO REGISTERED";
             setTimeout(() => {
-                statusMsg.innerText = ">> MEMORY LEAK STABLE";
-                intelInput.value = "";
-            }, 2000);
+                status.innerText = "";
+                input.value = "";
+            }, 1500);
         }
 
-        renderEchoes();
+        // inject into wall boxes
+        injectEcho(val);
     }
 }
 
 
 // ==========================================
-// RENDER ECHOES
+// INJECT INTO EXISTING BOXES
 // ==========================================
 
-function renderEchoes() {
+function injectEcho(text) {
 
-    const container = document.querySelector("section");
+    const targets = [
+        document.getElementById("echo-text-1"),
+        document.getElementById("echo-text-2")
+    ];
 
-    if (!container) return;
+    // remove invalid targets
+    const valid = targets.filter(Boolean);
+    if (valid.length === 0) return;
 
-    // Remove old rendered echoes first
-    document.querySelectorAll(".generated-echo").forEach(e => e.remove());
+    // pick random box
+    const target = valid[Math.floor(Math.random() * valid.length)];
 
-    const echoes = JSON.parse(localStorage.getItem("echoes") || "[]");
+    // slight corruption effect (important for your vibe)
+    const variants = [
+        `"${text}"`,
+        `"${text}..."`,
+        `...${text}...`,
+        text.toUpperCase(),
+        `// ${text}`
+    ];
 
-    echoes.slice(-5).reverse().forEach(e => {
-
-        const div = document.createElement("div");
-
-        div.className =
-            "generated-echo border-2 border-[#ff007f] p-6 bg-black shadow-[10px_10px_0px_0px_#444]";
-
-        div.innerHTML = `
-            <h2 class="text-2xl font-black text-[#ff007f] italic mb-3">
-                ECHO
-            </h2>
-
-            <p class="text-xs tracking-widest text-zinc-300 italic">
-                "${e.text}"
-            </p>
-        `;
-
-        container.prepend(div);
-    });
+    target.innerText =
+        variants[Math.floor(Math.random() * variants.length)];
 }
 
 
 // ==========================================
-// INIT
+// OPTIONAL: REPLAY STORED ECHOES ON LOAD
+// ==========================================
+
+window.addEventListener("load", () => {
+
+    const stored = JSON.parse(localStorage.getItem("echoes") || "[]");
+    if (stored.length === 0) return;
+
+    const last = stored.slice(-1)[0];
+
+    if (last?.text) {
+        injectEcho(last.text);
+    }
+});
+
+
+// ==========================================
+// EXPORT
 // ==========================================
 
 window.submitIntel = submitIntel;
-
-window.addEventListener("load", renderEchoes);
