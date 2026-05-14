@@ -14,37 +14,6 @@ window.addEventListener('keydown', (e) => {
 });
 
 // ==========================================
-// 2. THE WALL LOGIC (Submit 'lunc' in box)
-// ==========================================
-function submitIntel() {
-    const intelInput = document.getElementById('intel-input');
-    const statusMsg = document.getElementById('status-msg');
-
-    if (!intelInput) return;
-    const val = intelInput.value.toLowerCase().trim();
-
-    // SECRET TRIGGER
-    if (val === "lunc") {
-        if (statusMsg) statusMsg.innerText = ">> TRUTH_FOUND. RELOCATING...";
-        setTimeout(() => { window.location.href = "dev-room.html"; }, 600);
-        return; 
-    }
-
-    // NORMAL LOGIC
-    if (val.length > 2) {
-        if (statusMsg) {
-            statusMsg.innerText = ">> INTEL RECEIVED. ENCRYPTING...";
-            setTimeout(() => { 
-                statusMsg.innerText = ">> UPLOAD COMPLETE."; 
-                intelInput.value = "";
-            }, 2000);
-        }
-    }
-}
-// Essential: Make function global
-window.submitIntel = submitIntel;
-
-// ==========================================
 // 3. GLOBAL VISUALS (Rain & Flicker)
 // ==========================================
 function createShard() {
